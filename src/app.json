@@ -1,0 +1,39 @@
+{
+  "pages": [
+    "pages/index/main",
+    "pages/counter/main"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fed901",
+    "navigationBarTitleText": "Bang Bang",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#b2b2b2",
+    "selectedColor": "#fed901",
+    "backgroundColor": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/main",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/index/main",
+        "text": "订单"
+      },
+      {
+        "pagePath": "pages/index/main",
+        "text": "发布"
+      },
+      {
+        "pagePath": "pages/index/main",
+        "text": "推荐"
+      },
+      {
+        "pagePath": "pages/index/main",
+        "text": "我的"
+      }
+    ]
+  }
+}
