@@ -1,0 +1,19 @@
+@import '../public/_variables';
+@import '../public/functions';
+.title{
+    @include config_font(40rpx,black,bold);
+    margin:69rpx 0rpx 69rpx 38rpx;
+}
+ul{
+    @include config_colbox_center();
+    li{
+        margin-top: 15rpx;
+        img{
+            @include config_width_height(676rpx,153rpx)
+        }
+        &:first-child{
+            margin-top: 0;
+        }
+    } 
+}
+

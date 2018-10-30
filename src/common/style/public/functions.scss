@@ -1,0 +1,48 @@
+@import './variables';
+/*设置宽和高*/
+@mixin config_width_height($width:auto,$height:auto) {
+    height: $height;
+    width: $width;
+}
+/*设置弹性盒*/
+@mixin config_flexbox() {
+    display: flex;
+}
+
+@mixin config_rowbox() {
+    @include config_flexbox();
+    flex-flow: row nowrap;
+}
+
+@mixin config_column() {
+    @include config_flexbox();
+    flex-direction: column;
+}
+/*水平盒子的居中*/
+@mixin config_rowbox_center(){
+    @include config_rowbox();
+    justify-content: center;
+}
+@mixin config_rowbox_centercol($style:left){
+    @include config_rowbox();
+    align-items: center;
+    justify-content: $style;
+}
+
+/*垂直盒子的居中*/
+@mixin config_colbox_center(){
+    @include config_column();
+    align-items: center;
+}
+/*垂直盒子的居中*/
+@mixin config_colbox_centercol(){
+    @include config_column();
+    justify-content: center;
+}
+
+/* 字体设置 */
+@mixin config_font($size, $color:$normalFont,$weight:normal) {
+    font-size: $size;
+    color: $color;
+    font-weight: $weight;
+}

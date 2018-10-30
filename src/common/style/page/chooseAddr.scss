@@ -1,0 +1,86 @@
+@import '../public/variables';
+@import '../public/functions.scss';
+
+.choose{
+    &-title{
+        position: relative;
+        @include config_width_height(auto,100rpx);
+        @include config_rowbox_centercol();
+        border-bottom: 2rpx $listBorder solid;
+        img{
+            position: absolute;
+            left: 130rpx;
+            z-index: 5;
+            @include config_width_height(26rpx,25rpx);
+        }
+        span{
+            @include config_font(23rpx);
+            margin-left: 33rpx;
+            margin-right: 16rpx;
+        }
+        input{
+            background: white;
+            @include config_width_height(624rpx,51rpx);
+            @include config_font(19rpx,#4d4d4d);
+            border-radius: 9rpx;
+            padding: 0 52rpx 0 52rpx;
+            box-sizing: border-box;
+        }
+    }
+    &-content{
+        @include config_width_height(701rpx,131rpx);
+        border-bottom: #d2d2d2 2rpx solid;
+        margin: 0 25rpx 0 24rpx;
+        &-avatar{
+            text-align: center;
+            line-height: 50rpx;
+            color: white;
+            font-size: 34rpx;
+            @include config_width_height(50rpx,50rpx);
+            border-radius: 50%;
+            background: $mainColor;
+        }
+        &-info{
+            margin-left: 12rpx;
+            @include config_font(23rpx,#808080);
+            @include config_column();
+            &-1{
+                @include config_rowbox();
+                align-items: flex-end;
+                span{
+                    margin-left: 10rpx;
+                    @include config_font(19rpx,$adviceFont);
+                }
+            }
+            &-2{
+                @include config_font(19rpx,#808080);
+                max-width: 415rpx;
+                margin-top: 16rpx;
+            }
+        }
+        &-addr{
+            position: absolute;
+            right:62rpx;
+            @include config_rowbox_centercol(flex-end);
+            margin-left: 111rpx;
+            border-left: #b7b7b7 2rpx solid;
+            @include config_width_height(70rpx,72rpx);
+            img{
+                @include config_width_height(24rpx,25rpx);
+            }
+        }
+        li{
+            @include config_width_height(701rpx,131rpx);
+            @include config_rowbox_centercol();
+        }
+    }
+    &-content-bnt{
+        @include config_rowbox_center();
+        height: 68rpx;
+        img{
+            @include config_width_height(636rpx,68rpx);
+        }
+        margin-top: 71rpx;
+    }
+}
+

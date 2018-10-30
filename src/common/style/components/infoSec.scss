@@ -1,0 +1,24 @@
+@import '../public/functions.scss';
+@import '../public/variables';
+.sec-info{
+    display: none;
+    li{
+        padding-left: 89rpx;
+    }
+    .sendComopany{
+        border-bottom: 2rpx $listBorder solid ;
+    }
+    span{
+        margin-right: 12rpx;
+    }
+    @include config_font(19rpx);
+}
+#show{
+    animation: hideIndex 0.2s;
+    display: block;
+}
+@keyframes hideIndex{
+    0%{ opacity: 0; transform: translate(0, -30rpx) };
+    100%{opacity: 1; transform: translate(0, 0) }
+}
+
