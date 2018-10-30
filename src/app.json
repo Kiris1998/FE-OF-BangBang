@@ -1,39 +1,52 @@
 {
-  "pages": [
-    "pages/index/main",
+    "pages": [
+    "pages/selectStyle/main",
+    "pages/helpShop/main",
+    "pages/freeCarry/main",
+    "pages/chooseAddr/main",
+    "pages/helpSend/main",
+    "pages/logs/main",
     "pages/counter/main"
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fed901",
-    "navigationBarTitleText": "Bang Bang",
+    "navigationBarBackgroundColor": "#FCD800",
+    "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle": "black"
   },
   "tabBar": {
-    "color": "#b2b2b2",
-    "selectedColor": "#fed901",
-    "backgroundColor": "black",
-    "list": [
-      {
-        "pagePath": "pages/index/main",
-        "text": "首页"
-      },
-      {
-        "pagePath": "pages/index/main",
-        "text": "订单"
-      },
-      {
-        "pagePath": "pages/index/main",
-        "text": "发布"
-      },
-      {
-        "pagePath": "pages/index/main",
-        "text": "推荐"
-      },
-      {
-        "pagePath": "pages/index/main",
-        "text": "我的"
-      }
-    ]
+    "color":"#b2b2b2",
+    "selectedColor":"#FCD800",
+    "backgroundColor":"black",
+    "list": [{
+      "pagePath": "pages/selectStyle/main",
+      "iconPath": "./static/image/homepage.png",
+      "text": "首页",
+      "selectedIconPath": "./static/image/homepage_cur.png"
+    },
+    {
+      "pagePath": "pages/selectStyle/main",
+      "iconPath": "./static/image/menu.png",
+      "text": "菜单",
+      "selectedIconPath": "./static/image/menu_cur.png"
+    },
+    {
+      "pagePath": "pages/selectStyle/main",
+      "iconPath": "./static/image/release.png",
+      "text": "发布",
+      "selectedIconPath": "./static/image/release_cur.png"
+    },
+    {
+      "pagePath": "pages/selectStyle/main",
+      "iconPath": "./static/image/recommend.png",
+      "text": "推荐",
+      "selectedIconPath": "./static/image/recommend_cur.png"
+    },
+    {
+      "pagePath":"pages/selectStyle/main",
+      "iconPath": "./static/image/my.png",
+      "text": "我的",
+      "selectedIconPath": "./static/image/my_cur.png"
+    }]
   }
 }
