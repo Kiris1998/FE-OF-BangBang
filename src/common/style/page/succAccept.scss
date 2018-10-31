@@ -1,0 +1,44 @@
+@import '../public/variables';
+@import '../public/functions.scss';
+
+.succAccept{
+    @include config_colbox_center();
+    &-avatar{
+        @include config_width_height(200rpx,200rpx);
+        background: black;
+        border-radius: 50%;
+        margin-top: 62rpx;
+    }
+    &-name{
+        margin-top:16rpx;
+        @include config_font(40rpx);
+        color: #ed1e79;
+    }
+    &-school{
+        margin-top: 7rpx;
+        @include config_font(19rpx,$adviceFont);
+    }
+    &-cong{
+        margin-top: 26rpx;
+        @include config_font(26rpx,#808080);
+    }
+    &-bottom{
+        @include config_rowbox_centercol(center);
+        margin-top: 34rpx;
+        @include config_font(40rpx);
+        .left,.right{
+            @include config_width_height(101rpx,4rpx);
+            background: black;
+        }
+        .left-dot{
+            @include config_width_height(4rpx,4rpx);
+            margin: 0 17rpx 0 5rpx;
+            background: black;
+        }
+        .right-dot{
+            @include config_width_height(4rpx,4rpx);
+            margin: 0 5rpx 0 17rpx;
+            background: black;
+        }
+    }
+}
