@@ -1,6 +1,7 @@
 {
     "pages": [
     "pages/selectStyle/main",
+    "pages/addAddr/main",
     "pages/helpShop/main",
     "pages/freeCarry/main",
     "pages/chooseAddr/main",
