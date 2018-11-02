@@ -1,0 +1,142 @@
+@import '../public/_variables';
+@import '../public/functions';
+@import '../public/set_common.scss';
+
+.setSend{
+    padding: 0 $rightPadding 0 $leftPadding;
+    margin-top: 20rpx;
+    .textHolder {
+        span{
+            position: absolute;
+            z-index: 5;
+            @include config_font(24rpx);
+            top: 39rpx;
+            margin-left: 25rpx;
+        }
+    }
+    &-baseInfo{
+        @include config_width_height(717rpx,191rpx);
+        @include config_font(20rpx,$adviceFont,light);
+        box-sizing: border-box;
+        background: white;
+        padding-top: 57rpx;
+        padding-left: 25rpx;
+        border-radius: 12rpx;
+    }
+    &-btn{
+        margin-top: 54rpx;
+        @include config_width_height(601rpx,101rpx);
+        background-color: $mainColor;
+        @include config_font(60rpx,$normalFont,light);
+        line-height: 101rpx;
+    }
+    &-con{
+        margin-top: 29rpx;
+        margin-left: 29-$leftPadding;
+        li{
+            @include config_rowbox_centercol();
+        }
+        &-sex{
+            @include togher();
+            @include firstImg(26rpx,25rpx);
+            @include firstSpan();
+            div{
+                @include config_font(19rpx);
+                display: inline-block;
+                @include config_width_height(97rpx,36rpx);
+                line-height: 36rpx;
+                background: #E6E6E6;
+                border: $listBorderHieght solid $mainColor;
+                text-align: center;
+                border-radius: 48rpx;
+                margin-right: 12rpx; 
+            }
+        }
+        &-localGet{
+            @include firstSpan2();
+            @include firstImg(26rpx,30rpx);
+            @include secondImg();
+            @include theDiv();
+        }
+        &-localext{
+            @include togher();
+            @include firstImg(26rpx,25rpx);
+            @include inputLoc();
+        }
+        &-localSend{
+            @include firstImg(26rpx,30rpx);
+            @include secondImg();
+            @include theDiv();
+            div{
+                margin-left:  26rpx + 14rpx + $imageMargin;
+            }
+        }
+        &-name,&-phone{
+            @include togher();
+            @include firstImg(26rpx,25rpx);
+            input{
+                margin-left: 14rpx;
+                font-size: 19rpx;
+            }
+        }
+        &-reward{
+            @include togher();
+            @include firstImg(26rpx,25rpx);
+            input{
+                margin-left: 14rpx;
+                font-size: 19rpx;
+            }
+            span{
+                margin-left: 14rpx + 26rpx + $imageMargin;
+                @include config_font(26rpx);
+            }
+        }
+        &-price{
+            @include togher();
+            @include firstImg(26rpx,25rpx);
+            input{
+                margin-left: 14rpx;
+                font-size: 19rpx;
+            }
+            span{
+                margin-left: 14rpx;
+                @include config_font(26rpx);
+            }
+        }
+        &-money{
+            @include togher();
+            @include firstImg(26rpx,25rpx);
+            @include inputLoc();
+            @include config_width_height(598rpx);
+        }
+    }
+}
+.setSend-bottom{
+    @include config_width_height(100%,99rpx);
+    background-color: #000;
+    position: fixed;
+    bottom: 0rpx;
+    @include config_rowbox();
+    justify-content: flex-end;
+    &-info{
+        @include config_colbox_centercol();
+        @include config_font(23rpx,white);
+        text-align: right;
+        margin-right: 27rpx;
+        span{
+            @include config_font(41rpx,white);
+        }
+        &-2{
+            @include config_font(19rpx,$adviceFont);
+        }
+    }
+    button{
+        @include config_width_height(142rpx,100%);
+        margin: 0;
+        border-radius: 0;
+        background-color: $mainColor;
+        line-height: 99rpx;
+        @include config_font(26rpx);
+        padding: 0;
+    }
+}

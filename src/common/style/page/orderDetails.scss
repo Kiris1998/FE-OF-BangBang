@@ -1,0 +1,152 @@
+@import '../public/variables';
+@import '../public/functions.scss';
+
+.order{
+    padding: 26rpx 28rpx 0 21rpx;
+    &-title{
+        @include config-font(40rpx);
+        margin-left: 47rpx;
+    }
+    &-details{
+        margin-top: 48rpx;
+        @include config_rowbox();
+        .avatar{
+            @include config_width_height(80rpx,80rpx);
+            background: black;
+            border-radius: 50%;
+            margin: 0 0 0 72rpx;
+        }
+        .rightSide{
+            margin-left: 20rpx;
+            @include config_column();
+            .firstRow{
+                @include config_rowbox();
+                img{
+                    @include config_width_height(22rpx,37rpx);
+                    margin-left: 13rpx;
+                }
+                span{
+                    @include config-font(40rpx,$showColor);
+                }
+            }
+            .college{
+                    @include config-font(19rpx,$adviceFont);
+                    margin-top: 8rpx;
+            }
+            .list{
+                width: 502rpx;
+                margin-top: 15rpx;
+                li{
+                    @include config_rowbox_centercol();
+                    border-bottom: 1rpx solid $listBorder;
+                }
+                .remark{
+                    align-items: flex-start;
+                    .first{
+                        @include config_width_height(19rpx,26rpx);
+                    }
+                    div{
+                        margin: 0 0 19rpx 19rpx;
+                        @include config-font(19rpx,$blackFont);
+                    }  
+                }
+                .address{
+                    position: relative;
+                    @include config_width_height(auto,50rpx);
+                    .first{
+                        @include config_width_height(22rpx,22rpx);
+                    }
+                    div{
+                        margin-left:19rpx;
+                        @include config-font(19rpx,$blackFont);
+                    }  
+                    .second{
+                        position: absolute;
+                        right: 0;
+                        @include config_width_height(16rpx,26rpx);
+                    }
+                }
+                .reward{
+                    position: relative;
+                    margin: 18rpx 0 45rpx 0;
+                    border-bottom: none;
+                    @include config_width_height(auto,50rpx);
+                    .first{
+                        @include config_width_height(22rpx,22rpx);
+                    }
+                    div{
+                        margin-left:19rpx;
+                        @include config-font(19rpx,$blackFont);
+                    }  
+                    .price{
+                        position: absolute;
+                        right: 0;
+                        @include config-font(60rpx);
+                        span{
+                            @include config-font(26rpx);
+                        }
+                    }
+                    .second{
+                        position: absolute;
+                        right: 0;
+                        @include config_width_height(16rpx,26rpx);
+                    }
+                }
+            }
+        }
+    }
+    &-status{
+        border-top: 3rpx solid $listBorder;
+        border-bottom: 3rpx solid $listBorder;
+        height: 217rpx;
+        @include config_rowbox_centercol(center);
+        .progressBar{
+            @include config_rowbox_centercol(center);
+            @include config_width_height(516rpx,50rpx);
+            position: relative;
+            .line{
+                @include config_width_height(516rpx,2rpx);
+                background: $adviceFont;
+            }
+            .circle{
+                padding: 0 75rpx;
+                // 宽度根据两边的值直接修改即可
+                @include config_width_height(472rpx,75rpx);
+                @include config_rowbox_centercol(space-between);
+                position: absolute;
+                span{
+                    display: inline-block;
+                    @include config_width_height(8rpx,8rpx);
+                    background: rgb(204, 235, 32);
+                    border: 1rpx rgb(255, 49, 49) solid;
+                    border-radius: 50%;
+                }
+            }
+            .theLabel{
+                position: absolute;
+                top: 41rpx;
+                @include config_rowbox_centercol(space-between);
+                @include config_width_height(531rpx);
+                span{
+                    @include config-font(21rpx);
+                }
+            }
+        }
+    }
+    .footer{
+        margin-top: 15rpx;
+        @include config-font(19rpx,$adviceFont);
+        text-align: center;
+    }
+    &-bnt{
+        @include config_rowbox_center();
+        button{
+            position: absolute;
+            bottom: 24rpx;
+            background: black;
+            @include config_width_height(650rpx,96rpx);
+            line-height: 96rpx;
+            @include config-font(40rpx,white);
+        }
+    }
+}
