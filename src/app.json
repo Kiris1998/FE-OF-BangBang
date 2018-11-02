@@ -1,6 +1,16 @@
 {
   "pages": [
     "pages/index/main",
+    "pages/order/main",
+    "pages/admin/main",
+    "pages/welcome/main",
+    "pages/recommend3/main",
+    "pages/recommend2/main",
+    "pages/recommend/main",
+    "pages/searchAdd/main",
+    "pages/invitation/main",
+    "pages/info/main",
+    "pages/me/main",
     "pages/counter/main"
   ],
   "window": {
@@ -31,7 +41,7 @@
         "text": "推荐"
       },
       {
-        "pagePath": "pages/index/main",
+        "pagePath": "pages/me/main",
         "text": "我的"
       }
     ]
