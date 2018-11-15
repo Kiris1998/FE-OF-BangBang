@@ -7,12 +7,10 @@
 </template>
 
 <script>
+import {showLoading} from '../../utils/utils.js'
 export default{
   beforeCreate: function(){
-    wx.showLoading({
-      title: '加载中',
-      mask:true
-    })
+    showLoading('正在加载中')
   },
   created(){
     wx.getSetting({

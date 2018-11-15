@@ -5,6 +5,14 @@ const jumpTo = (url) => {
     })
 }
 
+const showLoading = (str) => {
+    wx.showLoading({
+      title: str,
+      mask:true
+    })
+}
+
 export{
-    jumpTo
+    jumpTo,
+    showLoading
 }
