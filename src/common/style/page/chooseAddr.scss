@@ -9,19 +9,20 @@
         border-bottom: 2rpx $listBorder solid;
         img{
             position: absolute;
-            left: 130rpx;
+            left: 125rpx;
             z-index: 5;
-            @include config_width_height(26rpx,25rpx);
+            @include config_width_height(27rpx,27rpx);
         }
         span{
-            @include config_font(23rpx);
-            margin-left: 33rpx;
-            margin-right: 16rpx;
+            @include config_font(27rpx);
+            margin-left: 18rpx;
+            margin-right: 18rpx;
         }
         input{
             background: white;
-            @include config_width_height(624rpx,51rpx);
-            @include config_font(19rpx,#4d4d4d);
+            line-height:56rpx;
+            @include config_width_height(624rpx,56rpx);
+            @include config_font(24rpx,#4d4d4d);
             border-radius: 9rpx;
             padding: 0 52rpx 0 52rpx;
             box-sizing: border-box;
@@ -29,33 +30,32 @@
     }
     &-content{
         @include config_width_height(701rpx,131rpx);
-        border-bottom: #d2d2d2 2rpx solid;
         margin: 0 25rpx 0 24rpx;
         &-avatar{
             text-align: center;
             line-height: 50rpx;
             color: white;
-            font-size: 34rpx;
-            @include config_width_height(50rpx,50rpx);
+            font-size: 36rpx;
+            @include config_width_height(56rpx,56rpx);
             border-radius: 50%;
             background: $mainColor;
         }
         &-info{
-            margin-left: 12rpx;
-            @include config_font(23rpx,#808080);
+            margin-left: 24rpx;
+            @include config_font(27rpx,#808080);
             @include config_column();
             &-1{
                 @include config_rowbox();
                 align-items: flex-end;
                 span{
                     margin-left: 10rpx;
-                    @include config_font(19rpx,$adviceFont);
+                    @include config_font(25rpx,$adviceFont);
                 }
             }
             &-2{
-                @include config_font(19rpx,#808080);
-                max-width: 415rpx;
-                margin-top: 16rpx;
+                @include config_font(24rpx,#808080);
+                max-width: 450rpx;
+                margin-top: 11rpx;
             }
         }
         &-addr{
@@ -66,12 +66,13 @@
             border-left: #b7b7b7 2rpx solid;
             @include config_width_height(70rpx,72rpx);
             img{
-                @include config_width_height(24rpx,25rpx);
+                @include config_width_height(31rpx,29rpx);
             }
         }
         li{
-            @include config_width_height(701rpx,131rpx);
+            @include config_width_height(701rpx,150rpx);
             @include config_rowbox_centercol();
+            border-bottom: #d2d2d2 2rpx solid;
         }
     }
     &-content-bnt{

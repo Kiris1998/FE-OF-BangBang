@@ -1,5 +1,8 @@
 {
   "pages": [
+    "pages/secretPage/main",
+    "pages/orderDetails/main",
+    "pages/chooseAddr/main",
     "pages/index/main",
     "pages/order/main",
     "pages/admin/main",
@@ -15,9 +18,7 @@
     "pages/addAddr/main",
     "pages/helpShop/main",
     "pages/freeCarry/main",
-    "pages/chooseAddr/main",
     "pages/helpSend/main",
-    "pages/logs/main",
     "pages/counter/main"
   ],
   "window": {

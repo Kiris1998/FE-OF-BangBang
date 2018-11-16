@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <!-- <img class="logo" src="http://thyrsi.com/t6/400/1540826774x1822611437.jpg"> -->
-    <p @click="aa">让美好的遇见从帮帮开始</p>
+    <p id="text" @click="aa">让美好的遇见从帮帮开始</p>
     <button open-type="getUserInfo" @getuserinfo="bindinfo">获取用户的信息</button>
   </div>
 </template>
@@ -9,8 +9,18 @@
 <script>
 import {showLoading} from '../../utils/utils.js'
 export default{
+  data(){
+    return{
+      num:2
+    }
+  },
   beforeCreate: function(){
-    showLoading('正在加载中')
+    var obj = {
+      name:'liming',
+      age:6,
+      sex:'man'
+    }
+    showLoading(obj)
   },
   created(){
     wx.getSetting({
@@ -30,6 +40,13 @@ export default{
     })
   },
   methods: {
+    aa:function(e){
+      console.log(e)
+    },
+    bb:function(){
+      console.log(this)
+      this.num++;
+    },
     bindinfo:function(){
       wx.getUserInfo({
         success: function (res) {

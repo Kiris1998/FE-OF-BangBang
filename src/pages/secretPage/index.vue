@@ -65,7 +65,6 @@
                 </div>
             </div>
         </div>              
-        <div class="footer">信息涉及到隐私，接单后可查看更多关于订单信息。</div>
         <div class="order-bnt">
             <button>已送达</button>
         </div>
