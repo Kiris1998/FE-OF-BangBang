@@ -9,18 +9,18 @@
         span{
             position: absolute;
             z-index: 5;
-            @include config_font(24rpx);
-            top: 39rpx;
-            margin-left: 25rpx;
+            @include config_font(27rpx);
+            top: 33rpx;
+            margin-left: 22rpx;
         }
     }
     &-baseInfo{
         @include config_width_height(717rpx,191rpx);
-        @include config_font(20rpx,$adviceFont,light);
+        @include config_font(24rpx,$normalFont,light);
         box-sizing: border-box;
         background: white;
-        padding-top: 57rpx;
-        padding-left: 25rpx;
+        padding-top: 52rpx;
+        padding-left: 22rpx;
         border-radius: 12rpx;
     }
     &-btn{
@@ -38,10 +38,10 @@
         }
         &-sex{
             @include togher();
-            @include firstImg(26rpx,25rpx);
+            @include firstImg(34rpx,34rpx);
             @include firstSpan();
             div{
-                @include config_font(19rpx);
+                @include config_font(21rpx);
                 display: inline-block;
                 @include config_width_height(97rpx,36rpx);
                 line-height: 36rpx;
@@ -54,29 +54,27 @@
         }
         &-localGet{
             @include firstSpan2();
-            @include firstImg(26rpx,30rpx);
+            @include firstImg(34rpx,40rpx);
             @include secondImg();
             @include theDiv();
         }
         &-localext{
             @include togher();
-            @include firstImg(26rpx,25rpx);
             @include inputLoc();
         }
         &-localSend{
-            @include firstImg(26rpx,30rpx);
             @include secondImg();
             @include theDiv();
             div{
-                margin-left:  26rpx + 14rpx + $imageMargin;
+                margin-left:  34rpx + 14rpx + $imageMargin;
             }
         }
         &-name,&-phone{
             @include togher();
-            @include firstImg(26rpx,25rpx);
+            @include firstImg(34rpx,34rpx);
             input{
                 margin-left: 14rpx;
-                font-size: 19rpx;
+                @include config_font(24rpx)
             }
         }
         &-sendInfo{
@@ -88,15 +86,16 @@
                 margin-right: 9rpx;
             }
             #warning{
-                @include config_font(19rpx,#808080,light);
+                @include config_font(21rpx,#808080,light);
             }
             .changeDiv{
-                @include config_font(19rpx,#808080);
+                @include config_font(24rpx,#808080);
                 @include config_width_height(550rpx,47rpx);
-                margin: 3rpx 0 19rpx 89rpx;
+                margin: 6rpx 0 25rpx 89rpx;
             }
             .firstCol{
-                @include firstImg(26rpx,25rpx);
+                padding: 8rpx 0;
+                @include firstImg(34rpx,34rpx);
                 @include config_font(19rpx,$adviceFont,light);
             }
             .second-img{
@@ -107,10 +106,10 @@
         }
         &-reward{
             @include togher();
-            @include firstImg(26rpx,25rpx);
+            @include firstImg(34rpx,34rpx);
             input{
                 margin-left: 14rpx;
-                font-size: 19rpx;
+                font-size: 24rpx;
             }
             span{
                 margin-left: 14rpx;
@@ -135,7 +134,7 @@
             @include config_font(41rpx,white);
         }
         &-2{
-            @include config_font(19rpx,$adviceFont);
+            @include config_font(22rpx,$adviceFont);
         }
     }
     button{
@@ -144,7 +143,7 @@
         border-radius: 0;
         background-color: $mainColor;
         line-height: 99rpx;
-        @include config_font(26rpx);
+        @include config_font(30rpx);
         padding: 0;
     }
 }

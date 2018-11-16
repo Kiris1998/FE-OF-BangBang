@@ -1,5 +1,7 @@
 {
   "pages": [
+    "pages/helpSend/main",
+    "pages/addAddr/main",
     "pages/secretPage/main",
     "pages/orderDetails/main",
     "pages/chooseAddr/main",
@@ -15,10 +17,8 @@
     "pages/info/main",
     "pages/me/main",
     "pages/selectStyle/main",
-    "pages/addAddr/main",
     "pages/helpShop/main",
     "pages/freeCarry/main",
-    "pages/helpSend/main",
     "pages/counter/main"
   ],
   "window": {
