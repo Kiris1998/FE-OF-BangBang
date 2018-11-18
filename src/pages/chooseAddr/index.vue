@@ -66,7 +66,7 @@
 </template>
 
 <script>
-import card from '@/components/card'
+import card from '@/components/card'    
 import {jumpTo} from '../../utils/utils'
 
 export default {

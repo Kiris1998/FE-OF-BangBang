@@ -5,6 +5,16 @@ const jumpTo = (url) => {
     })
 }
 
+const showLoading = ({name,age,sex,school}) => {
+    age = age || 'hai'
+    console.log(name,age)
+    // wx.showLoading({
+    //   title: str,
+    //   mask:true
+    // })
+}
+
 export{
-    jumpTo
+    jumpTo,
+    showLoading
 }

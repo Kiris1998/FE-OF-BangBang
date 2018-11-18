@@ -13,46 +13,41 @@
             position: relative;
             @include config_rowbox_centercol();
             .first{
-                @include config_width_height(22rpx,28rpx);
+                @include config_width_height(34rpx,45rpx);
             }
             .second{
                 position: absolute;
                 right: 5rpx;
-                @include config_width_height(11rpx,20rpx);
+                @include config_width_height(13rpx,27rpx);
             }
             span{
-                font-size: 19rpx;
+                @include config_font($adviceFontSize);
                 margin-left: 16rpx;
             }
         }
         .localFor{
-            margin: 15rpx 0 0 37rpx;
-            margin-top: 15rpx;
-            @include config_font(15rpx);
+            margin: 18rpx 0 0 48rpx;
+            @include config_font($inputFontSize);
             padding-bottom: 18rpx;
             border-bottom: 2rpx $listBorder solid;
         }
         .configList{
             li{
-                @include config_width_height(auto,49rpx);
+                @include config_width_height(auto,70rpx);
                 @include config_rowbox_centercol();
                 border-bottom: 2rpx $listBorder solid;
             }
-            .config-number{
-                @include config_font(15rpx);
-                margin-left: 36rpx;
-            }
-            .config-tele,.config-name{
-                @include config_font(19rpx);
+            .config-tele{
+                @include config_font($inputFontSize);
                 img{
-                    @include config_width_height(17rpx,17rpx);
+                    @include config_width_height(35rpx,35rpx);
                 } 
                 span{
                     margin-left: 19rpx;
                 }
                 input{
                     margin-left: 19rpx;
-                    @include config_font(15rpx);
+                    @include config_font($inputFontSize);
                 }
             }
         }
@@ -62,6 +57,6 @@
         @include config_width_height(636rpx,67rpx);
         color: white;
         line-height: 67rpx;
-        margin-top: 21rpx;
+        margin-top: 114rpx;
     }
 }

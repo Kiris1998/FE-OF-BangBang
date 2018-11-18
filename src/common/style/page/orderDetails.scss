@@ -30,7 +30,7 @@
                 }
             }
             .college{
-                    @include config-font(19rpx,$adviceFont);
+                    @include config-font(24rpx,$adviceFont);
                     margin-top: 8rpx;
             }
             .list{
@@ -43,22 +43,22 @@
                 .remark{
                     align-items: flex-start;
                     .first{
-                        @include config_width_height(19rpx,26rpx);
+                        @include config_width_height(44rpx,38rpx);
                     }
                     div{
-                        margin: 0 0 19rpx 19rpx;
-                        @include config-font(19rpx,$blackFont);
+                        margin: 0 0 19rpx 26rpx;
+                        @include config-font(24rpx,$blackFont);
                     }  
                 }
                 .address{
                     position: relative;
-                    @include config_width_height(auto,50rpx);
+                    @include config_width_height(auto,60rpx);
                     .first{
-                        @include config_width_height(22rpx,22rpx);
+                        @include config_width_height(36rpx,36rpx);
                     }
                     div{
                         margin-left:19rpx;
-                        @include config-font(19rpx,$blackFont);
+                        @include config-font(24rpx,$blackFont);
                     }  
                     .second{
                         position: absolute;
@@ -72,18 +72,18 @@
                     border-bottom: none;
                     @include config_width_height(auto,50rpx);
                     .first{
-                        @include config_width_height(22rpx,22rpx);
+                        @include config_width_height(36rpx,36rpx);
                     }
                     div{
                         margin-left:19rpx;
-                        @include config-font(19rpx,$blackFont);
+                        @include config-font(24rpx,$blackFont);
                     }  
                     .price{
                         position: absolute;
                         right: 0;
                         @include config-font(60rpx);
                         span{
-                            @include config-font(26rpx);
+                            @include config-font(38rpx);
                         }
                     }
                     .second{
@@ -128,14 +128,14 @@
                 @include config_rowbox_centercol(space-between);
                 @include config_width_height(531rpx);
                 span{
-                    @include config-font(21rpx);
+                    @include config-font(24rpx);
                 }
             }
         }
     }
     .footer{
         margin-top: 15rpx;
-        @include config-font(19rpx,$adviceFont);
+        @include config-font(23rpx,$adviceFont);
         text-align: center;
     }
     &-bnt{

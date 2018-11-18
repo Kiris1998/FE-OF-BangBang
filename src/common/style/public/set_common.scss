@@ -13,18 +13,18 @@
     span{
         margin-left: 14rpx;
         margin-right: 10rpx;
-        @include config_font(19rpx,$adviceFont,light);
+        @include config_font($adviceFontSize,$adviceFont,light);
     }
 }
 @mixin firstSpan2() {
     span{
         margin-right: 10rpx;
-        @include config_font(19rpx,$adviceFont,light);
+        @include config_font($adviceFontSize);
     }
 }
 @mixin inputLoc() {
-    margin-left: 26rpx + 14rpx + $imageMargin;
-    @include config_font(20rpx,$adviceFont,light);
+    margin-left: 34rpx + 14rpx + $imageMargin;
+    @include config_font(24rpx,$normalFont,light);
 }
 
 @mixin secondImg() {
@@ -38,6 +38,6 @@
         @include config_rowbox_centercol(space-between);
         @include config_width_height(598rpx,$listLineHeight);
         border-bottom: $listBorderHieght solid $listBorder;
-        @include config_font(20rpx,$normalFont,light);
+        @include config_font($adviceFontSize,$normalFont,light);
     }
 }

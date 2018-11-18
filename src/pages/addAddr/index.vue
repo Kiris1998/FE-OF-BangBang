@@ -13,16 +13,9 @@
             西安市雁塔区含光路南段100号
         </div>
         <ul class="configList">
-            <li class="config-number">
-                <input placeholder="请补充具体楼层门牌号"/>
-            </li>
             <li class="config-tele">
                 <img src="/static/image/addAdr/telephone.png"/>
                 <span>123456789</span>
-            </li>
-            <li class="config-name">
-                <img src="/static/image/addAdr/people.png"/>
-                <input placeholder="请补充具体楼层门牌号"/>
             </li>
         </ul>
       </div>

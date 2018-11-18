@@ -3,6 +3,7 @@
 .sec-info{
     display: none;
     li{
+        height: $listLineHeight;
         padding-left: 89rpx;
     }
     .sendComopany{
@@ -11,7 +12,11 @@
     span{
         margin-right: 12rpx;
     }
-    @include config_font(19rpx);
+    @include config_font($adviceFontSize);
+    input{
+        @include config_font($inputFontSize);
+        @include config_width_height(450rpx);
+    }
 }
 #show{
     animation: hideIndex 0.2s;
