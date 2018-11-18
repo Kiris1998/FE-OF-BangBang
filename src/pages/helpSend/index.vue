@@ -22,17 +22,11 @@
                 <img class="second-img" src="/static/image/sendHelp/go.png"/>
               </div>
             </li>
-            <li class="setSend-con-localext">
-                <input placeholder="补充具体楼号和门牌号"/>
-            </li>
             <li class="setSend-con-localSend">
               <div>
                 <span>选择送达地址</span>
                 <img class="second-img" src="/static/image/sendHelp/go.png"/>
               </div>
-            </li>
-            <li class="setSend-con-localext">
-                <input placeholder="补充具体楼号和门牌号"/>
             </li>
             <li class="setSend-con-phone">
                 <img src="/static/image/sendHelp/phone.png"/>

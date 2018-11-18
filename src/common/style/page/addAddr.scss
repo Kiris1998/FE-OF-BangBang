@@ -21,28 +21,24 @@
                 @include config_width_height(13rpx,27rpx);
             }
             span{
-                @include config_font(30rpx);
+                @include config_font($adviceFontSize);
                 margin-left: 16rpx;
             }
         }
         .localFor{
             margin: 18rpx 0 0 48rpx;
-            @include config_font(24rpx);
+            @include config_font($inputFontSize);
             padding-bottom: 18rpx;
             border-bottom: 2rpx $listBorder solid;
         }
         .configList{
             li{
-                @include config_width_height(auto,67rpx);
+                @include config_width_height(auto,70rpx);
                 @include config_rowbox_centercol();
                 border-bottom: 2rpx $listBorder solid;
             }
-            .config-number{
-                @include config_font(24rpx);
-                margin-left: 48rpx;
-            }
-            .config-tele,.config-name{
-                @include config_font(24rpx);
+            .config-tele{
+                @include config_font($inputFontSize);
                 img{
                     @include config_width_height(35rpx,35rpx);
                 } 
@@ -51,7 +47,7 @@
                 }
                 input{
                     margin-left: 19rpx;
-                    @include config_font(24rpx);
+                    @include config_font($inputFontSize);
                 }
             }
         }

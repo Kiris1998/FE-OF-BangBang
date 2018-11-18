@@ -9,14 +9,14 @@
         span{
             position: absolute;
             z-index: 5;
-            @include config_font(27rpx);
+            @include config_font($adviceFontSize);
             top: 33rpx;
             margin-left: 22rpx;
         }
     }
     &-baseInfo{
         @include config_width_height(717rpx,191rpx);
-        @include config_font(24rpx,$normalFont,light);
+        @include config_font($inputFontSize,$normalFont,light);
         box-sizing: border-box;
         background: white;
         padding-top: 52rpx;
@@ -41,7 +41,7 @@
             @include firstImg(34rpx,34rpx);
             @include firstSpan();
             div{
-                @include config_font(21rpx);
+                @include config_font(24rpx);
                 display: inline-block;
                 @include config_width_height(97rpx,36rpx);
                 line-height: 36rpx;
@@ -58,10 +58,6 @@
             @include secondImg();
             @include theDiv();
         }
-        &-localext{
-            @include togher();
-            @include inputLoc();
-        }
         &-localSend{
             @include secondImg();
             @include theDiv();
@@ -74,24 +70,24 @@
             @include firstImg(34rpx,34rpx);
             input{
                 margin-left: 14rpx;
-                @include config_font(24rpx)
+                @include config_font($inputFontSize)
             }
         }
         &-sendInfo{
             display: block !important;
             border-bottom: 2rpx $listBorder solid ;
             #sendInfoTitle{
-                @include config_font(26rpx,#000,light);
+                @include config_font($adviceFontSize,#000,light);
                 margin-left: 16rpx;
                 margin-right: 9rpx;
             }
             #warning{
-                @include config_font(21rpx,#808080,light);
+                @include config_font(23rpx,#808080,light);
             }
             .changeDiv{
-                @include config_font(24rpx,#808080);
-                @include config_width_height(550rpx,47rpx);
-                margin: 6rpx 0 25rpx 89rpx;
+                @include config_font($inputFontSize,#808080);
+                @include config_width_height(550rpx);
+                margin: 6rpx 0 14rpx 89rpx;
             }
             .firstCol{
                 padding: 8rpx 0;
@@ -108,12 +104,13 @@
             @include togher();
             @include firstImg(34rpx,34rpx);
             input{
+                @include config_width_height(450rpx);
                 margin-left: 14rpx;
-                font-size: 24rpx;
+                font-size: $inputFontSize;
             }
             span{
                 margin-left: 14rpx;
-                @include config_font(26rpx);
+                @include config_font($adviceFontSize);
             }
         }
     }

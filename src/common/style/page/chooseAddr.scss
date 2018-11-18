@@ -9,12 +9,12 @@
         border-bottom: 2rpx $listBorder solid;
         img{
             position: absolute;
-            left: 125rpx;
+            left: 140rpx;
             z-index: 5;
             @include config_width_height(27rpx,27rpx);
         }
         span{
-            @include config_font(27rpx);
+            @include config_font($adviceFontSize);
             margin-left: 18rpx;
             margin-right: 18rpx;
         }
@@ -22,7 +22,7 @@
             background: white;
             line-height:56rpx;
             @include config_width_height(624rpx,56rpx);
-            @include config_font(24rpx,#4d4d4d);
+            @include config_font($inputFontSize,#4d4d4d);
             border-radius: 9rpx;
             padding: 0 52rpx 0 52rpx;
             box-sizing: border-box;
@@ -33,27 +33,27 @@
         margin: 0 25rpx 0 24rpx;
         &-avatar{
             text-align: center;
-            line-height: 50rpx;
+            line-height: 60rpx;
             color: white;
             font-size: 36rpx;
-            @include config_width_height(56rpx,56rpx);
+            @include config_width_height(60rpx,60rpx);
             border-radius: 50%;
             background: $mainColor;
         }
         &-info{
             margin-left: 24rpx;
-            @include config_font(27rpx,#808080);
+            @include config_font($baseinfoSize,#808080);
             @include config_column();
             &-1{
                 @include config_rowbox();
                 align-items: flex-end;
                 span{
                     margin-left: 10rpx;
-                    @include config_font(25rpx,$adviceFont);
+                    @include config_font($otherinfoSize,$adviceFont);
                 }
             }
             &-2{
-                @include config_font(24rpx,#808080);
+                @include config_font($otherinfoSize,#808080);
                 max-width: 450rpx;
                 margin-top: 11rpx;
             }
