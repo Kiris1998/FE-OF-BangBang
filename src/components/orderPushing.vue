@@ -17,8 +17,7 @@
             <p>已接单</p>
           </div>
           <div v-else class="othersBtn">
-            <img src="http://thyrsi.com/t6/400/1540826774x1822611437.jpg">
-            <img src="http://thyrsi.com/t6/400/1540826774x1822611437.jpg">
+            <img src="../static/image/phone.png">
           </div>
         </div>
       </div>
@@ -45,13 +44,14 @@
     display: flex;
   }
   .pushingLogo {
-    width: 30%;
-    background: white;
+    width: 25%;
+    background: url("http://img.027cgb.com/610462/bike.png");
     height: 100%;
+    background-size: 100% 80px;
   }
   .pushingContent {
     display: flex;
-    width: 70%;
+    width: 75%;
     background: #fdd731;
     border-top-right-radius: 7px;
     border-bottom-right-radius: 7px;
@@ -69,9 +69,10 @@
     border-bottom: solid #c09d2c 1px;
   }
   .pushingTips {
-    background: #feee9e;
+    background: url("http://img.027cgb.com/610462/bar.png");
     margin-top: 5px;
     border-radius: 6px;
+    background-size: 100% 33px
   }
   .pushingMoney {
     font-size: 15px;
@@ -107,8 +108,8 @@
     margin: 2px 0;
   }
   .othersBtn img {
-    width: 20px;
-    height: 20px;
+    width: 40px;
+    height: 40px;
     margin: 3px;
   }
 </style>

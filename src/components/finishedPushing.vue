@@ -8,6 +8,7 @@
           <img class="avatr" src="http://thyrsi.com/t6/400/1540826774x1822611437.jpg">
           <span class="orderHelper">Kiris|</span>
           <span>西安电子科技大学</span>
+          <span style="color:#ea267a;margin: 5px 0 0 7px;">♀</span>
         </div>
         <div style="position:relative;right:35px;">
           <span class="orderDate">10.13| </span>
@@ -15,14 +16,14 @@
         </div>
       </div>
       <div class="details">
-        <p>123131231</p>
-        <p>123123123121231231</p>
-        <p>12312312312</p>
+        <p><i class="iconfont icon-bijiben-copy"></i> 123131231</p>
+        <p><i class="iconfont icon-quhaopaidui"></i> 123123123121231231</p>
+        <p><i class="iconfont icon-distribution"></i> 12312312312</p>
       </div>
       <div class="lastRow">
         <div class="orderMoney">
           <span>成交金额:</span>
-          <span>¥6.00</span>
+          <span style="font-size:20px;color:black;font-weight:bold;">¥6.00</span>
         </div>
         <div class="btns">
           <button>评价</button>
@@ -114,11 +115,11 @@
   }
   .btns button{
     display: inline-block;
-    width: 90px;
+    width: 80px;
     height: 20px;
     line-height: 18px;
     margin-right: 3px;
-    font-size: 10px;
+    font-size: 8px;
     color: #808080;
     border: solid #b1b1b1 1px;
     border-radius: 10px;
@@ -127,4 +128,33 @@
   .btns {
     margin-right: 20px;
   }
+  i {
+    display: inline;
+    color: #fdd731;
+  }
+
+@font-face {
+  font-family: 'iconfont';  /* project id 914500 */
+  src: url('//at.alicdn.com/t/font_914500_ubqrj79mjt.eot');
+  src: url('//at.alicdn.com/t/font_914500_ubqrj79mjt.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_914500_ubqrj79mjt.woff') format('woff'),
+  url('//at.alicdn.com/t/font_914500_ubqrj79mjt.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_914500_ubqrj79mjt.svg#iconfont') format('svg');
+}
+
+.iconfont {
+  font-family:"iconfont" !important;
+  font-size:16px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-quhaopaidui:before { content: "\e639"; }
+
+.icon-distribution:before { content: "\e659"; }
+
+.icon-bijiben-copy:before { content: "\e62c"; }
+
+
 </style>

@@ -18,23 +18,32 @@
 </script>
 
 <style scoped>
+  .page {
+    width: 100vw;
+    height: 100vh;
+    background: #f2f2f2;
+  }
   input {
     display: inline-block;
     background: #e6e6e6;
     border-radius: 8px;
-    width: 72%;
+    width: 90%;
+    margin: 13px;
   }
   .searchBar {
-    padding: 20px;
     border-bottom: solid #b2b2b2 1px;
     width: 100vw;
     display: flex;
+    box-sizing: border-box;
+    height: 50px;
   }
   .searchBar span {
-    margin-right: 20px;
     display: inline-block;
     width: 15%;
-    font-weight: 300;
+    font-size: 13px;
+    height: 50px;
+    line-height: 50px;
+    margin-left: 20px;
   }
   .results {
     display: flex;

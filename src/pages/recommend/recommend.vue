@@ -1,10 +1,13 @@
 <template>
   <div class="page">
     <p class="title">我的推荐人</p>
-    <div class="addPerson">
+    <div class="wrapper">
+      <div class="addPerson">
       <p>为您添加一位联系人</p>
       <p>每单获得更高收益</p>
+      </div>
     </div>
+    
     <button>邀请有奖</button>
   </div>
 </template>
@@ -35,6 +38,10 @@
     margin: 50px 0 10px 0;
     border-radius: 10px;
     padding: 20px 0 0 20px;
+  }
+  .wrapper {
+    border-bottom: #808080 solid 1px;
+    padding-bottom: 10px;
   }
   .addPerson p:nth-child(1) {
     font-weight: bold;

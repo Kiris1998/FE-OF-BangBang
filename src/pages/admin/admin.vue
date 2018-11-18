@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <div class="box">
-      <img class="logo" src="http://thyrsi.com/t6/400/1540826774x1822611437.jpg">
+      <img class="logo" src="../../static/image/welcome/logoS.png">
       <input type="text" placeholder="请输入手机号">
       <div class="testBox">
         <input class="test" type="text" placeholder="请输入验证码">
@@ -32,7 +32,7 @@
     width: 100px;
     height: 100px;
     border-radius: 50%;
-    margin: 15px 0 80px 0;
+    margin: 20px 0 65px 0;
   }
   .box {
     display: flex;

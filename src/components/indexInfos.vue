@@ -10,6 +10,9 @@
           <span class="school">
             西安电子科技大学
           </span>
+          <span class="sex">
+            ♂
+          </span>
           <span class="time">
             12：23发布
           </span>
@@ -32,7 +35,6 @@
 </template>
 
 <script>
-  
 </script>
 
 <style scoped>
@@ -50,8 +52,13 @@
     align-items: center;
   }
   .logo {
-    background: #fed304;
     width: 33%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: url("http://img.027cgb.com/610462/back.png");
+    background-size: 100% 110px;
   }
   .avatr {
     width: 62px;
@@ -69,6 +76,10 @@
     color: #2081d0;
     font-size: 17px;
     font-weight: bold;
+  }
+  .sex {
+    color: #2081d0;
+    font-size: 9px;
   }
   .school {
     color: #a9a9a9;
@@ -108,13 +119,6 @@
   }
   .baseInfo {
     margin-bottom: 5px;
-  }
-  .logo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-
   }
   .title {
     color: white;

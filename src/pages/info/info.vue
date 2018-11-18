@@ -9,8 +9,8 @@
       <input type="text" v-model="name" placeholder-class="small" placeholder="为了保证交易安全请填写真实姓名">
     </div>
     <div class="selectRow">
-      <div>
-        <span>性别： </span>
+      <div style="margin-left:-10px">
+        <span>性别：</span>
         <span class="small">请选择性别</span>
       </div>
       <div>
@@ -60,8 +60,8 @@
     justify-content: center;
   }
   .avatr {
-    width: 150px;
-    height: 150px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
   }
   .avatRow {
@@ -69,12 +69,14 @@
     justify-content: space-between;
     width: 90vw;
     align-items: center;
-    border-bottom: solid #b2b2b2 1px;
+    border-bottom: solid #e0e0e0 1px;
+    height: 180px;
+    margin-bottom: 10px;
   }
   .inputRow {
     display: flex;
     align-items: center;
-    border-top: solid #b2b2b2 1px;
+    border-top: solid #e0e0e0 1px;
     padding: 10px 0;
   }
   .avatRow+.inputRow {
@@ -89,22 +91,27 @@
   }
   .small{
     font-size: 12px;
+    color: #808080;
   }
   .selectRow {
     display: flex;
     justify-content: space-between;
-    width: 90vw;
-    border-top: solid #b2b2b2 1px;
+    width: 83vw;
+    border-top: solid #e0e0e0 1px;
+    padding: 10px 0;
   }
   .selectRow div:nth-child(2) span{
     display: inline-block;
-    width: 30px;
-    height: 10px;
-    padding: 10px 20px;
+    width: 25px;
+    height: 6px;
+    padding: 7px 13px;
     border: solid #fed901 1px;
     text-align: center;
-    line-height: 10px;
-    border-radius: 10px;
+    line-height: 6px;
+    border-radius: 15px;
+    font-size: 13px;
+    color: #808080;
+    margin: 0 4px;
   }
 </style>
 

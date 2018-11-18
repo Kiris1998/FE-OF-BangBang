@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <img class="logo" src="http://thyrsi.com/t6/400/1540826774x1822611437.jpg">
+    <img class="logo" src="../../static/image/welcome/logo.png">
     <p>让美好的遇见从帮帮开始</p>
   </div>
 </template>
@@ -20,10 +20,14 @@
     flex-direction: column;
   }
   .logo {
-    height: 150px;
-    width: 150px;
-    border-radius: 50%;
+    height: 200px;
+    width: 200px;
     position: relative;
-    bottom: 120px;
+    bottom: 180px;
+  }
+  p {
+    margin-top: -130px;
+    font-weight: bolder;
+    font-size: 25px;
   }
 </style>

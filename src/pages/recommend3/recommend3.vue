@@ -8,20 +8,18 @@
         <span>收益提成自动转入账户余额</span>
       </div>
     </div>
-    <div class="personInfo">
-      <div>
-        <span class="name">Kiris</span>
-        <span class="school">西安电子科技大学</span>
-        <p class="_id">15991266003</p>
-      </div>
-      <img class="avatr" src="http://thyrsi.com/t6/400/1540826774x1822611437.jpg">
-    </div>
+    <recommend-info></recommend-info>
     <button>邀请有奖</button>
   </div>
 </template>
 
 <script>
-  
+  import recommendInfo from '@/components/recommendInfo'
+  export default {
+    components: {
+      recommendInfo
+    }
+  }
 </script>
 
 <style scoped>
@@ -38,43 +36,13 @@
     left: 20px;; 
     font-weight: bold;
   }
-  .personInfo {
-    background: #fed901;
-    width: 90vw;
-    height: 120px;
-    margin: 30px 0 10px 0;
-    border-radius: 10px;
-    padding: 20px 10px 20px 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .avatr {
-    width: 140px;
-    height: 100px;
-    border-radius: 50%;
-    display: block;
-  }
-  .name {
-    font-weight: bold;
-    color: #248cd6;
-    font-size: 40px;
-    margin-right: 5px;
-    display: inline-block;
-    margin-left: 10px;
-  }
-  .school {
-    font-weight: 300;
-    font-size: 15px;
-  }
-  ._id {
-    color:#4d4d4d;
-    margin-left: 10px;
-    display: inline-block;
-  }
   .money {
     margin-top: 55px;
     width: 90vw;
+    border-bottom: #b7b7b7 solid 1px;
+    border-top: #b7b7b7 solid 1px;
+    padding: 15px 0;
+    margin-bottom: -20px;
   }
   .money p {
     color: #b7b7b7;
