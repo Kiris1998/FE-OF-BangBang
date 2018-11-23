@@ -14,6 +14,7 @@
                 <span>请选择您的性别</span>
                 <div>男</div>
                 <div>女</div>
+                <div>不限</div>
             </li>
             <li class="setSend-con-localGet">
               <img class="first-img" src="/static/image/sendHelp/location.png"/>
@@ -77,6 +78,7 @@
 
 <script>
 import card from '@/components/card'
+import bottom from '@/components/bottom'
 import {jumpTo} from '../../utils/utils'
 
 export default {
@@ -88,7 +90,8 @@ export default {
   },
 
   components: {
-    card
+    card,
+    bottom
   },
 
   methods: {

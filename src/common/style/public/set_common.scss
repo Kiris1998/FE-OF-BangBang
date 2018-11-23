@@ -24,7 +24,7 @@
 }
 @mixin inputLoc() {
     margin-left: 34rpx + 14rpx + $imageMargin;
-    @include config_font(24rpx,$normalFont,light);
+    @include config_font($inputFontSize,$normalFont,light);
 }
 
 @mixin secondImg() {

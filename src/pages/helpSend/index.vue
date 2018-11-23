@@ -14,6 +14,7 @@
                 <span>请选择您的性别</span>
                 <div>男</div>
                 <div>女</div>
+                <div>不限</div>
             </li>
             <li class="setSend-con-localGet">
               <img class="first-img" src="/static/image/sendHelp/location.png"/>
@@ -59,25 +60,14 @@
         </button>
     </div>
   </div>
-  <div class="setSend-bottom">
-    <div class="setSend-bottom-info">
-      <div class="setSend-bottom-info-1">
-        下单支付：<span>￥3.00</span>
-      </div>
-      <div class="setSend-bottom-info-2">
-        基础速递费2元+悬赏金3元+优惠券0元
-      </div>
-    </div>
-    <button>
-        确认下单
-    </button>
-  </div>
+  <bottom></bottom>
 </div>
 </template>
 
 <script>
 import card from '@/components/card';
 import infoSec from '@/components/infoSec'
+import bottom from '@/components/bottom'
 
 export default {
   data () {
@@ -88,7 +78,8 @@ export default {
 
   components: {
     card,
-    infoSec
+    infoSec,
+    bottom
   },
 
   methods: {
@@ -105,7 +96,7 @@ export default {
 <style lang="scss">
   @import '../../common/style/page/helpSend.scss';
   page{
-    background: #E6E6E6;
+    background: #E6E6E6;  
   }
 </style>
 

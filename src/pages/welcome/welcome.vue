@@ -1,13 +1,8 @@
 <template>
   <div class="page">
-<<<<<<< HEAD
     <img class="logo" src="../../static/image/welcome/logo.png">
     <p>让美好的遇见从帮帮开始</p>
-=======
-    <!-- <img class="logo" src="http://thyrsi.com/t6/400/1540826774x1822611437.jpg"> -->
-    <p id="text" @click="aa">让美好的遇见从帮帮开始</p>
     <button open-type="getUserInfo" @getuserinfo="bindinfo">获取用户的信息</button>
->>>>>>> 124941fd8dd4dd3818eaedffa0ef07f60da2e560
   </div>
 </template>
 
@@ -28,21 +23,21 @@ export default{
     showLoading(obj)
   },
   created(){
-    wx.getSetting({
-      success(res) {
-        wx.hideLoading()
-        if(res.authSetting['scope.userInfo'] == undefined || res.authSetting['scope.userInfo'] == false){
-          wx.showModal({
-            title: '提示',
-            content: '请授权，否则无法正常使用'
-          })
-        }else{
-          //跳转到主页面
-          console.log('已授权')
-        }
-        wx.hideLoading()
-      }
-    })
+    // wx.getSetting({
+    //   success(res) {
+    //     wx.hideLoading()
+    //     if(res.authSetting['scope.userInfo'] == undefined || res.authSetting['scope.userInfo'] == false){
+    //       wx.showModal({
+    //         title: '提示',
+    //         content: '请授权，否则无法正常使用'
+    //       })
+    //     }else{
+    //       //跳转到主页面
+    //       console.log('已授权')
+    //     }
+    //     wx.hideLoading()
+    //   }
+    // })
   },
   methods: {
     aa:function(e){
