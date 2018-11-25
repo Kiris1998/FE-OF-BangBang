@@ -6,21 +6,26 @@
       <div class="addAdr-content">
         <div class="addAdr-content-local">
             <img class="first" src="/static/image/addAdr/local.png"/>
-            <span>西安美术学院</span>
+            <span>{{college}}</span>
             <img class="second" src="/static/image/addAdr/go.png"/>
         </div>
-        <div class="localFor">
-            西安市雁塔区含光路南段100号
-        </div>
+        <textarea class="localFor" placeholder="请输入收货地址" v-model="address"></textarea>
         <ul class="configList">
             <li class="config-tele">
                 <img src="/static/image/addAdr/telephone.png"/>
-                <span>123456789</span>
+                <input  placeholder="请输入您的手机号" v-model="telePhone"/>
+            </li>
+            <li class="config-tele">
+                <img src="/static/image/addAdr/people.png"/>
+                <input  placeholder="请输入您的姓名" v-model="name"/>
             </li>
         </ul>
       </div>
-      <button class="addAdr-config">
+      <button class="addAdr-config" @click="configAddr">
           确认
+      </button>
+      <button class="addAdr-config-delect" @click="delectInfo">
+          删除纪录
       </button>
   </div>
 </template>
@@ -32,25 +37,30 @@ import {jumpTo} from '../../utils/utils'
 export default {
   data () {
     return {
-        
+        telePhone:'',
+        college:'西安美术学院',
+        address:'',
+        name:''
     }
   },
-
   components: {
     card
   },
-
   methods: {
-    linkToSend(){
-      jumpTo('../helpSend/main')
-    },
-    linkToShop(){
-      jumpTo('../helpShop/main')
-    },
-    linkToFree(){
-      jumpTo('../freeCarry/main')
-    }
+     configAddr(){
+        wx.navigateBack()
+     },
+     delectInfo(){
 
+     }
+  },
+  onLoad(options){
+    if(options.info != undefined){
+        var obj = JSON.parse(options.info)
+        this.telePhone = obj.telePhone
+        this.name = obj.name
+        this.address = obj.address
+    }
   }
 }
 </script>

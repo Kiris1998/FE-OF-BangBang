@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/addAddr/main",
     "pages/me/main",
     "pages/invitation/main",
     "pages/searchAdd/main",

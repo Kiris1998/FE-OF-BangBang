@@ -16,18 +16,24 @@
                 <div>女</div>
                 <div>不限</div>
             </li>
-            <li class="setSend-con-localGet">
+            <li class="setSend-con-localGet" @click="chooseRecive">
               <img class="first-img" src="/static/image/sendHelp/location.png"/>
               <div>
                 <span>选择收货地址</span>
                 <img class="second-img" src="/static/image/sendHelp/go.png"/>
               </div>
             </li>
-            <li class="setSend-con-localSend">
+            <li class="setSend-con-localext">
+                <span>{{address}}</span>
+            </li>
+            <li class="setSend-con-localSend" @click="chooseSend">
               <div>
                 <span>选择送达地址</span>
                 <img class="second-img" src="/static/image/sendHelp/go.png"/>
               </div>
+            </li>
+            <li class="setSend-con-localext">
+                <span>{{address}}</span>
             </li>
             <li class="setSend-con-phone">
                 <img src="/static/image/sendHelp/phone.png"/>
@@ -68,23 +74,37 @@
 import card from '@/components/card';
 import infoSec from '@/components/infoSec'
 import bottom from '@/components/bottom'
+import {jumpTo} from '../../utils/utils'
+import Bus from '@/mixins/event-bus'
 
 export default {
   data () {
     return {
-      isClick:false
+      isClick:false,
+      address:'北京市复兴门外大街'
     }
   },
-
   components: {
     card,
     infoSec,
     bottom
   },
+  mounted(){
+    Bus.$on('getParams', params => {
+      console.log(params)
+      this.address = params.address
+    })
+  },
 
   methods: {
     changeShow(){
       this.isClick = !this.isClick
+    },
+    chooseRecive(){
+      jumpTo('../chooseAddr/main')
+    },
+    chooseSend(){
+      jumpTo('../chooseAddr/main')
     }
   }
 }
