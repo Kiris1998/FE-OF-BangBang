@@ -37,7 +37,7 @@
         下单支付：<span>￥3.00</span>
       </div>
       <div class="setSend-bottom-info-2">
-        物品价格5元+基础速递费2元+悬赏金3元+优惠券0元
+        悬赏金3元-优惠券0元
       </div>
     </div>
     <button>

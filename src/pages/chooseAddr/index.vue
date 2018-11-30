@@ -10,10 +10,11 @@
         <div class="choose-content">
             <ul>
                 <li v-for="(item,index) in msg" :key="item.id">
-                   <div class="choose-content-avatar" @click="linkToSend">
+                   <div class="choose-content-avatar" @click="linkToSend(index)">
                         {{item.firstname}}
                     </div>
-                    <div class="choose-content-info" @click="linkToSend">
+                    
+                    <div class="choose-content-info" @click="linkToSend(index)">
                         <div class="choose-content-info-1">
                             <div>
                                 {{item.name}}
@@ -67,11 +68,12 @@ export default {
   },
 
   methods: {
-    linkToSend(){
+    linkToSend(index){
+        // console.log(index)
         let params = { 
-            address:this.address
+            address:this.msg[index].address
         }
-        Bus.$emit('getParams', params)
+        Bus.$emit('getAddr', params)
         wx.navigateBack()
     },
     linkToShop(){

@@ -23,14 +23,6 @@
         padding-left: 22rpx;
         border-radius: 12rpx;
     }
-    &-btn{
-        margin-top: 54rpx;
-        margin-bottom: 120rpx;
-        @include config_width_height(601rpx,101rpx);
-        background-color: $mainColor;
-        @include config_font(60rpx,$normalFont,light);
-        line-height: 101rpx;
-    }
     &-con{
         margin-top: 29rpx;
         margin-left: 29-$leftPadding;
