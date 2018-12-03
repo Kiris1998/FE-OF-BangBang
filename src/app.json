@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/me/main",
+    "pages/welcome/main",
     "pages/invitation/main",
     "pages/searchAdd/main",
     "pages/info/main",
@@ -9,7 +10,6 @@
     "pages/order/main",
     "pages/index/main",
     "pages/admin/main",
-    "pages/welcome/main",
     "pages/recommend/main",
     "pages/selectStyle/main",
     "pages/freeCarry/main",
