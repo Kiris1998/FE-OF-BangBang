@@ -23,13 +23,6 @@
         padding-left: 22rpx;
         border-radius: 12rpx;
     }
-    &-btn{
-        margin-top: 54rpx;
-        @include config_width_height(601rpx,101rpx);
-        background-color: $mainColor;
-        @include config_font(60rpx,$normalFont,light);
-        line-height: 101rpx;
-    }
     &-con{
         margin-top: 29rpx;
         margin-left: 29-$leftPadding;
@@ -58,6 +51,12 @@
             @include secondImg();
             @include theDiv();
         }
+        &-localext{
+            border-bottom: $listBorderHieght solid $listBorder;
+            padding: 12rpx 0rpx;
+            @include firstImg(34rpx,34rpx);
+            @include inputLoc();
+        }
         &-localSend{
             @include secondImg();
             @include theDiv();
@@ -85,7 +84,7 @@
                 @include config_font(23rpx,#808080,light);
             }
             .changeDiv{
-                @include config_font($inputFontSize,#808080);
+                @include config_font(25rpx,#808080);
                 @include config_width_height(550rpx);
                 margin: 6rpx 0 14rpx 89rpx;
             }

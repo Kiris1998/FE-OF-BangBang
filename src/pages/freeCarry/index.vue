@@ -14,6 +14,7 @@
                 <span>请选择您的性别</span>
                 <div>男</div>
                 <div>女</div>
+                <div>不限</div>
             </li>
             <li class="setSend-con-phone">
                 <img src="/static/image/sendHelp/phone.png"/>
@@ -36,7 +37,7 @@
         下单支付：<span>￥3.00</span>
       </div>
       <div class="setSend-bottom-info-2">
-        物品价格5元+基础速递费2元+悬赏金3元+优惠券0元
+        悬赏金3元-优惠券0元
       </div>
     </div>
     <button>

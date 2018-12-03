@@ -13,25 +13,20 @@
     span{
         margin-left: 14rpx;
         margin-right: 10rpx;
-        @include config_font(19rpx,$adviceFont,light);
+        @include config_font($baseinfoSize,$adviceFont,light);
     }
 }
 @mixin firstSpan2() {
     span{
         margin-right: 10rpx;
-        @include config_font(19rpx,$adviceFont,light);
+        @include config_font($baseinfoSize,$adviceFont,light);
     }
 }
 @mixin inputLoc() {
     margin-left: 26rpx + 14rpx + $imageMargin;
-    @include config_font(20rpx,$adviceFont,light);
+    @include config_font($baseinfoSize,$adviceFont,light);
 }
 
-@mixin secondImg() {
-    .second-img{
-        @include config_width_height(11rpx,20rpx);
-    }
-}
 @mixin theDiv() {
     div{
         margin-left: 14rpx;

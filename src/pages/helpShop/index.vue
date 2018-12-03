@@ -14,16 +14,17 @@
                 <span>请选择您的性别</span>
                 <div>男</div>
                 <div>女</div>
+                <div>不限</div>
             </li>
             <li class="setSend-con-localGet">
               <img class="first-img" src="/static/image/sendHelp/location.png"/>
               <div>
-                <span>选择收货地址</span>
+                <span>填写购买地址</span>
                 <img class="second-img" src="/static/image/sendHelp/go.png"/>
               </div>
             </li>
             <li class="setSend-con-localext">
-                <input placeholder="补充具体楼号和门牌号"/>
+                <input placeholder="填写购买地址"/>
             </li>
             <li class="setSend-con-localSend">
               <div>
@@ -34,14 +35,14 @@
             <li class="setSend-con-localext">
                 <input placeholder="补充具体楼号和门牌号"/>
             </li>
-            <li class="setSend-con-phone">
+            <!-- <li class="setSend-con-phone">
                 <img src="/static/image/sendHelp/phone.png"/>
                 <input placeholder="请填写联系电话" class="name"/>
             </li>
             <li class="setSend-con-name">
                 <img src="/static/image/sendHelp/people.png"/>
                 <input placeholder="请填写联系人姓名" class="name"/>
-            </li>
+            </li> -->
             <li class="setSend-con-price">
                 <img src="/static/image/sendHelp/reward.png"/>
                 <span id="rewardTitle">物品金额</span>
@@ -54,9 +55,9 @@
                 <input id="rewardInput" placeholder="填写悬赏金"/>
             </li> 
         </ul>
-        <button class="setSend-btn">
+        <!-- <button class="setSend-btn">
           ￥00.00
-        </button>
+        </button> -->
     </div>
   </div>
   <div class="setSend-bottom">
@@ -77,6 +78,7 @@
 
 <script>
 import card from '@/components/card'
+import bottom from '@/components/bottom'
 import {jumpTo} from '../../utils/utils'
 
 export default {
@@ -88,7 +90,8 @@ export default {
   },
 
   components: {
-    card
+    card,
+    bottom
   },
 
   methods: {

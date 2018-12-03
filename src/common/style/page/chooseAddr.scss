@@ -57,6 +57,7 @@
                 max-width: 450rpx;
                 margin-top: 11rpx;
             }
+            padding: 25rpx 0;
         }
         &-addr{
             position: absolute;
@@ -70,7 +71,7 @@
             }
         }
         li{
-            @include config_width_height(701rpx,150rpx);
+            @include config_width_height(701rpx);
             @include config_rowbox_centercol();
             border-bottom: #d2d2d2 2rpx solid;
         }
@@ -81,7 +82,7 @@
         img{
             @include config_width_height(636rpx,68rpx);
         }
-        margin-top: 71rpx;
+        margin-top: 110rpx;
     }
 }
 

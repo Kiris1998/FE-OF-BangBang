@@ -1,5 +1,11 @@
 {
   "pages": [
+    "pages/helpShop/main",
+    "pages/index/main",
+    "pages/helpSend/main",
+    "pages/selectStyle/main",
+    "pages/addAddr/main",
+    "pages/welcome/main",
     "pages/me/main",
     "pages/welcome/main",
     "pages/invitation/main",
@@ -8,13 +14,10 @@
     "pages/recommend3/main",
     "pages/recommend2/main",
     "pages/order/main",
-    "pages/index/main",
     "pages/admin/main",
     "pages/recommend/main",
-    "pages/selectStyle/main",
     "pages/freeCarry/main",
     "pages/chooseAddr/main",
-    "pages/helpSend/main",
     "pages/counter/main"
   ],
   "window": {

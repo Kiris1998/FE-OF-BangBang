@@ -9,56 +9,30 @@
         </div>
         <div class="choose-content">
             <ul>
-                <li>
-                    <div class="choose-content-avatar">
-                        王
+                <li v-for="(item,index) in msg" :key="item.id">
+                   <div class="choose-content-avatar" @click="linkToSend(index)">
+                        {{item.firstname}}
                     </div>
-                    <div class="choose-content-info">
+                    
+                    <div class="choose-content-info" @click="linkToSend(index)">
                         <div class="choose-content-info-1">
                             <div>
-                                王小明
+                                {{item.name}}
                             </div>
                             <span>
-                                15929320201
+                                {{item.telePhone}}
                             </span>
                         </div>
                         <div class="choose-content-info-2">
-                            西安市雁塔区含光南路100号 西安美术学院3-107
+                            {{item.address}}
                         </div>
                     </div>
-                    <div class="choose-content-addr">
+                    <div class="choose-content-addr" @click="linkToEdit(index)">
                         <img src="/static/image/chooseAddr/edit.png" />
-                    </div>
-                    <div>
-
-                    </div>
-                </li>
-                <li>
-                    <div class="choose-content-avatar">
-                        白
-                    </div>
-                    <div class="choose-content-info">
-                        <div class="choose-content-info-1">
-                            <div>
-                                白果
-                            </div>
-                            <span>
-                                15929320201
-                            </span>
-                        </div>
-                        <div class="choose-content-info-2">
-                            西安市新城区韩森寨幸福南路100号 西安建筑科技大学华清学院
-                        </div>
-                    </div>
-                    <div class="choose-content-addr">
-                        <img src="/static/image/chooseAddr/edit.png" />
-                    </div>
-                    <div>
-
                     </div>
                 </li>
             </ul>
-            <div class="choose-content-bnt">
+            <div class="choose-content-bnt"  @click="linkToEdit()">
                 <img src="/static/image/chooseAddr/config.png"/>
             </div>
         </div>
@@ -68,12 +42,24 @@
 <script>
 import card from '@/components/card'    
 import {jumpTo} from '../../utils/utils'
+import Bus from '@/mixins/event-bus'
 
 export default {
   data () {
     return {
-      motto: 'Hello World',
-      userInfo: {}
+        msg:[
+            {
+                name:'王小明',
+                firstname:'',
+                telePhone:'15929320201',
+                address:'西安市新城区韩森寨幸福南路100号 西安建筑科技大学华清学院西安市新城区韩森寨幸福南路100号 西安建筑科技大学华清学院'
+            },{
+                name:'白果',
+                firstname:'',
+                telePhone:'15929320201',
+                address:'西安市新城区韩森寨幸福南路100号 西安建筑科技大学华清学院西安市新城区韩森寨幸福南路100号 西安建筑科技大学华清学院'
+            }
+        ]
     }
   },
 
@@ -82,12 +68,33 @@ export default {
   },
 
   methods: {
-    linkToSend(){
-      jumpTo('../helpSend/main')
+    linkToSend(index){
+        // console.log(index)
+        let params = { 
+            address:this.msg[index].address
+        }
+        Bus.$emit('getAddr', params)
+        wx.navigateBack()
     },
     linkToShop(){
-      jumpTo('../helpShop/main')
+        jumpTo('../helpShop/main')
+    },
+    linkToEdit(index){
+        // console.log(index)
+        if(index == undefined){
+            jumpTo(`../addAddr/main`)
+        }
+        else{
+            var info = this.msg[index]
+            info = JSON.stringify(info)
+            jumpTo(`../addAddr/main?info=${info}`)
+        }
     }
+  },
+  beforeMount(){
+      for(let i = 0;i < this.msg.length;i++){
+        this.msg[i].firstname = this.msg[i].name.substr(0,1)
+      }
   }
 }
 </script>

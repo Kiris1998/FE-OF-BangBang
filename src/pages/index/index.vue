@@ -22,7 +22,10 @@
 </template>
 
 <script>
+  import globalStore from '@/store/vuex.js'
   import indexInfos from '@/components/indexInfos'
+  import {showModal,showToast,showLoading,hideLoading} from '../../utils/wxAPI.js'
+  import {getSettings,getUserInfo,jumpTo,switchTab,login,ajax} from '../../utils/utils.js'
   export default {
     components: {
       indexInfos
@@ -36,6 +39,41 @@
         ],
         selectedNum: 0
       }
+    },
+    mounted(){
+      var code;
+      var encryptedData;
+      var iv;
+      showLoading()
+      getUserInfo().then((res)=>{
+        encryptedData = res.encryptedData
+        iv = res.iv
+        console.log(encryptedData)
+        console.log(iv)
+        return login()
+      })
+      .then((res)=>{
+        console.log(res)
+        hideLoading()
+        // wx.request({
+        //   url: 'https://bang.zhengsj.top/login/user', 
+        //   method:'POST',
+        //   data: {
+        //     code:code,
+        //     encryptedData: encryptedData,
+        //     iv: iv
+        //   },
+        //   success (res) {
+        //     console.log(res.data)
+        //   },
+        //   fail(){
+
+        //   }
+        // })
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
     }
   }
 </script>
