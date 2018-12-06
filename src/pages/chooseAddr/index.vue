@@ -81,7 +81,6 @@ export default {
         jumpTo('../helpShop/main')
     },
     linkToEdit(index){
-        // console.log(index)
         if(index == undefined){
             jumpTo(`../addAddr/main`)
         }

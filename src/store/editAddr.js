@@ -8,8 +8,7 @@ export default new Vuex.Store({
     },
     mutations: {
         commitInfo:(state,val)=>{
-            console.log(val)
             state.info = val
         }
     }
-  });
+});
