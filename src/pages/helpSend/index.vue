@@ -12,19 +12,18 @@
             <li class="setSend-con-sex">
                 <img src="/static/image/sendHelp/sex.png"/>
                 <span>请选择您的性别</span>
-                <div>男</div>
-                <div>女</div>
-                <div>不限</div>
+                <div :id="sexChoose == 'man'?'activeClass':'errorClass'" @click="chooseThisSex('man')">男</div>
+                <div :id="sexChoose == 'woman'?'activeClass':'errorClass'" @click="chooseThisSex('woman')">女</div>
+                <div :id="sexChoose == 'noLimit'?'activeClass':'errorClass'" @click="chooseThisSex('noLimit')">不限</div>
             </li>
-            <li class="setSend-con-localGet" @click="chooseRecive">
+            <li class="setSend-con-localGet">
               <img class="first-img" src="/static/image/sendHelp/location.png"/>
               <div>
-                <span>选择待取地址</span>
-                <img class="second-img" src="/static/image/sendHelp/go.png"/>
+                <span>填写待取地址</span>
               </div>
             </li>
             <li class="setSend-con-localext">
-                <span>{{address}}</span>
+                <input placeholder="请输入用户的取货地址"/>
             </li>
             <li class="setSend-con-localSend" @click="chooseSend">
               <div>
@@ -33,7 +32,7 @@
               </div>
             </li>
             <li class="setSend-con-localext">
-                <span>{{address}}</span>
+                <span>{{userAddr}}</span>
             </li>
             <li class="setSend-con-sendInfo">
               <div class="firstCol" @click="changeShow">
@@ -66,12 +65,19 @@ import card from '@/components/card';
 import bottom from '@/components/bottom'
 import {jumpTo} from '../../utils/utils'
 import Bus from '@/mixins/event-bus'
+import store from '../../store/vuex'
 
 export default {
   data () {
     return {
+      sexChoose:'noLimit',
       address:'北京市复兴门外大街'
     }
+  },
+  computed: {
+    userAddr() {
+      return store.state.info;
+    }
   },
   components: {
     card,
@@ -79,13 +85,16 @@ export default {
     bottom
   },
   mounted(){
-    Bus.$on('getAddr', params => {
-      console.log(params)
-      this.address = params.address
-    })
+    // Bus.$on('getAddr', params => {
+    //   console.log(params)
+    //   this.address = params.address
+    // })
   },
 
   methods: {
+    chooseThisSex(res){
+      this.sexChoose = res
+    },
     chooseRecive(){
       jumpTo('../chooseAddr/main')
     },

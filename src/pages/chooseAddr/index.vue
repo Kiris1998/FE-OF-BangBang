@@ -88,6 +88,7 @@ export default {
         else{
             var info = this.msg[index]
             info = JSON.stringify(info)
+            console.log(info)
             jumpTo(`../addAddr/main?info=${info}`)
         }
     }

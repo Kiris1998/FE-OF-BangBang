@@ -35,14 +35,6 @@
             <li class="setSend-con-localext2">
                 <span>{{userAddr}}</span>
             </li>
-            <!-- <li class="setSend-con-phone">
-                <img src="/static/image/sendHelp/phone.png"/>
-                <input placeholder="请填写联系电话" class="name"/>
-            </li>
-            <li class="setSend-con-name">
-                <img src="/static/image/sendHelp/people.png"/>
-                <input placeholder="请填写联系人姓名" class="name"/>
-            </li> -->
             <li class="setSend-con-price">
                 <img src="/static/image/sendHelp/reward.png"/>
                 <span id="rewardTitle">物品金额</span>
@@ -55,9 +47,6 @@
                 <input id="rewardInput" placeholder="填写悬赏金"/>
             </li> 
         </ul>
-        <!-- <button class="setSend-btn">
-          ￥00.00
-        </button> -->
     </div>
   </div>
   <div class="setSend-bottom">

@@ -76,7 +76,7 @@
                 @include config_font(23rpx,#808080,light);
             }
             .changeDiv{
-                @include config_font($adviceFontSize,#808080);
+                @include config_font(26rpx,#808080);
                 @include config_width_height(550rpx,100rpx);
                 margin: 6rpx 0 14rpx 89rpx;
             }
@@ -148,3 +148,10 @@
 #hide{
     display: none;
 }
+
+#activeClass{
+    border-color: brown
+}
+#errorClass{
+    border-color: chartreuse
+}   
