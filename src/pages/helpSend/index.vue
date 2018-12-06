@@ -35,14 +35,6 @@
             <li class="setSend-con-localext">
                 <span>{{address}}</span>
             </li>
-            <!-- <li class="setSend-con-phone">
-                <img src="/static/image/sendHelp/phone.png"/>
-                <input placeholder="请填写联系电话" class="name"/>
-            </li>
-            <li class="setSend-con-name">
-                <img src="/static/image/sendHelp/people.png"/>
-                <input placeholder="请填写联系人姓名" class="name"/>
-            </li> -->
             <li class="setSend-con-sendInfo">
               <div class="firstCol" @click="changeShow">
                 <img src="/static/image/sendHelp/sendInfo.png"/>
@@ -50,11 +42,11 @@
                 <!-- <span id="warning">选填</span> -->
                 <img class="second-img" src="/static/image/sendHelp/go.png"/>
               </div>
-              <div class="changeDiv" @click="changeShow" :id="!isClick?'show':'hide'">
-                <!-- 代取快递是填写具体取件码和快递公司信息，此内容属于隐私内容，接单人接单后放可以查看 -->
+              <!-- <div class="changeDiv" @click="changeShow" :id="!isClick?'show':'hide'">
                 请填写取件所需的必要信息，如取件码，取件人，手机号等(订单被接后对方才能看见这些信息)
-              </div>
-              <info-sec :hiddenName="isClick"/>
+              </div> -->
+              <textarea class="changeDiv" placeholder="请填写取件所需的必要信息，如取件码，取件人，手机号等(订单被接后对方才能看见这些信息)"></textarea>
+              <!-- <info-sec :hiddenName="isClick"/> -->
             </li>
             <li class="setSend-con-reward">
                 <img src="/static/image/sendHelp/reward.png"/>
@@ -70,7 +62,7 @@
 
 <script>
 import card from '@/components/card';
-import infoSec from '@/components/infoSec'
+// import infoSec from '@/components/infoSec'
 import bottom from '@/components/bottom'
 import {jumpTo} from '../../utils/utils'
 import Bus from '@/mixins/event-bus'
@@ -78,13 +70,12 @@ import Bus from '@/mixins/event-bus'
 export default {
   data () {
     return {
-      isClick:false,
       address:'北京市复兴门外大街'
     }
   },
   components: {
     card,
-    infoSec,
+    // infoSec,
     bottom
   },
   mounted(){
@@ -95,9 +86,6 @@ export default {
   },
 
   methods: {
-    changeShow(){
-      this.isClick = !this.isClick
-    },
     chooseRecive(){
       jumpTo('../chooseAddr/main')
     },

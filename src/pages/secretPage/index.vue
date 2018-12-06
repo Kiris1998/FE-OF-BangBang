@@ -32,7 +32,7 @@
                     </li>
                     <li class="reward">
                         <img class="first" src="/static/image/orderDetails/send.png"/>
-                        <div>可获得金额 （元）</div>
+                        <div>可获得金额（元）</div>
                         <div class="price"><span>￥</span>5.00</div>
                     </li>        
                 </ul>
