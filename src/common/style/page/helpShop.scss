@@ -63,6 +63,12 @@
             @include firstImg(34rpx,34rpx);
             @include inputLoc();
         }
+        &-localext2{
+            padding: 10rpx 0 10rpx 0;
+            border-bottom: $listBorderHieght solid $listBorder;
+            @include firstImg(34rpx,34rpx);
+            @include inputLoc();
+        }
         &-localSend{
             @include firstImg(34rpx,34rpx);
             @include secondImg();
@@ -100,7 +106,7 @@
             }
             span{
                 margin-left: 14rpx;
-                @include config_font($normalFont);
+                @include config_font($adviceFontSize);
             }
         }
         &-money{
@@ -139,4 +145,11 @@
         @include config_font(26rpx);
         padding: 0;
     }
+}
+
+#activeClass{
+    border-color: brown
+}
+#errorClass{
+    border-color: chartreuse
 }

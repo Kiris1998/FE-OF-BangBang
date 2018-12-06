@@ -19,17 +19,16 @@
                     </li>
                     <li class="address">
                         <img class="first" src="/static/image/orderDetails/fetch.png"/>
-                        <div>九方快递</div>
-                        <img class="second" src="/static/image/orderDetails/go.png"/>
+                        <div>九方快递拜托帮忙取一下快递，人没在学校，先帮我取一下明天回去拿回来！</div>
+                        <!-- <img class="second" src="/static/image/orderDetails/go.png"/> -->
                     </li>
                     <li class="address">
                         <img class="first" src="/static/image/orderDetails/send.png"/>
-                        <div>三号公寓</div>
-                        <img class="second" src="/static/image/orderDetails/go.png"/>
+                        <div>九方快递拜托帮忙取一下快递，人没在学校，先帮我取一下明天回去拿回来！</div>
+                        <!-- <img class="second" src="/static/image/orderDetails/go.png"/> -->
                     </li>
                     <li class="secret">
-                        <div>取件码<span>25463</span></div>
-                        <div style="border-bottom: none;">快递公司<span>圆通速递</span></div>
+                        <div>取件码九方快递拜托帮忙取一下快递，人没在学校，先帮我取一下明天回去拿回来！</div>
                     </li>
                     <li class="reward">
                         <img class="first" src="/static/image/orderDetails/send.png"/>
