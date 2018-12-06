@@ -30,7 +30,7 @@
                 }
             }
             .college{
-                    @include config-font(24rpx,$adviceFont);
+                    @include config-font($inputFontSize,$adviceFont);
                     margin-top: 8rpx;
             }
             .list{
@@ -72,7 +72,7 @@
                     }
                     div{
                         margin-left:19rpx;
-                        @include config-font(24rpx,$blackFont);
+                        @include config-font($inputFontSize,$blackFont);
                     }  
                     .price{
                         position: absolute;
