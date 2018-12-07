@@ -24,8 +24,10 @@
 <script>
   import globalStore from '@/store/vuex.js'
   import indexInfos from '@/components/indexInfos'
+  import store from '../../store/vuex'
   import {showModal,showToast,showLoading,hideLoading} from '../../utils/wxAPI.js'
   import {getSettings,getUserInfo,jumpTo,switchTab,login,ajax} from '../../utils/utils.js'
+import { fail } from 'assert';
   export default {
     components: {
       indexInfos
@@ -45,33 +47,47 @@
       var encryptedData;
       var iv;
       showLoading()
-      getUserInfo().then((res)=>{ 
-        encryptedData = res.encryptedData
-        iv = res.iv
-        return login()
-      })
-      .then((res)=>{
-        code = res.code
-        hideLoading()
-        wx.request({
-          url: 'https://bang.zhengsj.top/login/user', 
-          method:'POST',
-          data: {
-            code:code,
-            encryptedData: encryptedData,
-            iv: iv
-          },
-          success (res) {
-            console.log(res.data)
-          },
-          fail(){
+      wx.getStorage({
+        key:'userInfo',
+        success(res){
+          store.commit('getUserDetail', res.data)
+          console.log(store.state.userInfo);
+          hideLoading()
+        },
+        fail(){
+          getUserInfo().then((res)=>{
+            encryptedData = res.encryptedData
+            iv = res.iv
+            return login()
+        })
+        .then((res)=>{
+            code = res.code
+            hideLoading()
+            wx.request({
+              url: 'https://bang.zhengsj.top/login/user', 
+              method:'POST',
+              data: {
+                code:code,
+                encryptedData: encryptedData,
+                iv: iv
+              },
+              success (res) {
+                console.log(res.data.data)
+                wx.setStorage({
+                  key:'userInfo',
+                  data:res.data.data
+                })
+              },
+              fail(){
 
+              }
+            })
+          })
+          .catch((err)=>{
+            console.log(err)
+          })
           }
         })
-      })
-      .catch((err)=>{
-        console.log(err)
-      })
     }
   }
 </script>
