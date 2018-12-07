@@ -45,11 +45,9 @@
       var encryptedData;
       var iv;
       showLoading()
-      getUserInfo().then((res)=>{
+      getUserInfo().then((res)=>{ 
         encryptedData = res.encryptedData
         iv = res.iv
-        console.log(encryptedData)
-        console.log(iv)
         return login()
       })
       .then((res)=>{
