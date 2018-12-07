@@ -53,7 +53,7 @@
         return login()
       })
       .then((res)=>{
-        console.log(res)
+        code = res.code
         hideLoading()
         wx.request({
           url: 'https://bang.zhengsj.top/login/user', 
