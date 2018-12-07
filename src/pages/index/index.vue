@@ -55,21 +55,21 @@
       .then((res)=>{
         console.log(res)
         hideLoading()
-        // wx.request({
-        //   url: 'https://bang.zhengsj.top/login/user', 
-        //   method:'POST',
-        //   data: {
-        //     code:code,
-        //     encryptedData: encryptedData,
-        //     iv: iv
-        //   },
-        //   success(res) {
-        //     console.log(res.data)
-        //   },
-        //   fail(){
+        wx.request({
+          url: 'https://bang.zhengsj.top/login/user', 
+          method:'POST',
+          data: {
+            code:code,
+            encryptedData: encryptedData,
+            iv: iv
+          },
+          success (res) {
+            console.log(res.data)
+          },
+          fail(){
 
-        //   }
-        // })
+          }
+        })
       })
       .catch((err)=>{
         console.log(err)
