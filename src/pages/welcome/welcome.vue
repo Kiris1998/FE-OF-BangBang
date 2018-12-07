@@ -24,10 +24,9 @@ export default{
       if(authInfo == undefined || authInfo == false){
         showModal('请授权，否则无法正常使用')
       } else{
-        showToast('您已授权，即将进入小程序首页','success',true)
         setTimeout(()=>{
           switchTab('../index/main')
-        },1500)
+        },2000)
       }
     },(err)=>{
         hideLoading()
