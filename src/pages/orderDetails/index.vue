@@ -19,13 +19,11 @@
                     </li>
                     <li class="address">
                         <img class="first" src="/static/image/orderDetails/fetch.png"/>
-                        <div>九方快递</div>
-                        <img class="second" src="/static/image/orderDetails/go.png"/>
+                        <div>拜托帮忙取一下快递，人没在学校，先帮我取一下明天回去拿回来！拜托帮忙取一下快递，人没在学校，先帮我取一下明天回去拿回来！</div>
                     </li>
                     <li class="address">
                         <img class="first" src="/static/image/orderDetails/send.png"/>
-                        <div>三号公寓</div>
-                        <img class="second" src="/static/image/orderDetails/go.png"/>
+                        <div>三号公寓拜托帮忙取一下快递，人没在学校，先帮我取一下明天回去拿回来！拜托帮忙取一下快递，人没在学校，先帮我取一下明天回去拿回来！</div>
                     </li>
                     <li class="reward">
                         <img class="first" src="/static/image/orderDetails/send.png"/>

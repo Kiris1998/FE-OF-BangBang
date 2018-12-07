@@ -12,19 +12,18 @@
             <li class="setSend-con-sex">
                 <img src="/static/image/sendHelp/sex.png"/>
                 <span>请选择您的性别</span>
-                <div>男</div>
-                <div>女</div>
-                <div>不限</div>
+                <div :id="sexChoose == 'man'?'activeClass':'errorClass'" @click="chooseThisSex('man')">男</div>
+                <div :id="sexChoose == 'woman'?'activeClass':'errorClass'" @click="chooseThisSex('woman')">女</div>
+                <div :id="sexChoose == 'noLimit'?'activeClass':'errorClass'" @click="chooseThisSex('noLimit')">不限</div>
             </li>
-            <li class="setSend-con-localGet" @click="chooseRecive">
+            <li class="setSend-con-localGet">
               <img class="first-img" src="/static/image/sendHelp/location.png"/>
               <div>
-                <span>选择待取地址</span>
-                <img class="second-img" src="/static/image/sendHelp/go.png"/>
+                <span>填写待取地址</span>
               </div>
             </li>
             <li class="setSend-con-localext">
-                <span>{{address}}</span>
+                <input placeholder="请输入用户的取货地址"/>
             </li>
             <li class="setSend-con-localSend" @click="chooseSend">
               <div>
@@ -33,16 +32,8 @@
               </div>
             </li>
             <li class="setSend-con-localext">
-                <span>{{address}}</span>
+                <span>{{userAddr}}</span>
             </li>
-            <!-- <li class="setSend-con-phone">
-                <img src="/static/image/sendHelp/phone.png"/>
-                <input placeholder="请填写联系电话" class="name"/>
-            </li>
-            <li class="setSend-con-name">
-                <img src="/static/image/sendHelp/people.png"/>
-                <input placeholder="请填写联系人姓名" class="name"/>
-            </li> -->
             <li class="setSend-con-sendInfo">
               <div class="firstCol" @click="changeShow">
                 <img src="/static/image/sendHelp/sendInfo.png"/>
@@ -50,11 +41,11 @@
                 <!-- <span id="warning">选填</span> -->
                 <img class="second-img" src="/static/image/sendHelp/go.png"/>
               </div>
-              <div class="changeDiv" @click="changeShow" :id="!isClick?'show':'hide'">
-                <!-- 代取快递是填写具体取件码和快递公司信息，此内容属于隐私内容，接单人接单后放可以查看 -->
+              <!-- <div class="changeDiv" @click="changeShow" :id="!isClick?'show':'hide'">
                 请填写取件所需的必要信息，如取件码，取件人，手机号等(订单被接后对方才能看见这些信息)
-              </div>
-              <info-sec :hiddenName="isClick"/>
+              </div> -->
+              <textarea class="changeDiv" placeholder="请填写取件所需的必要信息，如取件码，取件人，手机号等(订单被接后对方才能看见这些信息)"></textarea>
+              <!-- <info-sec :hiddenName="isClick"/> -->
             </li>
             <li class="setSend-con-reward">
                 <img src="/static/image/sendHelp/reward.png"/>
@@ -70,33 +61,39 @@
 
 <script>
 import card from '@/components/card';
-import infoSec from '@/components/infoSec'
+// import infoSec from '@/components/infoSec'
 import bottom from '@/components/bottom'
 import {jumpTo} from '../../utils/utils'
 import Bus from '@/mixins/event-bus'
+import store from '../../store/vuex'
 
 export default {
   data () {
     return {
-      isClick:false,
+      sexChoose:'noLimit',
       address:'北京市复兴门外大街'
     }
   },
+  computed: {
+    userAddr() {
+      return store.state.info;
+    }
+  },
   components: {
     card,
-    infoSec,
+    // infoSec,
     bottom
   },
   mounted(){
-    Bus.$on('getAddr', params => {
-      console.log(params)
-      this.address = params.address
-    })
+    // Bus.$on('getAddr', params => {
+    //   console.log(params)
+    //   this.address = params.address
+    // })
   },
 
   methods: {
-    changeShow(){
-      this.isClick = !this.isClick
+    chooseThisSex(res){
+      this.sexChoose = res
     },
     chooseRecive(){
       jumpTo('../chooseAddr/main')

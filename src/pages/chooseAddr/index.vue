@@ -13,7 +13,6 @@
                    <div class="choose-content-avatar" @click="linkToSend(index)">
                         {{item.firstname}}
                     </div>
-                    
                     <div class="choose-content-info" @click="linkToSend(index)">
                         <div class="choose-content-info-1">
                             <div>
@@ -43,6 +42,7 @@
 import card from '@/components/card'    
 import {jumpTo} from '../../utils/utils'
 import Bus from '@/mixins/event-bus'
+import store from '../../store/vuex'
 
 export default {
   data () {
@@ -73,20 +73,21 @@ export default {
         let params = { 
             address:this.msg[index].address
         }
-        Bus.$emit('getAddr', params)
+        store.commit('commitInfo',params)
+        //Bus.$emit('getAddr', params)
         wx.navigateBack()
     },
     linkToShop(){
         jumpTo('../helpShop/main')
     },
     linkToEdit(index){
-        // console.log(index)
         if(index == undefined){
             jumpTo(`../addAddr/main`)
         }
         else{
             var info = this.msg[index]
             info = JSON.stringify(info)
+            console.log(info)
             jumpTo(`../addAddr/main?info=${info}`)
         }
     }

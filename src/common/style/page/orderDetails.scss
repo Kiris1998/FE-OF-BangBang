@@ -30,7 +30,7 @@
                 }
             }
             .college{
-                    @include config-font(24rpx,$adviceFont);
+                    @include config-font($inputFontSize,$adviceFont);
                     margin-top: 8rpx;
             }
             .list{
@@ -43,28 +43,24 @@
                 .remark{
                     align-items: flex-start;
                     .first{
-                        @include config_width_height(44rpx,38rpx);
+                        @include config_width_height(31rpx,38rpx);
                     }
                     div{
                         margin: 0 0 19rpx 26rpx;
-                        @include config-font(24rpx,$blackFont);
+                        @include config-font($inputFontSize,$blackFont);
+                        max-width: 430rpx;
                     }  
                 }
                 .address{
                     position: relative;
-                    @include config_width_height(auto,60rpx);
                     .first{
                         @include config_width_height(36rpx,36rpx);
                     }
                     div{
-                        margin-left:19rpx;
-                        @include config-font(24rpx,$blackFont);
-                    }  
-                    .second{
-                        position: absolute;
-                        right: 0;
-                        @include config_width_height(16rpx,26rpx);
-                    }
+                        margin: 15rpx 0 15rpx 19rpx;
+                        @include config-font($inputFontSize,$blackFont);
+                        max-width: 430rpx;
+                    } 
                 }
                 .reward{
                     position: relative;
@@ -76,7 +72,7 @@
                     }
                     div{
                         margin-left:19rpx;
-                        @include config-font(24rpx,$blackFont);
+                        @include config-font($inputFontSize,$blackFont);
                     }  
                     .price{
                         position: absolute;
@@ -141,8 +137,7 @@
     &-bnt{
         @include config_rowbox_center();
         button{
-            position: absolute;
-            bottom: 24rpx;
+            margin-top: 100rpx;  
             background: black;
             @include config_width_height(650rpx,96rpx);
             line-height: 96rpx;

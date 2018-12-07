@@ -64,14 +64,6 @@
                 margin-left:  34rpx + 14rpx + $imageMargin;
             }
         }
-        &-name,&-phone{
-            @include togher();
-            @include firstImg(34rpx,34rpx);
-            input{
-                margin-left: 14rpx;
-                @include config_font($inputFontSize)
-            }
-        }
         &-sendInfo{
             display: block !important;
             border-bottom: 2rpx $listBorder solid ;
@@ -84,8 +76,8 @@
                 @include config_font(23rpx,#808080,light);
             }
             .changeDiv{
-                @include config_font(25rpx,#808080);
-                @include config_width_height(550rpx);
+                @include config_font(26rpx,#808080);
+                @include config_width_height(550rpx,100rpx);
                 margin: 6rpx 0 14rpx 89rpx;
             }
             .firstCol{
@@ -156,3 +148,10 @@
 #hide{
     display: none;
 }
+
+#activeClass{
+    border-color: brown
+}
+#errorClass{
+    border-color: chartreuse
+}   

@@ -12,9 +12,9 @@
             <li class="setSend-con-sex">
                 <img src="/static/image/sendHelp/sex.png"/>
                 <span>请选择您的性别</span>
-                <div>男</div>
-                <div>女</div>
-                <div>不限</div>
+                <div :id="sexChoose == 'man'?'activeClass':'errorClass'" @click="chooseThisSex('man')">男</div>
+                <div :id="sexChoose == 'woman'?'activeClass':'errorClass'" @click="chooseThisSex('woman')">女</div>
+                <div :id="sexChoose == 'noLimit'?'activeClass':'errorClass'" @click="chooseThisSex('noLimit')">不限</div>
             </li>
             <li class="setSend-con-localGet">
               <img class="first-img" src="/static/image/sendHelp/location.png"/>
@@ -26,23 +26,15 @@
             <li class="setSend-con-localext">
                 <input placeholder="填写购买地址"/>
             </li>
-            <li class="setSend-con-localSend">
+            <li class="setSend-con-localSend" @click="chooseAddr">
               <div>
                 <span>选择送达地址</span>
                 <img class="second-img" src="/static/image/sendHelp/go.png"/>
               </div>
             </li>
-            <li class="setSend-con-localext">
-                <input placeholder="补充具体楼号和门牌号"/>
+            <li class="setSend-con-localext2">
+                <span>{{userAddr}}</span>
             </li>
-            <!-- <li class="setSend-con-phone">
-                <img src="/static/image/sendHelp/phone.png"/>
-                <input placeholder="请填写联系电话" class="name"/>
-            </li>
-            <li class="setSend-con-name">
-                <img src="/static/image/sendHelp/people.png"/>
-                <input placeholder="请填写联系人姓名" class="name"/>
-            </li> -->
             <li class="setSend-con-price">
                 <img src="/static/image/sendHelp/reward.png"/>
                 <span id="rewardTitle">物品金额</span>
@@ -55,15 +47,12 @@
                 <input id="rewardInput" placeholder="填写悬赏金"/>
             </li> 
         </ul>
-        <!-- <button class="setSend-btn">
-          ￥00.00
-        </button> -->
     </div>
   </div>
   <div class="setSend-bottom">
     <div class="setSend-bottom-info">
       <div class="setSend-bottom-info-1">
-        下单支付：<span>￥3.00</span>
+        下单支付：<span>￥3  </span>
       </div>
       <div class="setSend-bottom-info-2">
         物品价格5元+基础速递费2元+悬赏金3元+优惠券0元
@@ -80,26 +69,39 @@
 import card from '@/components/card'
 import bottom from '@/components/bottom'
 import {jumpTo} from '../../utils/utils'
+import store from '../../store/vuex'
 
 export default {
   data () {
     return {
+      sexChoose:'noLimit',
       motto: 'Hello World',
-      userInfo: {}
     }
   },
-
+  computed: {
+    userAddr() {
+      return store.state.info;
+    }
+  },
   components: {
     card,
     bottom
   },
-
+  mounted:function(){
+    console.log(this.userInfo)
+  },
   methods: {
+    chooseThisSex(res){
+      this.sexChoose = res
+    },
     linkToSend(){
       jumpTo('../helpSend/main')
     },
     linkToShop(){
       jumpTo('../helpShop/main')
+    },
+    chooseAddr(){
+      jumpTo('../chooseAddr/main')
     }
   }
 }

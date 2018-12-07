@@ -33,6 +33,7 @@
 <script>
 import card from '@/components/card'
 import {jumpTo} from '../../utils/utils'
+import editAddr from '../../store/editAddr'
 
 export default {
   data () {
@@ -48,6 +49,13 @@ export default {
   },
   methods: {
      configAddr(){
+        var params = {
+            telePhone:this.telePhone,
+            college:this.college,
+            address:this.address,
+            name:this.name
+        }
+        editAddr.commit('commitInfo',params)
         wx.navigateBack()
      },
      delectInfo(){
@@ -60,6 +68,10 @@ export default {
         this.telePhone = obj.telePhone
         this.name = obj.name
         this.address = obj.address
+    }else{
+        this.telePhone = ''
+        this.name = ''
+        this.address = ''
     }
   }
 }

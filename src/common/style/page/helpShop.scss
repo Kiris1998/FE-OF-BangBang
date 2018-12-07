@@ -18,17 +18,10 @@
         @include config_width_height(717rpx,191rpx);
         @include config_font($inputFontSize,$normalFont,light);
         box-sizing: border-box;
-        background: white;
+        background: rgb(238, 236, 236);
         padding-top: 57rpx;
         padding-left: 25rpx;
         border-radius: 12rpx;
-    }
-    &-btn{
-        margin-top: 54rpx;
-        @include config_width_height(601rpx,101rpx);
-        background-color: $mainColor;
-        @include config_font(60rpx,$normalFont,light);
-        line-height: 101rpx;
     }
     &-con{
         margin-top: 29rpx;
@@ -63,20 +56,18 @@
             @include firstImg(34rpx,34rpx);
             @include inputLoc();
         }
+        &-localext2{
+            padding: 10rpx 0 10rpx 0;
+            border-bottom: $listBorderHieght solid $listBorder;
+            @include firstImg(34rpx,34rpx);
+            @include inputLoc();
+        }
         &-localSend{
             @include firstImg(34rpx,34rpx);
             @include secondImg();
             @include theDiv();
             div{
                 margin-left:  26rpx + 14rpx + $imageMargin;
-            }
-        }
-        &-name,&-phone{
-            @include togher();
-            @include firstImg(34rpx,34rpx);
-            input{
-                margin-left: 14rpx;
-                font-size: $inputFontSize;
             }
         }
         &-reward{
@@ -100,7 +91,7 @@
             }
             span{
                 margin-left: 14rpx;
-                @include config_font($normalFont);
+                @include config_font($adviceFontSize);
             }
         }
         &-money{
@@ -139,4 +130,11 @@
         @include config_font(26rpx);
         padding: 0;
     }
+}
+
+#activeClass{
+    border-color: brown
+}
+#errorClass{
+    border-color: chartreuse
 }
