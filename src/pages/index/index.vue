@@ -46,15 +46,17 @@
       var iv;
       showLoading()
       getUserInfo().then((res)=>{
+        console.log(res);
         encryptedData = res.encryptedData
         iv = res.iv
-        console.log(encryptedData)
-        console.log(iv)
+        // console.log(encryptedData)
+        // console.log(iv)
         return login()
       })
       .then((res)=>{
-        console.log(res)
+        // console.log(res)
         hideLoading()
+        console.log(code)
         wx.request({
           url: 'https://bang.zhengsj.top/login/user', 
           method:'POST',

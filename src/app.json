@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/welcome/main",
     "pages/orderDetails/main",
     "pages/secretPage/main",
     "pages/helpShop/main",
