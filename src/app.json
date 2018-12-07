@@ -1,13 +1,13 @@
 {
   "pages": [
+
+    "pages/welcome/main",
     "pages/helpShop/main",
     "pages/index/main",
     "pages/helpSend/main",
     "pages/selectStyle/main",
     "pages/addAddr/main",
-    "pages/welcome/main",
     "pages/me/main",
-    "pages/welcome/main",
     "pages/invitation/main",
     "pages/searchAdd/main",
     "pages/info/main",
@@ -37,9 +37,9 @@
       "selectedIconPath": "./static/image/homepage_cur.png"
     },
     {
-      "pagePath": "pages/selectStyle/main",
+      "pagePath": "pages/order/main",
       "iconPath": "./static/image/menu.png",
-      "text": "菜单",
+      "text": "订单",
       "selectedIconPath": "./static/image/menu_cur.png"
     },
     {
