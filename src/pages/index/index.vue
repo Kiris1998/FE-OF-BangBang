@@ -63,7 +63,7 @@
         //     encryptedData: encryptedData,
         //     iv: iv
         //   },
-        //   success (res) {
+        //   success(res) {
         //     console.log(res.data)
         //   },
         //   fail(){

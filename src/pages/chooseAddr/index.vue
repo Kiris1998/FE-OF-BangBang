@@ -69,16 +69,11 @@ export default {
 
   methods: {
     linkToSend(index){
-        // console.log(index)
         let params = { 
             address:this.msg[index].address
         }
         store.commit('commitInfo',params)
-        //Bus.$emit('getAddr', params)
         wx.navigateBack()
-    },
-    linkToShop(){
-        jumpTo('../helpShop/main')
     },
     linkToEdit(index){
         if(index == undefined){
