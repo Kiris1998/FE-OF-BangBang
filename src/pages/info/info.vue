@@ -14,39 +14,64 @@
         <span class="small">请选择性别</span>
       </div>
       <div>
-        <span>男</span>
-        <span>女</span>
+        <span :id="form.sexChoose == 'MALE'?'activeClass':'errorClass'" @click="chooseThisSex('MALE')">男</span>
+        <span :id="form.sexChoose == 'FEMALE'?'activeClass':'errorClass'" @click="chooseThisSex('FEMALE')">女</span>
       </div>
     </div>
     <div class="inputRow">
       <span>昵称： </span>
-      <input v-model="name2" type="text" placeholder-class="small" placeholder="输入你的昵称">
+      <input v-model="form.nickName" type="text" placeholder-class="small" placeholder="输入你的昵称">
     </div>
     <div class="inputRow">
       <span>电话： </span>
-      <input v-model="tel" type="text" placeholder-class="small" placeholder="填写你的电话">
+      <input v-model="form.tel" type="text" placeholder-class="small" placeholder="填写你的电话">
     </div>
     <div class="inputRow">
       <span>学校： </span>
-      <input v-model="school" type="text" placeholder-class="small" placeholder="填写学校全称">
+      <input v-model="form.school" type="text" placeholder-class="small" placeholder="填写学校全称">
     </div>
     <button @click="submit">提交</button>
   </div>
 </template>
 
 <script>
-  export default {
+  import store from '../../store/vuex'
+  export default{
     data () {
       return {
-        name: '',
-        name2: '',
-        tel: '',
-        school: ''
+        form:{
+          name: '',
+          nickName: '',
+          tel: '',
+          school: '',
+          sexChoose:'MALE',
+        }
       }
     },
     methods: {
-      submit: function () {
-        console.log(this.name)
+      submit() {
+        wx.request({
+          url: `https://bang.zhengsj.top/user/info/${store.state.userInfo.id}`, 
+          method:'POST',
+          data: {
+            userName:this.form.nickName,
+            trueName:this.form.name,
+            phone:this.form.tel,
+            schoolId:9,
+            gender:this.form.sexChoose
+          },
+          success (res) {
+            console.log(res)
+          },
+          fail(){
+
+          }
+        })
+        console.log(this.form.name)
+      },
+      chooseThisSex(sex){
+        this.form.sexChoose = sex
+        console.log(this.form.sexChoose)
       }
     }
   }
@@ -113,5 +138,11 @@
     color: #808080;
     margin: 0 4px;
   }
+  #activeClass{
+    border-color: brown
+  }
+  #errorClass{
+    border-color: chartreuse
+  }   
 </style>
 

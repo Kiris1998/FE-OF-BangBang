@@ -16,7 +16,7 @@
             <button>+1</button>
             <p>已接单</p>
           </div>
-          <div v-else class="othersBtn">
+          <div v-else class="othersBtn" @click="ToPhone">
             <img src="../static/image/phone.png">
           </div>
         </div>
@@ -28,6 +28,14 @@
   export default {
     props: {
       meOrOthers: Boolean
+    },
+    methods:{
+      ToPhone(){
+        console.log('wwww')
+        wx.makePhoneCall({
+          phoneNumber: '1340000' //仅为示例，并非真实的电话号码
+        })
+      }
     }
   }
 </script>

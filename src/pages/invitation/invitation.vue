@@ -4,18 +4,34 @@
       <h3>我的邀请码</h3>
       <img class="avatr" src="http://thyrsi.com/t6/400/1540826774x1822611437.jpg">
       <p>分享推荐码</p>
-      <div class="sharedNum">123456</div>
+      <div class="sharedNum">{{invatationCode}}</div>
     </div>
     <div class="bottom">
       <h2>成功邀请好友可获得</h2>
       <img class="invitation" src="../../static/image/invitation.png">
-      <button><i class="iconfont icon-weixin"></i> 微信分享</button>
+      <button @click="copyCode"><i class="iconfont icon-weixin"></i> 微信分享</button>
     </div>  
   </div>
 </template>
 
 <script>
-  
+export default{
+  data(){
+    return{
+      invatationCode:'123065'
+    }
+  },
+  methods:{
+    copyCode(){
+        wx.setClipboardData({
+          data: this.invatationCode ,
+          success (res) {
+            console.log('成功')
+          }
+        })
+    }
+  }
+}
 </script>
 
 <style scoped>

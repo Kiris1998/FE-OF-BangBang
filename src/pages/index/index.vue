@@ -63,20 +63,21 @@ import { fail } from 'assert';
         .then((res)=>{
             code = res.code
             hideLoading()
+            console.log(code,encryptedData,iv)
             wx.request({
               url: 'https://bang.zhengsj.top/login/user', 
               method:'POST',
               data: {
-                code:code,
-                encryptedData: encryptedData,
-                iv: iv
+                "code":code,
+                "encryptedData": encryptedData,
+                "iv": iv
               },
               success (res) {
-                console.log(res.data.data)
+                console.log(res)
                 wx.setStorage({
                   key:'userInfo',
                   data:res.data.data
-                })
+                })             
               },
               fail(){
 
