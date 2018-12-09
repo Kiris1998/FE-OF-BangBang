@@ -84,6 +84,7 @@ import { fail } from 'assert';
           console.log('登录失败')
         })
       })
+<<<<<<< HEAD
     },
     onReady(){
       console.log(this.sex)
@@ -98,6 +99,8 @@ import { fail } from 'assert';
             console.log(res);
           }
         })
+=======
+>>>>>>> 0e21abeca94d2874759a210ed7e64d93132439ad
     }
   }
 </script>
