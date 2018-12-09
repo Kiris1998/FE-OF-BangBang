@@ -26,7 +26,8 @@
   import indexInfos from '@/components/indexInfos'
   import store from '../../store/vuex'
   import {showModal,showToast,showLoading,hideLoading} from '../../utils/wxAPI.js'
-  import {getSettings,getUserInfo,jumpTo,switchTab,login,ajax} from '../../utils/utils.js'
+  import {getSettings,getUserInfo,jumpTo,switchTab,login,setStorage,getStorage} from '../../utils/utils.js'
+  import {getUserInfor} from '../../utils/API.js'
 import { fail } from 'assert';
   export default {
     components: {
@@ -51,15 +52,14 @@ import { fail } from 'assert';
       var iv;
       var header
       showLoading()
-      wx.getStorage({
-        key:'userInfo',
-        success(res){
+      getStorage('userInfo').then((res)=>{
           store.commit('getUserDetail', res.data)
           that.sex = res.data.gender
           hideLoading()
-        },
-        fail(){
-          getUserInfo().then((res)=>{
+      })
+      .catch(()=>{
+        getUserInfo()
+        .then((res)=>{
             encryptedData = res.encryptedData
             iv = res.iv
             return login()
@@ -67,39 +67,26 @@ import { fail } from 'assert';
         .then((res)=>{
             code = res.code
             hideLoading()
-            wx.request({
-              url: 'https://bang.zhengsj.top/login/user', 
-              method:'POST',
-              data: {
-                code:code,
-                encryptedData: encryptedData,
-                iv: iv
-              },
-              success (res) {
-                header = res.header
-                console.log();
-                wx.setStorage({
-                  key:'userInfo',
-                  data:res.data.data
-                })
-                wx.setStorage({
-                  key:'cookie',
-                  data:header["Set-Cookie"]
-                })
-              },
-              fail(){
-
-              }
-            })
-          })
-          .catch((err)=>{
-            console.log(err)
-          })
-          }
+            var data = {
+                "code":code,
+                "encryptedData": encryptedData,
+                "iv": iv
+            }
+            return getUserInfor(data)
         })
+        .then((res)=>{
+          console.log(res)
+          header = res.header
+          setStorage('userInfo',res.data.data)
+          setStorage('cookie',header["Set-Cookie"])
+        })
+        .catch(()=>{
+          console.log('登录失败')
+        })
+      })
     },
     onReady(){
-      console.log(this.sex);
+      console.log(this.sex)
       wx.request({
           url: "https://bang.zhengsj.top/indent/list",
           method: 'GET',
