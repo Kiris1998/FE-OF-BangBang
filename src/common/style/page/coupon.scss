@@ -1,0 +1,57 @@
+@import '../public/variables';
+@import '../public/functions.scss';
+.coupon{
+    @include config_colbox_center();
+    margin-top: 40rpx;
+    li{
+        @include config_rowbox();
+        @include config_width_height(700rpx,175rpx);
+        background-color: #FCD800;
+        margin-bottom: 18rpx;
+        border-radius: 25rpx;
+    }
+    &-left{
+        width:20%;
+        padding:0 30rpx;
+        @include config_colbox_centercol();
+        align-items: center;
+        border-right: 2rpx solid black;
+        &-1{
+            @include config_font(46rpx);
+        }
+        &-2{
+            @include config_font(26rpx);
+        }
+    }
+    &-right{
+        width:80%;
+        padding:0 30rpx;
+        @include config_colbox_centercol();
+        align-items: center;
+        &-1{
+            padding-top:30rpx;
+            @include config_font(30rpx);
+            @include config_rowbox_centercol('center');
+            align-content:space-between; 
+            padding-bottom: 32rpx;
+        }
+        &-2{
+            @include config_font(24rpx);
+        }
+        &-bnt{
+            margin-left: 40rpx;
+            padding:5rpx 5rpx;
+            border-radius: 20rpx;
+            border: 2rpx solid black;
+        }
+    }
+}
+
+.footer{
+    @include config_font(30rpx);
+    margin-top: 50rpx;
+    padding-bottom: 5rpx;
+    border-bottom: 2rpx solid black;
+    @include config_width_height(600rpx);
+    text-align: center;
+}

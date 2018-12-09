@@ -26,7 +26,8 @@
   import indexInfos from '@/components/indexInfos'
   import store from '../../store/vuex'
   import {showModal,showToast,showLoading,hideLoading} from '../../utils/wxAPI.js'
-  import {getSettings,getUserInfo,jumpTo,switchTab,login,ajax} from '../../utils/utils.js'
+  import {getSettings,getUserInfo,jumpTo,switchTab,login,setStorage,getStorage} from '../../utils/utils.js'
+  import {getUserInfor} from '../../utils/API.js'
 import { fail } from 'assert';
   export default {
     components: {
@@ -47,15 +48,14 @@ import { fail } from 'assert';
       var encryptedData;
       var iv;
       showLoading()
-      wx.getStorage({
-        key:'userInfo',
-        success(res){
+      getStorage('userInfo').then((res)=>{
           store.commit('getUserDetail', res.data)
           console.log(store.state.userInfo);
           hideLoading()
-        },
-        fail(){
-          getUserInfo().then((res)=>{
+      })
+      .catch(()=>{
+        getUserInfo()
+        .then((res)=>{
             encryptedData = res.encryptedData
             iv = res.iv
             return login()
@@ -63,32 +63,57 @@ import { fail } from 'assert';
         .then((res)=>{
             code = res.code
             hideLoading()
-            console.log(code,encryptedData,iv)
-            wx.request({
-              url: 'https://bang.zhengsj.top/login/user', 
-              method:'POST',
-              data: {
+            var data = {
                 "code":code,
                 "encryptedData": encryptedData,
                 "iv": iv
-              },
-              success (res) {
-                console.log(res)
-                wx.setStorage({
-                  key:'userInfo',
-                  data:res.data.data
-                })             
-              },
-              fail(){
-
-              }
-            })
-          })
-          .catch((err)=>{
-            console.log(err)
-          })
-          }
+            }
+            return getUserInfor(data)
         })
+        .then((res)=>{
+          console.log(res)
+          setStorage('userInfo',res.data.data)
+        })
+        .catch(()=>{
+          console.log('登录失败')
+        })
+      })
+
+
+      // wx.getStorage({
+      //   key:'userInfo',
+      //   success(res){
+      //     store.commit('getUserDetail', res.data)
+      //     console.log(store.state.userInfo);
+      //     hideLoading()
+      //   },
+      //   fail(){
+      //     getUserInfo().then((res)=>{
+      //       encryptedData = res.encryptedData
+      //       iv = res.iv
+      //       return login()
+      //   })
+      //   .then((res)=>{
+      //       code = res.code
+      //       hideLoading()
+      //       var data = {
+      //           "code":code,
+      //           "encryptedData": encryptedData,
+      //           "iv": iv
+      //       }
+      //       getUserInfor(data),then((res)=>{
+      //         console.log(res)
+      //         setStorage('userInfo',res.data.data)
+      //       })
+      //       .catch((err)=>{
+      //         console.log(err)
+      //       })
+      //     })
+      //     .catch((err)=>{
+      //       console.log(err)
+      //     })
+      //     }
+      //   })
     }
   }
 </script>

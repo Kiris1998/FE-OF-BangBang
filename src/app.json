@@ -1,5 +1,7 @@
 {
   "pages": [
+    "pages/advices/main",
+    "pages/coupon/main",
     "pages/detailsForClient/main",
     "pages/welcome/main",
     "pages/orderDetails/main",

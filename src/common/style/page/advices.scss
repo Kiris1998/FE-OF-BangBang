@@ -1,0 +1,18 @@
+@import '../public/variables';
+@import '../public/functions.scss';
+
+textarea{
+    background: white;
+    @include config_width_height(650rpx,400rpx);
+    border-radius: 25rpx;
+    padding: 5rpx 5rpx
+}
+.container{
+    @include config_colbox_centercol();
+    padding: 120rpx 0
+}
+button{
+    width: 80%;
+    background:orange;
+    margin-top: 100rpx;
+}

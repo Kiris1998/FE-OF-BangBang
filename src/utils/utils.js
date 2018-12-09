@@ -46,21 +46,32 @@ const login = ()=>{
     })
 }
 
-const ajax = ()=>{
-    wx.request({
-      url: 'https://bang.zhengsj.top/login/user', 
-      method:'POST',
-      data: {
-        code:code,
-        encryptedData: encryptedData,
-        iv: iv
-      },
-      success (res) {
-        console.log(res.data)
-      },
-      fail(){
+const setStorage = (key,data)=>{
+    return new Promise((resolve,reject)=>{
+        wx.setStorage({
+            key:key,
+            data:data,
+            success(res){
+                resolve(res)
+            },
+            fail(){
+                reject()
+            }
+        })
+    })
+}
 
-      }
+const getStorage = (key)=>{
+    return new Promise((resolve,reject)=>{
+        wx.getStorage({
+            key:key,
+            success(res){
+                resolve(res)
+            },
+            fail(){
+                reject()
+            }
+        })
     })
 }
 
@@ -72,5 +83,6 @@ export{
     getUserInfo,
     switchTab,
     login,
-    ajax
+    setStorage,
+    getStorage
 }
