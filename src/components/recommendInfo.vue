@@ -1,15 +1,25 @@
 <template>
-  <div class="personInfo">
+    <div class="personInfo">
       <div>
-        <span class="name">Kiris</span>
-        <span class="school">西安电子科技大学</span>
-        <p class="_id">15991266003</p>
+        <span class="name" :style="{color: userInfo.gender == 'MALE' ? '#248cd6' : '#eb2f74'}">
+          {{userInfo.userName}}
+        </span>
+        <span class="school">{{userInfo.school}}</span>
+        <span :style="{color: userInfo.gender == 'MALE' ? '#248cd6' : '#eb2f74',position: 'relative',bottom: '10px'}">
+          {{userInfo.gender == 'MALE' ? '♂' : '♀'}}
+        </span>
+        <p v-if="userInfo.phone" class="_id">{{userInfo.phone}}</p>
       </div>
-      <img class="avatr" src="http://thyrsi.com/t6/400/1540826774x1822611437.jpg">
+      <img class="avatr" :src=userInfo.avatar>
     </div>
 </template>
 
 <script>
+  export default {
+    props: {
+      userInfo: Object
+    }
+  }
 </script>
 
 <style scoped>
@@ -17,7 +27,7 @@
     background: #fed901;
     width: 90vw;
     height: 90px;
-    margin: 50px 0 10px 0;
+    margin: 10px 0 10px 0;
     border-radius: 10px;
     padding: 20px 10px 20px 10px;
     display: flex;
@@ -26,26 +36,27 @@
   }
   .avatr {
     width: 80px;
-    height: 70px;
+    height: 80px;
     border-radius: 50%;
     display: block;
   }
   .name {
     font-weight: bold;
     color: #248cd6;
-    font-size: 30px;
+    font-size: 40px;
     margin-right: 5px;
     display: inline-block;
     margin-left: 10px;
   }
   .school {
-    font-weight: 300;
-    font-size: 13px;
+    font-weight: bolder;
+    font-size: 15px;
+    position: relative;
+    bottom: 10px;
   }
   ._id {
     color:#4d4d4d;
-    margin-left: 10px;
-    display: inline-block;
-    font-size: 14px;
+    margin-left: 70px;
+    font-size: 18px;
   }
 </style>

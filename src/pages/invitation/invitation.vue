@@ -2,20 +2,46 @@
   <div class="page">
     <div class="top">
       <h3>我的邀请码</h3>
-      <img class="avatr" src="http://thyrsi.com/t6/400/1540826774x1822611437.jpg">
+      <img class="avatr" :src=avatarUrl>
       <p>分享推荐码</p>
-      <div class="sharedNum">123456</div>
+      <div class="sharedNum">{{id}}</div>
     </div>
     <div class="bottom">
       <h2>成功邀请好友可获得</h2>
       <img class="invitation" src="../../static/image/invitation.png">
-      <button><i class="iconfont icon-weixin"></i> 微信分享</button>
+      <button @click=share>获取邀请码</button>
     </div>  
   </div>
 </template>
 
 <script>
-  
+  import store from '../../store/vuex'
+  export default{
+    data() {
+      return {
+        avatarUrl: '',
+        id: ''
+      }
+    },
+    mounted() {
+      this.avatarUrl = store.state.userInfo.avatar,
+      this.id = store.state.userInfo.id
+    },
+    methods: {
+      share() {
+        wx.setClipboardData({
+          data: store.state.userInfo.id,
+          success (res) {
+            wx.showToast({
+              title: '邀请码复制成功',
+              icon: 'success',
+              duration: 2000
+            })
+          }
+        })
+      }
+    }
+  }
 </script>
 
 <style scoped>
@@ -81,28 +107,5 @@
     height: 50px;
     margin: 10px 0 0 60px;
   }
-
-@font-face {
-  font-family: 'iconfont';  /* project id 916915 */
-  src: url('//at.alicdn.com/t/font_916915_hvtrjg55vk.eot');
-  src: url('//at.alicdn.com/t/font_916915_hvtrjg55vk.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_916915_hvtrjg55vk.woff') format('woff'),
-  url('//at.alicdn.com/t/font_916915_hvtrjg55vk.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_916915_hvtrjg55vk.svg#iconfont') format('svg');
-}
-
-.iconfont {
-  font-family:"iconfont" !important;
-  font-size:25px;
-  font-style:normal;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-.icon-weixin:before { content: "\e608"; }
-
-i {
-  display: inline;
-}
 </style>
 

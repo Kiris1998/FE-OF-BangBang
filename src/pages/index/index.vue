@@ -39,19 +39,23 @@ import { fail } from 'assert';
           'http://thyrsi.com/t6/403/1541055883x-1404775437.jpg',
           'http://thyrsi.com/t6/403/1541055883x-1404775437.jpg'
         ],
-        selectedNum: 0
+        selectedNum: 0,
+        sex: '',
+        sort: 0
       }
     },
-    mounted(){
+    onLoad(){
+      let that = this
       var code;
       var encryptedData;
       var iv;
+      var header
       showLoading()
       wx.getStorage({
         key:'userInfo',
         success(res){
           store.commit('getUserDetail', res.data)
-          console.log(store.state.userInfo);
+          that.sex = res.data.gender
           hideLoading()
         },
         fail(){
@@ -72,10 +76,15 @@ import { fail } from 'assert';
                 iv: iv
               },
               success (res) {
-                console.log(res.data.data)
+                header = res.header
+                console.log();
                 wx.setStorage({
                   key:'userInfo',
                   data:res.data.data
+                })
+                wx.setStorage({
+                  key:'cookie',
+                  data:header["Set-Cookie"]
                 })
               },
               fail(){
@@ -86,6 +95,20 @@ import { fail } from 'assert';
           .catch((err)=>{
             console.log(err)
           })
+          }
+        })
+    },
+    onReady(){
+      console.log(this.sex);
+      wx.request({
+          url: "https://bang.zhengsj.top/indent/list",
+          method: 'GET',
+          data: {
+            sexType: 'MALE',
+            sort: this.sort
+          },
+          success(res){
+            console.log(res);
           }
         })
     }

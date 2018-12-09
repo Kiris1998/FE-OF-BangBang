@@ -2,7 +2,7 @@
   <div class="pages">
     <div class="avatRow">
       <span>头像</span>
-      <img class="avatr" src="http://thyrsi.com/t6/400/1540826774x1822611437.jpg">
+      <img class="avatr" :src=avatarUrl>
     </div>
     <div class="inputRow">
       <span>姓名： </span>
@@ -11,17 +11,17 @@
     <div class="selectRow">
       <div style="margin-left:-10px">
         <span>性别：</span>
-        <span class="small">请选择性别</span>
+        <span :class=sexClass >{{selectedSex}}</span>
       </div>
       <div>
-        <span>男</span>
-        <span>女</span>
+        <span @click="gender='MALE';selectedSex = '男';sexClass = 'big'">男</span>
+        <span @click="gender='FEMALE';selectedSex = '女';sexClass = 'big'">女</span>
       </div>
     </div>
-    <div class="inputRow">
+    <!-- <div class="inputRow">
       <span>昵称： </span>
       <input v-model="name2" type="text" placeholder-class="small" placeholder="输入你的昵称">
-    </div>
+    </div> -->
     <div class="inputRow">
       <span>电话： </span>
       <input v-model="tel" type="text" placeholder-class="small" placeholder="填写你的电话">
@@ -35,19 +35,58 @@
 </template>
 
 <script>
+  import store from '../../store/vuex'
   export default {
     data () {
       return {
         name: '',
         name2: '',
         tel: '',
-        school: ''
+        school: '',
+        avatarUrl: '',
+        userId: '',
+        gender: '',
+        cookie: '',
+        selectedSex: '请选择您的性别',
+        sexClass:'small'
       }
     },
     methods: {
       submit: function () {
-        console.log(this.name)
+        console.log(this.name);
+        console.log(this.name2);
+        console.log(this.tel);
+        console.log(this.name);
+        console.log(this.gender);
+        wx.request({
+          url: `https://bang.zhengsj.top/user/info/${this.userId}`,
+          method: 'POST',
+          header: {
+            cookie: this.cookie
+          },
+          data: {
+            userName: this.name2,
+            trueName: this.name,
+            phone: this.tel,
+            schoolId: 1,
+            gender: this.gender
+          },
+          success(res) {
+            console.log(res);
+          }
+        })
       }
+    },
+    mounted () {
+      this.avatarUrl = store.state.userInfo.avatar,
+      this.userId = store.state.userInfo.id
+      let that = this
+      wx.getStorage({
+        key:'cookie',
+        success(res){
+          that.cookie = res.data
+        },
+      })
     }
   }
 </script>
@@ -105,13 +144,21 @@
     width: 25px;
     height: 6px;
     padding: 7px 13px;
-    border: solid #fed901 1px;
+    background: #fed901;
+    color: white;
     text-align: center;
     line-height: 6px;
     border-radius: 15px;
     font-size: 13px;
-    color: #808080;
     margin: 0 4px;
   }
+  button {
+    background: #fed901;
+    color: white;
+    width: 100px;
+    height:40px;
+    line-height:40px;
+    margin-top:30px;
+}
 </style>
 

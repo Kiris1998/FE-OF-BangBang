@@ -1,12 +1,12 @@
 <template>
   <div class="page">
-    <img class="avatr" src="http://thyrsi.com/t6/400/1540826774x1822611437.jpg">
-    <p class="name">Kiris.</p>
-    <p>账号：12312312</p>
+    <img class="avatr" :src=avatrUrl>
+    <p class="name">{{userName}}</p>
+    <p>账号：{{id}}</p>
     <div class="money">
       <div class="moneyNum">
         <span>账户余额</span>
-        <span>1.11</span>
+        <span>{{balance}}</span>
       </div>
       <button>余额提现</button>
     </div>
@@ -16,15 +16,20 @@
       <li @click="toAdd"><i class="iconfont icon-LC_icon_gps_line_1"></i> 地址管理</li>
       <li @click="toInformation"><i class="iconfont icon-wodeyouhuijuan"></i> 我的优惠卷</li>
       <li @click="toInformation"><i class="iconfont icon-duanxin"></i> 意见反馈</li>
-      <li @click="toInformation"><i class="iconfont icon-yiwen"></i> 用户指南</li>
-      <li @click="toInformation"><i class="iconfont icon-ai-out"></i> 退出账户</li>
     </ul>
   </div>
 </template>
 
 <script>
   import {jumpTo} from '../../utils/utils'
+  import store from '../../store/vuex'
   export default {
+    data: {
+      avatrUrl: '',
+      id: '',
+      balance: '',
+      userName: ''
+    },
     methods: {
       toInformation(){
         jumpTo('../info/main')
@@ -35,6 +40,12 @@
       toAdd(){
         jumpTo('../searchAdd/main')
       }
+    },
+    mounted() {
+      this.avatrUrl = store.state.userInfo.avatar,
+      this.id = store.state.userInfo.id,
+      this.balance = store.state.userInfo.balance,
+      this.userName = store.state.userInfo.userName
     }
   }
 </script>
@@ -102,7 +113,7 @@
   }
   .items li {
     font-size: 15px;
-    margin: 15px 0;
+    margin: 25px 0;
   }
   .items i {
     display: inline;
