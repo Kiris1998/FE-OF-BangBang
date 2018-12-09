@@ -14,8 +14,8 @@
       <li @click="toInformation"><i class="iconfont icon-wo"></i> 个人信息</li>
       <li @click="toInvitation"><i class="iconfont icon-erweima"></i> 邀请码</li>
       <li @click="toAdd"><i class="iconfont icon-LC_icon_gps_line_1"></i> 地址管理</li>
-      <li @click="toInformation"><i class="iconfont icon-wodeyouhuijuan"></i> 我的优惠卷</li>
-      <li @click="toInformation"><i class="iconfont icon-duanxin"></i> 意见反馈</li>
+      <li @click="toCoupon"><i class="iconfont icon-wodeyouhuijuan"></i> 我的优惠卷</li>
+      <li @click="toAdvice"><i class="iconfont icon-duanxin"></i> 意见反馈</li>
     </ul>
   </div>
 </template>
@@ -39,6 +39,12 @@
       },
       toAdd(){
         jumpTo('../chooseAddr/main')
+      },
+      toCoupon(){
+        jumpTo('../coupon/main')
+      },
+      toAdvice(){
+        jumpTo('../advices/main')
       }
     },
     mounted() {
