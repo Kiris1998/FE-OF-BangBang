@@ -8,7 +8,7 @@
         基础速递费{{basePrice}}元+悬赏金{{givenPrice}}元+优惠券{{benefit}}元
       </div>
     </div>
-    <button>
+    <button @click="submit">
         确认下单
     </button>
   </div>
@@ -21,6 +21,11 @@ export default {
         basePrice:2,
         givenPrice:3,
         benefit:0
+      }
+    },
+    methods:{
+      submit(){
+        this.$emit('submit')
       }
     }
 }

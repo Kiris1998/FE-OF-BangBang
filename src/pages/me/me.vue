@@ -38,7 +38,7 @@
         jumpTo('../invitation/main')
       },
       toAdd(){
-        jumpTo('../searchAdd/main')
+        jumpTo('../chooseAddr/main')
       }
     },
     mounted() {

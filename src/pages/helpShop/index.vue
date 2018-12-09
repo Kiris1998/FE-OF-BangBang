@@ -12,9 +12,9 @@
             <li class="setSend-con-sex">
                 <img src="/static/image/sendHelp/sex.png"/>
                 <span>请选择您的性别</span>
-                <div :id="sexChoose == 'man'?'activeClass':'errorClass'" @click="chooseThisSex('man')">男</div>
-                <div :id="sexChoose == 'woman'?'activeClass':'errorClass'" @click="chooseThisSex('woman')">女</div>
-                <div :id="sexChoose == 'noLimit'?'activeClass':'errorClass'" @click="chooseThisSex('noLimit')">不限</div>
+                <div :id="requireGender == 'MALE'?'activeClass':'errorClass'" @click="chooseThisSex('MALE')">男</div>
+                <div :id="requireGender == 'FEMALE'?'activeClass':'errorClass'" @click="chooseThisSex('FEMALE')">女</div>
+                <div :id="requireGender == 'NO_LIMITED'?'activeClass':'errorClass'" @click="chooseThisSex('NO_LIMITED')">不限</div>
             </li>
             <li class="setSend-con-localGet">
               <img class="first-img" src="/static/image/sendHelp/location.png"/>
@@ -74,8 +74,13 @@ import store from '../../store/vuex'
 export default {
   data () {
     return {
-      sexChoose:'noLimit',
-      motto: 'Hello World',
+      requireGender:'NO_LIMITED',
+      indentContent:'',
+      indentPrice:'',
+      takeGoodAddress:'',
+      shippingAddressId:'',
+      goodPrice:'',
+      couponId:''
     }
   },
   computed: {
@@ -92,7 +97,7 @@ export default {
   },
   methods: {
     chooseThisSex(res){
-      this.sexChoose = res
+      this.requireGender = res
     },
     linkToSend(){
       jumpTo('../helpSend/main')
@@ -101,7 +106,7 @@ export default {
       jumpTo('../helpShop/main')
     },
     chooseAddr(){
-      jumpTo('../chooseAddr/main')
+      jumpTo('../chooseAddr/main?src=helpShop')
     }
   }
 }

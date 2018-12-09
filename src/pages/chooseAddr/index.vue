@@ -16,10 +16,10 @@
                     <div class="choose-content-info" @click="linkToSend(index)">
                         <div class="choose-content-info-1">
                             <div>
-                                {{item.name}}
+                                {{item.userName}}
                             </div>
                             <span>
-                                {{item.telePhone}}
+                                {{item.phone}}
                             </span>
                         </div>
                         <div class="choose-content-info-2">
@@ -43,42 +43,49 @@ import card from '@/components/card'
 import {jumpTo} from '../../utils/utils'
 import Bus from '@/mixins/event-bus'
 import store from '../../store/vuex'
+import editAddr from '../../store/editAddr'
+import {getAddrList} from '../../utils/API.js'
 
 export default {
   data () {
     return {
         msg:[
-            {
-                name:'王小明',
-                firstname:'',
-                telePhone:'15929320201',
-                address:'西安市新城区韩森寨幸福南路100号 西安建筑科技大学华清学院西安市新城区韩森寨幸福南路100号 西安建筑科技大学华清学院'
-            },{
-                name:'白果',
-                firstname:'',
-                telePhone:'15929320201',
-                address:'西安市新城区韩森寨幸福南路100号 西安建筑科技大学华清学院西安市新城区韩森寨幸福南路100号 西安建筑科技大学华清学院'
-            }
-        ]
+        ],
+        isChoose:false
     }
   },
 
   components: {
     card
   },
-
+    onLoad:function(options){
+        if(options.src != undefined)
+            this.isChoose = true
+    },
+  computed:{
+      changeInfo(){
+          if(editAddr.state.info != ''){
+            this.msg[editAddr.state.info.label - 1] = editAddr.state.info
+            this.msg[editAddr.state.info.label - 1].firstname = this.msg[editAddr.state.info.label - 1].userName.substr(0,1)
+            editAddr.state.info = ''
+            return editAddr.state.info
+          }
+      }
+  },
   methods: {
     linkToSend(index){
-        let params = { 
-            address:this.msg[index].address
+        if(this.isChoose){
+            let params = { 
+                address:this.msg[index].address
+            }
+            store.commit('commitInfo',params)
+            wx.navigateBack()
         }
-        store.commit('commitInfo',params)
-        wx.navigateBack()
     },
     linkToEdit(index){
         if(index == undefined){
             jumpTo(`../addAddr/main`)
-        }
+        }   
         else{
             var info = this.msg[index]
             info = JSON.stringify(info)
@@ -87,10 +94,16 @@ export default {
         }
     }
   },
-  beforeMount(){
-      for(let i = 0;i < this.msg.length;i++){
-        this.msg[i].firstname = this.msg[i].name.substr(0,1)
-      }
+  mounted(){
+      console.log(store.state)
+      getAddrList(store.state.userInfo.id).then((res)=>{
+          console.log(res.data)
+          this.msg = res.data.data
+            for(let i = 0;i < this.msg.length;i++){
+                this.msg[i].firstname = this.msg[i].userName.substr(0,1)
+                this.msg[i].label = i + 1
+            }
+      })
   }
 }
 </script>

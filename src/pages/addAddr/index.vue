@@ -41,7 +41,8 @@ export default {
         telePhone:'',
         college:'西安美术学院',
         address:'',
-        name:''
+        name:'',
+        id:''
     }
   },
   components: {
@@ -50,10 +51,11 @@ export default {
   methods: {
      configAddr(){
         var params = {
-            telePhone:this.telePhone,
+            phone:this.telePhone,
             college:this.college,
             address:this.address,
-            name:this.name
+            userName:this.name,
+            label:this.id
         }
         editAddr.commit('commitInfo',params)
         wx.navigateBack()
@@ -65,9 +67,10 @@ export default {
   onLoad(options){
     if(options.info != undefined){
         var obj = JSON.parse(options.info)
-        this.telePhone = obj.telePhone
-        this.name = obj.name
+        this.telePhone = obj.phone
+        this.name = obj.userName
         this.address = obj.address
+        this.id = obj.label
     }else{
         this.telePhone = ''
         this.name = ''
