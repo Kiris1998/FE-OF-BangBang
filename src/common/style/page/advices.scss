@@ -5,7 +5,9 @@ textarea{
     background: white;
     @include config_width_height(650rpx,400rpx);
     border-radius: 25rpx;
-    padding: 5rpx 5rpx
+    padding: 8rpx 8rpx;
+    @include config_font(30rpx);
+    border: 1rpx solid black
 }
 .container{
     @include config_colbox_centercol();

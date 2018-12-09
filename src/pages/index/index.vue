@@ -78,42 +78,6 @@ import { fail } from 'assert';
           console.log('登录失败')
         })
       })
-
-
-      // wx.getStorage({
-      //   key:'userInfo',
-      //   success(res){
-      //     store.commit('getUserDetail', res.data)
-      //     console.log(store.state.userInfo);
-      //     hideLoading()
-      //   },
-      //   fail(){
-      //     getUserInfo().then((res)=>{
-      //       encryptedData = res.encryptedData
-      //       iv = res.iv
-      //       return login()
-      //   })
-      //   .then((res)=>{
-      //       code = res.code
-      //       hideLoading()
-      //       var data = {
-      //           "code":code,
-      //           "encryptedData": encryptedData,
-      //           "iv": iv
-      //       }
-      //       getUserInfor(data),then((res)=>{
-      //         console.log(res)
-      //         setStorage('userInfo',res.data.data)
-      //       })
-      //       .catch((err)=>{
-      //         console.log(err)
-      //       })
-      //     })
-      //     .catch((err)=>{
-      //       console.log(err)
-      //     })
-      //     }
-      //   })
     }
   }
 </script>
