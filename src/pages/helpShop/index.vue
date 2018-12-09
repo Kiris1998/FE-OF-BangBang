@@ -49,19 +49,7 @@
         </ul>
     </div>
   </div>
-  <div class="setSend-bottom">
-    <div class="setSend-bottom-info">
-      <div class="setSend-bottom-info-1">
-        下单支付：<span>￥3  </span>
-      </div>
-      <div class="setSend-bottom-info-2">
-        物品价格5元+基础速递费2元+悬赏金3元+优惠券0元
-      </div>
-    </div>
-    <button>
-        确认下单
-    </button>
-  </div>
+  <bottom @submit="submitForm"></bottom>
 </div>
 </template>
 
@@ -70,6 +58,7 @@ import card from '@/components/card'
 import bottom from '@/components/bottom'
 import {jumpTo} from '../../utils/utils'
 import store from '../../store/vuex'
+import {submitHelpSend} from '../../utils/API.js'
 
 export default {
   data () {
@@ -107,6 +96,26 @@ export default {
     },
     chooseAddr(){
       jumpTo('../chooseAddr/main?src=helpShop')
+    },
+    submitForm(){
+      let data = {
+        indentType:'HELP_BUY',
+        requireGender:this.requireGender,
+        publisherId:store.state.userInfo.id,
+        indentContent:this.indentContent,
+        indentPrice:this.indentPrice,
+        takeGoodAddress:this.takeGoodAddress,
+        shippingAddressId:this.shippingAddressId,
+        couponId:this.couponId,
+        goodPrice:''
+      }
+      console.log(data)
+      submitHelpSend(data).then((res)=>{
+        console.log(res)
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
     }
   }
 }

@@ -127,7 +127,7 @@
         border-radius: 0;
         background-color: $mainColor;
         line-height: 99rpx;
-        @include config_font(26rpx);
+        @include config_font(30rpx);
         padding: 0;
     }
 }
