@@ -62,10 +62,11 @@
 import card from '@/components/card';
 import bottom from '@/components/bottom'
 import {jumpTo} from '../../utils/utils'
-import Bus from '@/mixins/event-bus'
 import store from '../../store/vuex'
 import {submitHelpSend} from '../../utils/API.js'
 import couponInfo from '../../store/couponInfo' 
+import {showModal} from '../../utils/wxAPI.js'
+
 
 export default {
   data () {
@@ -128,6 +129,7 @@ export default {
       })
       .catch((err)=>{
         console.log(err)
+        showModal(err)
       })
     }
   }

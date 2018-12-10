@@ -5,7 +5,11 @@ const ajax = function(url,methods='GET',data={}){
             method:methods,
             data: data,
             success (res) {
-                resolve(res)
+                if(res.code != 200){
+                    reject(res.data.msg)
+                }
+                else
+                    resolve(res)
             },
             fail(err){
                 reject(err)

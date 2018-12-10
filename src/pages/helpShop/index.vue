@@ -71,6 +71,7 @@ import {jumpTo} from '../../utils/utils'
 import store from '../../store/vuex'
 import {submitHelpSend} from '../../utils/API.js'
 import couponInfo from '../../store/couponInfo' 
+import {showModal} from '../../utils/wxAPI.js'
 
 export default {
   data () {
@@ -133,7 +134,7 @@ export default {
         console.log(res)
       })
       .catch((err)=>{
-        console.log(err)
+        showModal(err)
       })
     }
   }

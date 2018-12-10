@@ -12,9 +12,9 @@
             <li class="setSend-con-sex">
                 <img src="/static/image/sendHelp/sex.png"/>
                 <span>请选择您的性别</span>
-                <div>男</div>
-                <div>女</div>
-                <div>不限</div>
+                <div :id="requireGender == 'MALE'?'activeClass':'errorClass'" @click="chooseThisSex('MALE')">男</div>
+                <div :id="requireGender == 'FEMALE'?'activeClass':'errorClass'" @click="chooseThisSex('FEMALE')">女</div>
+                <div :id="requireGender == 'NO_LIMITED'?'activeClass':'errorClass'" @click="chooseThisSex('NO_LIMITED')">不限</div>
             </li>
             <li class="setSend-con-phone">
                 <img src="/static/image/sendHelp/phone.png"/>
@@ -48,17 +48,26 @@
 </template>
 
 <script>
-import card from '@/components/card'
+import card from '@/components/card';
+import bottom from '@/components/bottom'
 import {jumpTo} from '../../utils/utils'
-
+import store from '../../store/vuex'
+import {submitHelpSend} from '../../utils/API.js'
+import couponInfo from '../../store/couponInfo' 
+import {showModal} from '../../utils/wxAPI.js'
 export default {
   data () {
-    return {
-      motto: 'Hello World',
-      userInfo: {}
+    return {     
+      requireGender:'NO_LIMITED',
+      indentContent:'',
+      indentPrice:20,
+      takeGoodAddress:'ddd',
+      shippingAddressId:4,
+      secretText:'aaa'
     }
   },
-
+  methods: {
+  },
   components: {
     card
   },
@@ -69,6 +78,41 @@ export default {
     },
     linkToShop(){
       jumpTo('../helpShop/main')
+    },
+    chooseCoupon(){
+      jumpTo('../coupon/main?src=helpSend')
+    },
+    chooseThisSex(res){
+      this.requireGender = res
+    },
+    linkToSend(){
+      jumpTo('../helpSend/main')
+    },
+    linkToShop(){
+      jumpTo('../helpShop/main')
+    },
+    chooseAddr(){
+      jumpTo('../chooseAddr/main?src=helpShop')
+    },
+    submitForm(){
+      let data = {
+        indentType:'HELP_BUY',
+        requireGender:this.requireGender,
+        publisherId:store.state.userInfo.id,
+        indentContent:this.indentContent,
+        indentPrice:this.indentPrice,
+        takeGoodAddress:this.takeGoodAddress,
+        shippingAddressId:this.shippingAddressId,
+        couponId:this.couponId,
+        goodPrice:''
+      }
+      console.log(data)
+      submitHelpSend(data).then((res)=>{
+        console.log(res)
+      })
+      .catch((err)=>{
+        showModal(err)
+      })
     }
   }
 }
