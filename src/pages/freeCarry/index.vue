@@ -23,8 +23,13 @@
             <li class="setSend-con-reward">
                 <img src="/static/image/sendHelp/reward.png"/>
                 <span id="rewardTitle">悬赏金</span>
-                <input id="rewardInput" placeholder="填写悬赏金"/>
+                <input v-model="indentPrice" id="rewardInput" placeholder="填写悬赏金"/>
             </li> 
+            <li class="setSend-con-reward" @click="chooseCoupon">
+                <img src="/static/image/sendHelp/reward.png"/>
+                <span id="rewardTitle">优惠券</span>
+                <span id="rewardInput">{{couponId == ''?'请选择优惠券':couponId}}</span>
+            </li>
         </ul>
         <button class="setSend-btn">
           ￥00.00
@@ -58,7 +63,7 @@ import {showModal} from '../../utils/wxAPI.js'
 export default {
   data () {
     return {     
-      requireGender:'NO_LIMITED',
+      requireGender:'HELP_OTHER',
       indentContent:'',
       indentPrice:20,
       takeGoodAddress:'ddd',
@@ -70,6 +75,16 @@ export default {
   },
   components: {
     card
+  },
+  computed: {
+    userAddr() {
+      return store.state.info;
+    },
+    couponId(){
+      let info = couponInfo.state.info
+      couponInfo.state.info = ''
+      return info
+    },
   },
 
   methods: {
