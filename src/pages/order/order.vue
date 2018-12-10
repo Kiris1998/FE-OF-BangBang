@@ -30,6 +30,9 @@
       },
       goOthers: function () {
         this.myFlage = false
+      },
+      checkThis(){
+        console.log('aaa')
       }
     }
   }

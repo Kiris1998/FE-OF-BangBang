@@ -74,12 +74,13 @@
             @include togher();
             @include firstImg(34rpx,34rpx);
             input{
+                @include config_width_height(450rpx);
                 margin-left: 14rpx;
                 font-size: $inputFontSize;
             }
             span{
-                margin-left: 14rpx + 26rpx + $imageMargin;
-                @include config_font($inputFontSize);
+                margin-left: 14rpx;
+                @include config_font($adviceFontSize);
             }
         }
         &-price{

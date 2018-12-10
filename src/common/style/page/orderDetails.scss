@@ -94,7 +94,7 @@
     &-status{
         border-top: 3rpx solid $listBorder;
         border-bottom: 3rpx solid $listBorder;
-        height: 217rpx;
+        height: 170rpx;
         @include config_rowbox_centercol(center);
         .progressBar{
             @include config_rowbox_centercol(center);
@@ -124,20 +124,25 @@
                 @include config_rowbox_centercol(space-between);
                 @include config_width_height(531rpx);
                 span{
-                    @include config-font(24rpx);
+                    @include config-font(28rpx);
                 }
             }
         }
     }
-    .footer{
-        margin-top: 15rpx;
-        @include config-font(23rpx,$adviceFont);
-        text-align: center;
-    }
     &-bnt{
         @include config_rowbox_center();
         button{
-            margin-top: 100rpx;  
+            margin-top: 50rpx;  
+            background: black;
+            @include config_width_height(650rpx,96rpx);
+            line-height: 96rpx;
+            @include config-font(40rpx,white);
+        }
+    }
+    &-bnt2{
+        @include config_rowbox_center();
+        button{
+            margin-top: 10rpx;  
             background: black;
             @include config_width_height(650rpx,96rpx);
             line-height: 96rpx;

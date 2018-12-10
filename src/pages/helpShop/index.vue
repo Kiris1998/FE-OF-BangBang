@@ -5,7 +5,7 @@
         <span>
             帮我购买
         </span>
-        <textarea placeholder-class="place-holder" class="setSend-baseInfo" placeholder="买什么，从哪里买？输入物品名称和数量等基本信息" auto-focus />
+        <textarea v-model="indentContent" placeholder-class="place-holder" class="setSend-baseInfo" placeholder="买什么，从哪里买？输入物品名称和数量等基本信息" auto-focus />
     </div>
     <div>
         <ul class="setSend-con">
@@ -24,7 +24,7 @@
               </div>
             </li>
             <li class="setSend-con-localext">
-                <input placeholder="填写购买地址"/>
+                <input v-model="takeGoodAddress" placeholder="填写购买地址"/>
             </li>
             <li class="setSend-con-localSend" @click="chooseAddr">
               <div>
@@ -43,9 +43,20 @@
               <input placeholder="请输入物品价格"/>
             </li>
             <li class="setSend-con-reward">
+                <img src="/static/image/sendHelp/reward.png"/>
                 <span id="rewardTitle">悬赏金</span>
-                <input id="rewardInput" placeholder="填写悬赏金"/>
+                <input v-model="indentPrice" id="rewardInput" placeholder="填写悬赏金"/>
             </li> 
+            <li class="setSend-con-reward">
+                <img src="/static/image/sendHelp/reward.png"/>
+                <span id="rewardTitle">商品价格</span>
+                <input v-model="goodPrice" id="rewardInput" placeholder="填写购买商品的价格"/>
+            </li> 
+            <li class="setSend-con-reward" @click="chooseCoupon">
+                <img src="/static/image/sendHelp/reward.png"/>
+                <span id="rewardTitle">优惠券</span>
+                <span id="rewardInput">{{couponId == ''?'请选择优惠券':couponId}}</span>
+            </li>
         </ul>
     </div>
   </div>
@@ -59,6 +70,7 @@ import bottom from '@/components/bottom'
 import {jumpTo} from '../../utils/utils'
 import store from '../../store/vuex'
 import {submitHelpSend} from '../../utils/API.js'
+import couponInfo from '../../store/couponInfo' 
 
 export default {
   data () {
@@ -69,13 +81,17 @@ export default {
       takeGoodAddress:'',
       shippingAddressId:'',
       goodPrice:'',
-      couponId:''
     }
   },
   computed: {
     userAddr() {
       return store.state.info;
-    }
+    },
+    couponId(){
+      let info = couponInfo.state.info
+      couponInfo.state.info = ''
+      return info
+    },
   },
   components: {
     card,
@@ -85,6 +101,9 @@ export default {
     console.log(this.userInfo)
   },
   methods: {
+    chooseCoupon(){
+      jumpTo('../coupon/main?src=helpSend')
+    },
     chooseThisSex(res){
       this.requireGender = res
     },

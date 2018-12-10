@@ -23,7 +23,7 @@
               </div>
             </li>
             <li class="setSend-con-localext">
-                <input placeholder="请输入用户的取货地址"/>
+                <input v-model="takeGoodAddress" placeholder="请输入用户的取货地址"/>
             </li>
             <li class="setSend-con-localSend" @click="chooseSend">
               <div>
@@ -44,12 +44,12 @@
             <li class="setSend-con-reward">
                 <img src="/static/image/sendHelp/reward.png"/>
                 <span id="rewardTitle">悬赏金</span>
-                <input id="rewardInput" placeholder="填写悬赏金"/>
+                <input v-model="indentPrice" id="rewardInput" placeholder="填写悬赏金"/>
             </li>
-            <li class="setSend-con-reward">
+            <li class="setSend-con-reward" @click="chooseCoupon">
                 <img src="/static/image/sendHelp/reward.png"/>
                 <span id="rewardTitle">优惠券</span>
-                <span id="rewardInput">请选择优惠券</span>
+                <span id="rewardInput">{{couponId == ''?'请选择优惠券':couponId}}</span>
             </li>
         </ul>
     </div>
@@ -65,6 +65,7 @@ import {jumpTo} from '../../utils/utils'
 import Bus from '@/mixins/event-bus'
 import store from '../../store/vuex'
 import {submitHelpSend} from '../../utils/API.js'
+import couponInfo from '../../store/couponInfo' 
 
 export default {
   data () {
@@ -74,24 +75,31 @@ export default {
       indentPrice:20,
       takeGoodAddress:'ddd',
       shippingAddressId:4,
-      secretText:'aaa',
-      couponId:''
+      secretText:'aaa'
     }
   },
   computed: {
     userAddr() {
       return store.state.info;
-    }
+    },
+    couponId(){
+      let info = couponInfo.state.info
+      couponInfo.state.info = ''
+      return info
+    }
   },
   components: {
     card,
     bottom
   },
   mounted(){
-
+    this.couponInfo = ''
   },
 
   methods: {
+    chooseCoupon(){
+      jumpTo('../coupon/main?src=helpSend')
+    },
     chooseThisSex(res){
       this.requireGender = res
     },
