@@ -15,7 +15,7 @@
                         <span>
                             有效期至{{item.date}}
                         </span>
-                        <span class="coupon-right-bnt">
+                        <span v-show="isChoose" class="coupon-right-bnt" @click="chooseThis(item.price)">
                             立即使用
                         </span>
                     </div>
@@ -31,9 +31,11 @@
     </div>
 </template>
 <script>
+import couponInfo from '../../store/couponInfo' 
 export default {
     data(){
         return{
+            isChoose:false,
             myCoupon:[
                 {
                     price:5,
@@ -52,6 +54,22 @@ export default {
                 }
             ]
         }
+    },
+    onLoad:function(options){
+        if(options.src != undefined)
+            this.isChoose = true
+    },
+    methods:{
+        chooseThis(info){
+            if(this.isChoose){
+                couponInfo.commit('commitInfo',info)
+                console.log(info)
+                wx.navigateBack()
+            }
+        }
+    },
+    mounted:{
+        
     }
 }
 </script>

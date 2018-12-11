@@ -1,7 +1,7 @@
 <template>
     <div class="order">
         <div class="order-title"> 
-            我的帮购订单详情
+            我的发布订单详情
         </div>
         <div class="order-details">
             <div class="avatar">
@@ -38,30 +38,32 @@
                 <div class="line">
                 </div>
                 <div class="circle">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                    <span :style="{ background: status.first}"></span>
+                    <span :style="{ background: status.second}"></span>
+                    <span :style="{ background: status.third}"></span>
+                    <span :style="{ background: status.fourth}"></span>
                 </div>
                 <div class="theLabel">
-                    <span>
+                    <span :style="{ color: status.first}">
                         新发布
                     </span>
-                    <span>
+                    <span :style="{ color: status.second}">
                         已接单
                     </span>
-                    <span>
+                    <span :style="{ color: status.third}">
                         已送达
                     </span>
-                    <span style="margin-right:0">
+                    <span :style="[{ 'color': status.fourth,'margin-right':0 }]">
                         完成订单
                     </span>
                 </div>
             </div>
         </div>
-        <div class="footer">信息涉及到隐私，接单后可查看更多关于订单信息。</div>
         <div class="order-bnt">
-            <button>确认送达</button>
+            <button>待接单</button>
+        </div>
+        <div class="order-bnt2">
+            <button @click="deleteOrder">取消订单</button>
         </div>
     </div>
 </template>
@@ -72,6 +74,12 @@ import card from '@/components/card'
 export default {
   data () {
     return {
+        status:{
+            first:'red',
+            second:'red',
+            third:'white',
+            fourth:'white'
+        }
     }
   },
 
@@ -80,7 +88,9 @@ export default {
   },
 
   methods: {
-
+      deleteOrder(){
+          
+      }
   }
 }
 </script>

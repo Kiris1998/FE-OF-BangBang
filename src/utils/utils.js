@@ -8,6 +8,11 @@ const switchTab = (url)=>{
         url:url
     })
 }
+const redirectTo = (url)=>{
+    wx.redirectTo({
+        url: url
+    })
+}
 const getSettings = ()=>{
     return new Promise((resolve,reject)=>{
         wx.getSetting({
@@ -25,6 +30,7 @@ const getUserInfo = ()=>{
         wx.getUserInfo({
             success: function (res) {
                 resolve(res)
+
             },
             fail: function (err) {
                 reject(err)
@@ -74,6 +80,9 @@ const getStorage = (key)=>{
         })
     })
 }
+const getStorageSync = (key)=>{
+    return wx.getStorageSync(key)
+}
 
 
 
@@ -84,5 +93,7 @@ export{
     switchTab,
     login,
     setStorage,
-    getStorage
+    getStorage,
+    redirectTo,
+    getStorageSync
 }

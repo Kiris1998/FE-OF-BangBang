@@ -32,16 +32,19 @@
 
 <script>
 import card from '@/components/card'
-import {jumpTo} from '../../utils/utils'
-import editAddr from '../../store/editAddr'
+import {jumpTo,redirectTo} from '../../utils/utils'
+import store from '../../store/vuex'
+import {addAddress,daleteAddr} from '../../utils/API.js'
 
 export default {
   data () {
     return {
+        isAdd:true,
         telePhone:'',
         college:'西安美术学院',
         address:'',
-        name:''
+        name:'',
+        id:''
     }
   },
   components: {
@@ -49,25 +52,46 @@ export default {
   },
   methods: {
      configAddr(){
+        if(this.isAdd){
+            var params = {
+                "phone":this.telePhone,
+                "address":this.address,
+                "userName":this.name,
+                "userId":store.state.userInfo.id
+            }
+            addAddress(params).then((res)=>{
+                console.log(res)
+            })
+            .catch((err)=>{
+                console.log(err)
+            })
+        }
         var params = {
-            telePhone:this.telePhone,
+            phone:this.telePhone,
             college:this.college,
             address:this.address,
-            name:this.name
+            userName:this.name,
+            label:this.id
         }
-        editAddr.commit('commitInfo',params)
         wx.navigateBack()
      },
      delectInfo(){
-
+         var obj = {
+             addressId:this.id
+         }
+         daleteAddr(obj).then((res)=>{
+             console.log(res)
+         })
      }
   },
   onLoad(options){
     if(options.info != undefined){
         var obj = JSON.parse(options.info)
-        this.telePhone = obj.telePhone
-        this.name = obj.name
+        this.telePhone = obj.phone
+        this.name = obj.userName
         this.address = obj.address
+        this.id = obj.label
+        this.isAdd = false
     }else{
         this.telePhone = ''
         this.name = ''

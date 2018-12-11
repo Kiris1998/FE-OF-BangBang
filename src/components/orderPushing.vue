@@ -1,5 +1,5 @@
 <template>
-    <div class="content">
+    <div class="content" @click="checkThis">
       <div class="pushing">
         <div class="pushingLogo"></div>
         <div class="pushingContent">
@@ -16,7 +16,7 @@
             <button>+1</button>
             <p>已接单</p>
           </div>
-          <div v-else class="othersBtn" @click="ToPhone">
+          <div v-else class="othersBtn" @click.stop="ToPhone">
             <img src="../static/image/phone.png">
           </div>
         </div>
@@ -25,6 +25,7 @@
 </template>
 
 <script>
+  import {jumpTo} from '../utils/utils.js'
   export default {
     props: {
       meOrOthers: Boolean
@@ -35,6 +36,10 @@
         wx.makePhoneCall({
           phoneNumber: '1340000' //仅为示例，并非真实的电话号码
         })
+      },
+      checkThis(){
+        console.log('aaa')
+        jumpTo('../detailsForClient/main')
       }
     }
   }
