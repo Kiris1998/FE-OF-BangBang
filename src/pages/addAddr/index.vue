@@ -34,7 +34,7 @@
 import card from '@/components/card'
 import {jumpTo,redirectTo} from '../../utils/utils'
 import store from '../../store/vuex'
-import {addAddress} from '../../utils/API.js'
+import {addAddress,daleteAddr} from '../../utils/API.js'
 
 export default {
   data () {
@@ -76,7 +76,12 @@ export default {
         wx.navigateBack()
      },
      delectInfo(){
-
+         var obj = {
+             addressId:this.id
+         }
+         daleteAddr(obj).then((res)=>{
+             console.log(res)
+         })
      }
   },
   onLoad(options){

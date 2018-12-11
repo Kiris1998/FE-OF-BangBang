@@ -65,7 +65,8 @@ export default {
     linkToSend(index){
         if(this.isChoose){
             let params = { 
-                address:this.msg[index].address
+                address:this.msg[index].address,
+                id:this.msg[index].id
             }
             store.commit('commitInfo',params)
             wx.navigateBack()
@@ -84,7 +85,6 @@ export default {
     }
   },
   onShow(){
-      console.log(store.state)
       getAddrList(store.state.userInfo.id).then((res)=>{
           console.log(res.data)
           this.msg = res.data.data
@@ -92,6 +92,9 @@ export default {
                 this.msg[i].firstname = this.msg[i].userName.substr(0,1)
                 this.msg[i].label = i + 1
             }
+      })
+      .catch((err)=>{
+          console.log(err)
       })
   }
 }

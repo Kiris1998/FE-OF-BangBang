@@ -37,6 +37,7 @@ export default{
     bindinfo:function(){
       showLoading()
       getUserInfo().then((res)=>{
+        console.log(res)
         hideLoading()
         showToast('授权成功','success')
         setTimeout(()=>{

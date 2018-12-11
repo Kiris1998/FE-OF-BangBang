@@ -80,6 +80,9 @@ const getStorage = (key)=>{
         })
     })
 }
+const getStorageSync = (key)=>{
+    return wx.getStorageSync(key)
+}
 
 
 
@@ -91,5 +94,6 @@ export{
     login,
     setStorage,
     getStorage,
-    redirectTo
+    redirectTo,
+    getStorageSync
 }

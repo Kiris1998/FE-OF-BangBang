@@ -60,11 +60,13 @@ import { fail } from 'assert';
       .catch(()=>{
         getUserInfo()
         .then((res)=>{
+            console.log('userInfo',res)
             encryptedData = res.encryptedData
             iv = res.iv
             return login()
         })
         .then((res)=>{
+            console.log('res',res)
             code = res.code
             hideLoading()
             var data = {

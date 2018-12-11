@@ -33,24 +33,19 @@
               </div>
             </li>
             <li class="setSend-con-localext2">
-                <span>{{userAddr}}</span>
+                <span>{{userAddr == '' ? '请选择送达地址':userAddr}}</span>
             </li>
             <li class="setSend-con-price">
                 <img src="/static/image/sendHelp/reward.png"/>
                 <span id="rewardTitle">物品金额</span>
             </li> 
             <li class="setSend-con-money">
-              <input placeholder="请输入物品价格"/>
+              <input v-model="goodPrice" placeholder="请输入物品价格"/>
             </li>
             <li class="setSend-con-reward">
                 <img src="/static/image/sendHelp/reward.png"/>
                 <span id="rewardTitle">悬赏金</span>
                 <input v-model="indentPrice" id="rewardInput" placeholder="填写悬赏金"/>
-            </li> 
-            <li class="setSend-con-reward">
-                <img src="/static/image/sendHelp/reward.png"/>
-                <span id="rewardTitle">商品价格</span>
-                <input v-model="goodPrice" id="rewardInput" placeholder="填写购买商品的价格"/>
             </li> 
             <li class="setSend-con-reward" @click="chooseCoupon">
                 <img src="/static/image/sendHelp/reward.png"/>
@@ -77,33 +72,50 @@ export default {
   data () {
     return {
       requireGender:'NO_LIMITED',
+      shippingAddressId:'',
       indentContent:'',
       indentPrice:'',
       takeGoodAddress:'',
-      shippingAddressId:'',
       goodPrice:'',
+      isClear:true,
+      couponId:'',
+      userAddr:''
     }
   },
+  onShow(){
+    if(this.isClear){
+      Object.assign(this.$data, this.$options.data())
+      console.log(this.couponId)
+    }
+    this.isClear = true;
+  },
   computed: {
-    userAddr() {
-      return store.state.info;
+    userAddr1() {
+      let info = store.state.info   
+      this.userAddr = info
+      store.state.info = ''
     },
-    couponId(){
+    coupon(){
       let info = couponInfo.state.info
       couponInfo.state.info = ''
-      return info
+      this.couponId = info
     },
+    shippingAddressId(){
+      this.shippingAddressId = store.state.id
+      store.state.id = ''
+    }
   },
   components: {
     card,
     bottom
   },
   mounted:function(){
-    console.log(this.userInfo)
+    
   },
   methods: {
     chooseCoupon(){
       jumpTo('../coupon/main?src=helpSend')
+      this.isClear = false
     },
     chooseThisSex(res){
       this.requireGender = res
@@ -116,6 +128,7 @@ export default {
     },
     chooseAddr(){
       jumpTo('../chooseAddr/main?src=helpShop')
+      this.isClear = false
     },
     submitForm(){
       let data = {
@@ -127,7 +140,7 @@ export default {
         takeGoodAddress:this.takeGoodAddress,
         shippingAddressId:this.shippingAddressId,
         couponId:this.couponId,
-        goodPrice:''
+        goodPrice:this.goodPrice
       }
       console.log(data)
       submitHelpSend(data).then((res)=>{

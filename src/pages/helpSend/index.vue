@@ -32,7 +32,7 @@
               </div>
             </li>
             <li class="setSend-con-localext">
-                <span>{{userAddr}}</span>
+                <span>{{userAddr == '' ? '请选择送达地址':userAddr}}</span>
             </li>
             <li class="setSend-con-sendInfo">
               <div class="firstCol" @click="changeShow">
@@ -71,22 +71,37 @@ import {showModal} from '../../utils/wxAPI.js'
 export default {
   data () {
     return {
+      isClear:true,
       requireGender:'NO_LIMITED',
       indentContent:'',
       indentPrice:20,
       takeGoodAddress:'ddd',
-      shippingAddressId:4,
-      secretText:'aaa'
+      secretText:'快递号101010',
+      userAddr:'',
+      couponId:'',
     }
   },
+  onShow(){
+    if(this.isClear){
+      Object.assign(this.$data, this.$options.data())
+      console.log(this.couponId)
+    }
+    this.isClear = true;
+  },
   computed: {
-    userAddr() {
-      return store.state.info;
+    userAddr1() {
+      let info = store.state.info   
+      this.userAddr = info
+      store.state.info = ''
     },
-    couponId(){
+    coupon(){
       let info = couponInfo.state.info
       couponInfo.state.info = ''
-      return info
+      this.couponId = info
+    },
+    shippingAddressId(){
+      console.log(store.state.id)
+      return store.state.id
     }
   },
   components: {
@@ -100,15 +115,14 @@ export default {
   methods: {
     chooseCoupon(){
       jumpTo('../coupon/main?src=helpSend')
+      this.isClear = false
     },
     chooseThisSex(res){
       this.requireGender = res
     },
-    chooseRecive(){
-      jumpTo('../chooseAddr/main')
-    },
     chooseSend(){
       jumpTo('../chooseAddr/main?src=helpSend')
+      this.isClear = false
     },
     submitForm(){
       let data = {

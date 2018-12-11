@@ -11,9 +11,13 @@ const submitHelpSend = (data)=>{
 const addAddress = (data)=>{
     return ajax('https://bang.zhengsj.top/user/address','POST',data)
 }
+const daleteAddr = (data)=>{
+    return ajax('https://bang.zhengsj.top/user/addresses/delete','GET',data)
+}
 export {
     getUserInfor,
     getAddrList,
     submitHelpSend,
-    addAddress
+    addAddress,
+    daleteAddr
 }

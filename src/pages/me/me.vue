@@ -48,6 +48,7 @@
       }
     },
     mounted() {
+      console.log(store.state)
       this.avatrUrl = store.state.userInfo.avatar,
       this.id = store.state.userInfo.id,
       this.balance = store.state.userInfo.balance,
