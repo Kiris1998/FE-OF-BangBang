@@ -31,7 +31,10 @@
     </div>
 </template>
 <script>
-import couponInfo from '../../store/couponInfo' 
+import couponInfo from '../../store/couponInfo'
+import {couponList} from '../../utils/API.js'
+import store from '../../store/vuex'
+
 export default {
     data(){
         return{
@@ -58,6 +61,12 @@ export default {
     onLoad:function(options){
         if(options.src != undefined)
             this.isChoose = true
+        couponList(store.state.userInfo.id).then((res)=>{
+            console.log(res)
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
     },
     methods:{
         chooseThis(info){
@@ -68,9 +77,6 @@ export default {
             }
         }
     },
-    mounted:{
-        
-    }
 }
 </script>
 <style>

@@ -12,12 +12,20 @@ const addAddress = (data)=>{
     return ajax('https://bang.zhengsj.top/user/address','POST',data)
 }
 const daleteAddr = (data)=>{
-    return ajax('https://bang.zhengsj.top/user/addresses/delete','GET',data)
+    return ajax('https://bang.zhengsj.top/user/address/delete','GET',data)
+}
+const modifyAddr = (data)=>{
+    return ajax('https://bang.zhengsj.top/user/address/modify','POST',data)
+}
+const couponList = (id)=>{
+    return ajax(`https://bang.zhengsj.top/coupon/list/${id}`,'GET')
 }
 export {
     getUserInfor,
     getAddrList,
     submitHelpSend,
     addAddress,
-    daleteAddr
+    daleteAddr,
+    modifyAddr,
+    couponList
 }
