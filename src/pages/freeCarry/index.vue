@@ -63,7 +63,7 @@ import {showModal} from '../../utils/wxAPI.js'
 export default {
   data () {
     return {     
-      requireGender:'HELP_OTHER',
+      requireGender:'NO_LIMITED',
       indentContent:'',
       indentPrice:20,
       takeGoodAddress:'ddd',

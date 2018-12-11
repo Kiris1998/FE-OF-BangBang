@@ -67,6 +67,9 @@ export default {
                 wx.navigateBack()
             }
         }
+    },
+    mounted:{
+        
     }
 }
 </script>

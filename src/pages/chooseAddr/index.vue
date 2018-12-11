@@ -43,7 +43,6 @@ import card from '@/components/card'
 import {jumpTo} from '../../utils/utils'
 import Bus from '@/mixins/event-bus'
 import store from '../../store/vuex'
-import editAddr from '../../store/editAddr'
 import {getAddrList} from '../../utils/API.js'
 
 export default {
@@ -62,16 +61,6 @@ export default {
         if(options.src != undefined)
             this.isChoose = true
     },
-  computed:{
-      changeInfo(){
-          if(editAddr.state.info != ''){
-            this.msg[editAddr.state.info.label - 1] = editAddr.state.info
-            this.msg[editAddr.state.info.label - 1].firstname = this.msg[editAddr.state.info.label - 1].userName.substr(0,1)
-            editAddr.state.info = ''
-            return editAddr.state.info
-          }
-      }
-  },
   methods: {
     linkToSend(index){
         if(this.isChoose){
@@ -94,7 +83,7 @@ export default {
         }
     }
   },
-  mounted(){
+  onShow(){
       console.log(store.state)
       getAddrList(store.state.userInfo.id).then((res)=>{
           console.log(res.data)
