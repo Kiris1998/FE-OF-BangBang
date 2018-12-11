@@ -47,7 +47,6 @@
         jumpTo('../advices/main')
       }
     },
-<<<<<<< HEAD
     onLoad() {
       let info = store.state.userInfo
       console.log(info);
@@ -55,14 +54,6 @@
       this.id = info.id,
       this.balance = info.balance,
       this.userName = info.userName
-=======
-    mounted() {
-      console.log(store.state)
-      this.avatrUrl = store.state.userInfo.avatar,
-      this.id = store.state.userInfo.id,
-      this.balance = store.state.userInfo.balance,
-      this.userName = store.state.userInfo.userName
->>>>>>> 1eb920a970f52059a700671bb19a751452335eb3
     }
   }
 </script>
