@@ -41,11 +41,13 @@
         jumpTo('../searchAdd/main')
       }
     },
-    mounted() {
-      this.avatrUrl = store.state.userInfo.avatar,
-      this.id = store.state.userInfo.id,
-      this.balance = store.state.userInfo.balance,
-      this.userName = store.state.userInfo.userName
+    onLoad() {
+      let info = store.state.userInfo
+      console.log(info);
+      this.avatrUrl = info.avatar,
+      this.id = info.id,
+      this.balance = info.balance,
+      this.userName = info.userName
     }
   }
 </script>

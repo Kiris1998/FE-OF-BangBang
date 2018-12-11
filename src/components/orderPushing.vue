@@ -53,7 +53,7 @@
   }
   .pushingLogo {
     width: 25%;
-    background: url("http://img.027cgb.com/610462/bike.png");
+    background: url("http://cx-can-read.oss-cn-beijing.aliyuncs.com/bike.png");
     height: 100%;
     background-size: 100% 80px;
   }
@@ -77,7 +77,7 @@
     border-bottom: solid #c09d2c 1px;
   }
   .pushingTips {
-    background: url("http://img.027cgb.com/610462/bar.png");
+    background: url("http://cx-can-read.oss-cn-beijing.aliyuncs.com/bar.png");
     margin-top: 5px;
     border-radius: 6px;
     background-size: 100% 33px

@@ -24,11 +24,11 @@
     </div> -->
     <div class="inputRow">
       <span>电话： </span>
-      <input v-model="form.tel" type="text" placeholder-class="small" placeholder="填写你的电话">
+      <input v-model="tel" type="text" placeholder-class="small" placeholder="填写你的电话">
     </div>
     <div class="inputRow">
       <span>学校： </span>
-      <input v-model="form.school" type="text" placeholder-class="small" placeholder="填写学校全称">
+      <input v-model="school" type="text" placeholder-class="small" placeholder="填写学校全称">
     </div>
     <button @click="submit">提交</button>
   </div>
@@ -77,7 +77,7 @@
         })
       }
     },
-    mounted () {
+    onLoad () {
       this.avatarUrl = store.state.userInfo.avatar,
       this.userId = store.state.userInfo.id
       let that = this

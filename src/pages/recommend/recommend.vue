@@ -85,7 +85,7 @@
         },
       })
     },
-    onShow() {
+    onLoad() {
       console.log(this.cookie);
       let that = this
       wx.request({
@@ -95,6 +95,7 @@
           cookie: this.cookie
         },
         success(res){
+          console.log(res);
           that.detailInfo = res.data.data
         }
       })
@@ -107,6 +108,7 @@
         this.myFlage = true
       },
       getMyrecommened: function () {
+        console.log(111);
         let that = this
         this.myFlage = false
         wx.request({
