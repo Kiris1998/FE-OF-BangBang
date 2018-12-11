@@ -5,7 +5,7 @@
         <span>
             帮我购买
         </span>
-        <textarea placeholder-class="place-holder" class="setSend-baseInfo" placeholder="买什么，从哪里买？输入物品名称和数量等基本信息" auto-focus />
+        <textarea v-model="indentContent"  placeholder-class="place-holder" class="setSend-baseInfo" placeholder="买什么，从哪里买？输入物品名称和数量等基本信息" auto-focus />
     </div>
     <div>
         <ul class="setSend-con">
@@ -15,10 +15,6 @@
                 <div :id="requireGender == 'MALE'?'activeClass':'errorClass'" @click="chooseThisSex('MALE')">男</div>
                 <div :id="requireGender == 'FEMALE'?'activeClass':'errorClass'" @click="chooseThisSex('FEMALE')">女</div>
                 <div :id="requireGender == 'NO_LIMITED'?'activeClass':'errorClass'" @click="chooseThisSex('NO_LIMITED')">不限</div>
-            </li>
-            <li class="setSend-con-phone">
-                <img src="/static/image/sendHelp/phone.png"/>
-                <input placeholder="请填写联系电话" class="name"/>
             </li>
             <li class="setSend-con-reward">
                 <img src="/static/image/sendHelp/reward.png"/>
@@ -31,29 +27,13 @@
                 <span id="rewardInput">{{couponId == ''?'请选择优惠券':couponId}}</span>
             </li>
         </ul>
-        <button class="setSend-btn">
-          ￥00.00
-        </button>
     </div>
   </div>
-  <div class="setSend-bottom">
-    <div class="setSend-bottom-info">
-      <div class="setSend-bottom-info-1">
-        下单支付：<span>￥3.00</span>
-      </div>
-      <div class="setSend-bottom-info-2">
-        悬赏金3元-优惠券0元
-      </div>
-    </div>
-    <button>
-        确认下单
-    </button>
-  </div>
+  <bottom @submit="submitForm"></bottom>
 </div>
 </template>
 
 <script>
-import card from '@/components/card';
 import bottom from '@/components/bottom'
 import {jumpTo} from '../../utils/utils'
 import store from '../../store/vuex'
@@ -63,27 +43,37 @@ import {showModal} from '../../utils/wxAPI.js'
 export default {
   data () {
     return {     
+      isClear:true,
       requireGender:'NO_LIMITED',
       indentContent:'',
       indentPrice:20,
       takeGoodAddress:'ddd',
       shippingAddressId:4,
-      secretText:'aaa'
+      secretText:'aaa',
+      userAddr:'',
+      couponId:''
     }
   },
-  methods: {
+  onShow(){
+    if(this.isClear){
+      Object.assign(this.$data, this.$options.data())
+      console.log(this.couponId)
+    }
+    this.isClear = true;
   },
   components: {
-    card
+    bottom
   },
   computed: {
-    userAddr() {
-      return store.state.info;
+    userAddr1() {
+      let info = store.state.info   
+      this.userAddr = info
+      store.state.info = ''
     },
-    couponId(){
+    coupon(){
       let info = couponInfo.state.info
       couponInfo.state.info = ''
-      return info
+      this.couponId = info
     },
   },
 
@@ -107,19 +97,17 @@ export default {
       jumpTo('../helpShop/main')
     },
     chooseAddr(){
+      this.isClear = false
       jumpTo('../chooseAddr/main?src=helpShop')
     },
     submitForm(){
       let data = {
-        indentType:'HELP_BUY',
+        indentType:'HELP_OTHER',
         requireGender:this.requireGender,
         publisherId:store.state.userInfo.id,
         indentContent:this.indentContent,
         indentPrice:this.indentPrice,
-        takeGoodAddress:this.takeGoodAddress,
-        shippingAddressId:this.shippingAddressId,
-        couponId:this.couponId,
-        goodPrice:''
+        couponId:this.couponId
       }
       console.log(data)
       submitHelpSend(data).then((res)=>{

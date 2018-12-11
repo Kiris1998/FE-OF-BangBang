@@ -34,7 +34,7 @@
 import card from '@/components/card'
 import {jumpTo,redirectTo} from '../../utils/utils'
 import store from '../../store/vuex'
-import {addAddress,daleteAddr} from '../../utils/API.js'
+import {addAddress,daleteAddr,modifyAddr} from '../../utils/API.js'
 
 export default {
   data () {
@@ -65,13 +65,21 @@ export default {
             .catch((err)=>{
                 console.log(err)
             })
-        }
-        var params = {
-            phone:this.telePhone,
-            college:this.college,
-            address:this.address,
-            userName:this.name,
-            label:this.id
+        }else{
+            var params = {
+                "phone":this.telePhone,
+                "address":this.address,
+                "userName":this.name,
+                "addressId":this.id,
+                "userId":store.state.userInfo.id
+            }
+            console.log(params)
+            modifyAddr(params).then((res)=>{
+                console.log(res)
+            })
+            .catch((err)=>{
+                console.log(err)
+            })
         }
         wx.navigateBack()
      },
@@ -85,17 +93,19 @@ export default {
      }
   },
   onLoad(options){
+      console.log(options.info)
     if(options.info != undefined){
         var obj = JSON.parse(options.info)
         this.telePhone = obj.phone
         this.name = obj.userName
         this.address = obj.address
-        this.id = obj.label
+        this.id = obj.id
         this.isAdd = false
     }else{
         this.telePhone = ''
         this.name = ''
         this.address = ''
+        this.isAdd = true
     }
   }
 }

@@ -67,12 +67,12 @@ import {submitHelpSend} from '../../utils/API.js'
 import couponInfo from '../../store/couponInfo' 
 import {showModal} from '../../utils/wxAPI.js'
 
-
 export default {
   data () {
     return {
       isClear:true,
       requireGender:'NO_LIMITED',
+      shippingAddressId:'',
       indentContent:'',
       indentPrice:20,
       takeGoodAddress:'ddd',
@@ -100,8 +100,8 @@ export default {
       this.couponId = info
     },
     shippingAddressId(){
-      console.log(store.state.id)
-      return store.state.id
+      this.shippingAddressId = store.state.id
+      store.state.id = ''
     }
   },
   components: {
