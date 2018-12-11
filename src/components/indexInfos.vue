@@ -5,36 +5,50 @@
       <div class="details">
         <div class="baseInfo">
           <span class="name">
-            Kiris
+            {{detailInfo.publisherNickName}}
           </span>
           <span class="school">
-            西安电子科技大学
+            {{detailInfo.publisherSchool}}
           </span>
-          <span class="sex">
-            ♂
+          <span :style="{color: detailInfo.gender == 'MALE' ? '#248cd6' : '#eb2f74'}" class="sex">
+            {{detailInfo.gender == 'MALE' ? '♂' : '♀'}}
           </span>
-          <span class="time">
-            12：23发布
-          </span>
+          <p class="time">
+            {{detailInfo.createTime}}
+          </p>
         </div>
-        <div class="information">我在说中文1231231231212sws121s1212w312</div>
+        <div class="information">{{detailInfo.indentContent}}</div>
         <div class="place">
-          <div>北门快递</div>
-          <div>东门公交</div>
+          <div>{{detailInfo.takeGoodAddress}}</div>
+          <div>{{detailInfo.shippingAddress}}</div>
         </div>
       </div>
     </div>
     <div class="logo">
       <div class="title">悬赏金</div>
       <div>
-        <span style="font-size:13px">￥</span><span>5.00</span>
+        <span style="font-size:13px">￥</span><span>{{detailInfo.indentPrice}}</span>
       </div>
-      <div>首发3元+增加2元</div>
     </div>
   </div>
 </template>
 
 <script>
+  export default {
+    props: {
+      detailInfo: Object
+    },
+    methods: {
+    },
+    data () {
+      return {
+        
+      }
+    },
+    created(){
+      this.detailInfo.createTime = new Date(this.detailInfo.createTime).toLocaleString()
+    }
+  }
 </script>
 
 <style scoped>
@@ -57,7 +71,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background: url("http://img.027cgb.com/610462/back.png");
+    background: url("http://cx-can-read.oss-cn-beijing.aliyuncs.com/3%E9%A6%96%E9%A1%B5.png");
     background-size: 100% 110px;
   }
   .avatr {
@@ -78,7 +92,6 @@
     font-weight: bold;
   }
   .sex {
-    color: #2081d0;
     font-size: 9px;
   }
   .school {

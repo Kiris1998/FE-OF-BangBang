@@ -1,5 +1,5 @@
 <template>
-  <div class="page">
+  <div class="page" :style="{height: orderInfos.length <= 2 ? '100vh' : ''}">
     <swiper indicator-dots=true
             autoplay=true
             indicator-color="#a9a8a9"
@@ -15,9 +15,8 @@
       <div :class="{selected:selectedNum === 0}" @click="selectedNum = 0">默认</div>
       <div :class="{selected:selectedNum === 1}" @click="selectedNum = 1">时间</div>
       <div :class="{selected:selectedNum === 2}" @click="selectedNum = 2">价格</div>
-      <div :class="{selected:selectedNum === 3}" @click="selectedNum = 3">男女</div>
     </div>
-    <index-infos></index-infos>
+    <index-infos v-for="item in orderInfos" :key="item.indentId" :detailInfo="item"></index-infos>
   </div>
 </template>
 
@@ -36,22 +35,39 @@ import { fail } from 'assert';
     data () {
       return {
         pictures: [
-          'http://thyrsi.com/t6/403/1541055883x-1404775437.jpg',
-          'http://thyrsi.com/t6/403/1541055883x-1404775437.jpg',
-          'http://thyrsi.com/t6/403/1541055883x-1404775437.jpg'
         ],
         selectedNum: 0,
         sex: '',
-        sort: 0
+        sort: 0,
+        orderInfos:[],
+        cookie: ''
       }
     },
-    onLoad(){
+    onReady(){
       let that = this
       var code;
       var encryptedData;
       var iv;
       var header
       showLoading()
+      getStorage('cookie').then((res) => {
+        this.cookie = res.data
+        wx.request({
+          url: "https://bang.zhengsj.top/indent/list",
+          method: 'GET',
+          header: {
+            cookie: this.cookie
+          },
+          data: {
+            sexType: 'MALE',
+            sort: this.sort
+          },
+          success(res){
+            console.log(res);
+            that.orderInfos = res.data.data
+          }
+        })
+      })
       getStorage('userInfo').then((res)=>{
           store.commit('getUserDetail', res.data)
           that.sex = res.data.gender
@@ -86,20 +102,6 @@ import { fail } from 'assert';
           console.log('登录失败')
         })
       })
-    },
-    onReady(){
-      console.log(this.sex)
-      wx.request({
-          url: "https://bang.zhengsj.top/indent/list",
-          method: 'GET',
-          data: {
-            sexType: 'MALE',
-            sort: this.sort
-          },
-          success(res){
-            console.log(res);
-          }
-        })
     }
   }
 </script>
@@ -114,7 +116,6 @@ import { fail } from 'assert';
   .page {
     background: #e2e2e2;
     width: 100vw;
-    height: 100vh;
   }
   .bar {
     width: 100vw;
