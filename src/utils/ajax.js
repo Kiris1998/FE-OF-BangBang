@@ -12,12 +12,10 @@ const ajax = function(url,methods='GET',data={},headers = {'Content-Type': 'appl
             data: data,
             header:headers,
             success (res) {
-                console.log(res)
                 if(res.data.code != 0){
                     reject(res.data.msg)
                 }
                 else{
-                    console.log(res)
                     resolve(res)
                 }
             },

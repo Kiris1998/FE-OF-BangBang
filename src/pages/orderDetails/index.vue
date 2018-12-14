@@ -86,7 +86,6 @@ export default {
             indentId:8,
             userId:store.state.userInfo.id
         }
-        console.log(data)
         getOrderDetails(data).then((res)=>{
             console.log(res)
         })

@@ -23,6 +23,12 @@ const couponList = (id)=>{
 const getOrderDetails = (data)=>{
     return ajax('https://bang.zhengsj.top/indent/detail','GET',data)
 }
+const finishOrder = (data)=>{
+    return ajax('https://bang.zhengsj.top/indent/finished','POST',data)
+}
+const deleteOrder = (data)=>{
+    return ajax('https://bang.zhengsj.top/indent/canceled','DELETE',data)
+}
 export {
     getUserInfor,
     getAddrList,
@@ -31,5 +37,7 @@ export {
     daleteAddr,
     modifyAddr,
     couponList,
-    getOrderDetails
+    getOrderDetails,
+    finishOrder,
+    deleteOrder
 }
