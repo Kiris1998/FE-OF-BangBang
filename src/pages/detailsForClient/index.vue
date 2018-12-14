@@ -71,7 +71,7 @@
 <script>
 import card from '@/components/card'
 import {getOrderDetails,finishOrder,deleteOrder} from '../../utils/API.js'
-  import {getSettings,getUserInfo,jumpTo,switchTab,login,setStorage,getStorage} from '../../utils/utils.js'
+import {getSettings,getUserInfo,jumpTo,switchTab,login,setStorage,getStorage} from '../../utils/utils.js'
 import store from '../../store/vuex'
 
 export default {
@@ -190,7 +190,7 @@ export default {
 <style lang="scss">
   @import '../../common/style/page/orderDetails.scss';
   page{
-  background: #E6E6E6;
+    background: #E6E6E6;
     margin:0 auto;
   }
 </style>

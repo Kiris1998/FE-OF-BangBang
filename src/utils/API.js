@@ -29,6 +29,12 @@ const finishOrder = (data)=>{
 const deleteOrder = (data)=>{
     return ajax('https://bang.zhengsj.top/indent/canceled','DELETE',data)
 }
+const takeOrder = (data)=>{
+    return ajax('https://bang.zhengsj.top/indent/take','POST',data)
+}
+const configOrder = (data)=>{
+    return ajax('https://bang.zhengsj.top/indent/arrived','POST',data)
+}
 export {
     getUserInfor,
     getAddrList,
@@ -39,5 +45,7 @@ export {
     couponList,
     getOrderDetails,
     finishOrder,
-    deleteOrder
+    deleteOrder,
+    takeOrder,
+    configOrder
 }

@@ -39,7 +39,7 @@
       },
       checkThis(){
         console.log('aaa')
-        jumpTo('../detailsForClient/main')
+        jumpTo('../orderDetails/main')
       }
     }
   }

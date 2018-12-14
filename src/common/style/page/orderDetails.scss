@@ -150,3 +150,11 @@
         }
     }
 }
+
+.secret{
+    @include config_column();
+    align-items: flex-start;
+    @include config-font($inputFontSize);
+    margin-left: 39rpx;
+    border-bottom: none;
+}
