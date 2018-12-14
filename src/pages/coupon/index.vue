@@ -1,19 +1,42 @@
 <template>
     <div>
         <ul class="coupon">
-            <li v-for="item in myCoupon" :key="item.id">
+            <li v-for="item in getCoupons" :key="item.couponId">
                 <div class="coupon-left">
                     <span class="coupon-left-1">
-                        ￥{{item.price}}
+                        ￥{{item.reducePrice}}
                     </span>
                     <span class="coupon-left-2">
-                        满{{item.info}}可用
+                        满{{item.leastPrice}}可用
                     </span>
                 </div>
                 <div class="coupon-right">
                     <div class="coupon-right-1">
                         <span>
-                            有效期至{{item.date}}
+                            有效期至{{item.invalidTime}}
+                        </span>
+                        <span class="coupon-right-bnt" @click="chooseThis(item.price)">
+                            点击领取
+                        </span>
+                    </div>
+                    <div class="coupon-right-2">
+                        所有订单可用,按原价购买可用
+                    </div>
+                </div>
+            </li>
+            <li v-for="item in liveCoupons" :key="item.couponId">
+                <div class="coupon-left">
+                    <span class="coupon-left-1">
+                        ￥{{item.reducePrice}}
+                    </span>
+                    <span class="coupon-left-2">
+                        满{{item.leastPrice}}可用
+                    </span>
+                </div>
+                <div class="coupon-right">
+                    <div class="coupon-right-1">
+                        <span>
+                            有效期至{{item.invalidTime}}
                         </span>
                         <span v-show="isChoose" class="coupon-right-bnt" @click="chooseThis(item.price)">
                             立即使用
@@ -55,7 +78,9 @@ export default {
                     info:20,
                     date:'2019.01.01'
                 }
-            ]
+            ],
+            liveCoupons:[],
+            getCoupons:[]
         }
     },
     onLoad:function(options){
@@ -63,6 +88,8 @@ export default {
             this.isChoose = true
         couponList(store.state.userInfo.id).then((res)=>{
             console.log(res)
+            this.getCoupons = res.data.data.getCoupons;
+            this.liveCoupons = res.data.data.liveCoupons;
         })
         .catch((err)=>{
             console.log(err)

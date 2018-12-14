@@ -1,0 +1,24 @@
+@import '../public/_variables';
+@import '../public/functions';
+
+img{
+    @include config_width_height(80%,300rpx);
+}
+.container{
+    @include config_colbox_centercol();
+    padding: 50rpx 0;
+}
+.infoList{
+    @include config_colbox_center();
+    li{
+        text-align: center;
+        line-height: 105rpx;
+        @include config_width_height(600rpx,105rpx);
+        border-bottom: 1rpx solid black;
+    }
+}
+button{
+    @include config_width_height(300rpx);
+    margin-top: 100rpx;
+    background: #FCD800;
+}
