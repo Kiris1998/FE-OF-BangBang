@@ -70,10 +70,14 @@
 
 <script>
 import card from '@/components/card'
+import {getOrderDetails} from '../../utils/API.js'
+  import {getSettings,getUserInfo,jumpTo,switchTab,login,setStorage,getStorage} from '../../utils/utils.js'
+import store from '../../store/vuex'
 
 export default {
   data () {
     return {
+        cookie:'',
         status:{
             first:'red',
             second:'red',
@@ -87,6 +91,16 @@ export default {
     card
   },
 
+    onShow(){
+        var data =  {
+            "userId":"XB4lFU",
+            "indentId":9,
+        }
+        console.log(data)
+        getOrderDetails(data).then((res)=>{
+            console.log(res)
+        })
+    },
   methods: {
       deleteOrder(){
           

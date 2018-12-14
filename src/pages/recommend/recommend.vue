@@ -36,7 +36,7 @@
 <script>
   import recommendInfo from '@/components/recommendInfo'
   import store from '../../store/vuex'
-  import {jumpTo} from '../../utils/utils'
+  import {getSettings,getUserInfo,jumpTo,switchTab,login,setStorage,getStorage} from '../../utils/utils.js'
   import { userInfo } from 'os';
   export default {
     data() {
@@ -70,34 +70,31 @@
             "gender": "MALE",
           }
         ],
-        myFlage: true
+        myFlage: true,
+        userInfo: ''
       }
     },
     components: {
       recommendInfo
     },
-    created() {
-      let that = this
-      wx.getStorage({
-        key:'cookie',
-        success(res){
-          that.cookie = res.data
-        },
-      })
-    },
     onLoad() {
-      console.log(this.cookie);
-      let that = this
-      wx.request({
-        url: `https://bang.zhengsj.top/user/master/${store.state.userInfo.id}`,
-        method: 'GET',
-        header: {
-          cookie: this.cookie
-        },
-        success(res){
-          console.log(res);
-          that.detailInfo = res.data.data
-        }
+      getStorage('cookie').then(res => {
+        this.cookie = res.data
+        getStorage('userInfo').then(res => {
+        this.userInfo = res.data
+        let that = this
+        wx.request({
+          url: `https://bang.zhengsj.top/user/master/${this.userInfo.id}`,
+          method: 'GET',
+          header: {
+            cookie: this.cookie
+          },
+          success(res){
+            console.log(res);
+            that.detailInfo = res.data.data
+          }
+        })
+      })
       })
     },
     methods: {
@@ -112,12 +109,13 @@
         let that = this
         this.myFlage = false
         wx.request({
-          url: `https://bang.zhengsj.top/user/apprentices/${store.state.userInfo.id}`,
+          url: `https://bang.zhengsj.top/user/apprentices/${this.userInfo.id}`,
           method:'GET',
           header: {
             cookie: this.cookie
           },
           success(res) {
+            console.log(res.data.data)
             that.bDetailInfo = res.data.data
           }
         })

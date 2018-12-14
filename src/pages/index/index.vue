@@ -96,7 +96,23 @@ import { fail } from 'assert';
           console.log(res)
           header = res.header
           setStorage('userInfo',res.data.data)
+          store.commit('getUserDetail', res.data.data)
           setStorage('cookie',header["Set-Cookie"])
+          wx.request({
+          url: "https://bang.zhengsj.top/indent/list",
+          method: 'GET',
+          header: {
+            cookie: header["Set-Cookie"]
+          },
+          data: {
+            sexType: 'MALE',
+            sort: this.sort
+          },
+          success(res){
+            console.log(res);
+            that.orderInfos = res.data.data
+          }
+        })
         })
         .catch(()=>{
           console.log('登录失败')

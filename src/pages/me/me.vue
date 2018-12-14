@@ -21,7 +21,7 @@
 </template>
 
 <script>
-  import {jumpTo} from '../../utils/utils'
+  import {getSettings,getUserInfo,jumpTo,switchTab,login,setStorage,getStorage} from '../../utils/utils.js'
   import store from '../../store/vuex'
   export default {
     data: {
@@ -48,12 +48,14 @@
       }
     },
     onLoad() {
-      let info = store.state.userInfo
-      console.log(info);
-      this.avatrUrl = info.avatar,
-      this.id = info.id,
-      this.balance = info.balance,
-      this.userName = info.userName
+
+      getStorage('userInfo').then(res => {
+        let info = res.data
+        this.avatrUrl = info.avatar,
+        this.id = info.id,
+        this.balance = info.balance,
+        this.userName = info.userName
+      })
     }
   }
 </script>
