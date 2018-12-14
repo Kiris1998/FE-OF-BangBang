@@ -1,7 +1,7 @@
 <template>
-  <div class="info">
+  <div class="info" @click="gotoDetail(detailInfo.indentId)">
     <div class="content">
-      <img class="avatr" src="http://thyrsi.com/t6/400/1540826774x1822611437.jpg">
+      <img class="avatr" :src="detailInfo.publisherAvatar">
       <div class="details">
         <div class="baseInfo">
           <span class="name">
@@ -19,8 +19,8 @@
         </div>
         <div class="information">{{detailInfo.indentContent}}</div>
         <div class="place">
-          <div>{{detailInfo.takeGoodAddress}}</div>
-          <div>{{detailInfo.shippingAddress}}</div>
+          <div class="overHide">{{detailInfo.takeGoodAddress}}</div>
+          <div class="overHide">{{detailInfo.shippingAddress}}</div>
         </div>
       </div>
     </div>
@@ -34,11 +34,15 @@
 </template>
 
 <script>
+  import {getSettings,getUserInfo,jumpTo,switchTab,login,setStorage,getStorage} from '../utils/utils.js'
   export default {
     props: {
       detailInfo: Object
     },
     methods: {
+      gotoDetail(id){
+        jumpTo(`../orderDetails/main?id=${id}`)
+      }
     },
     data () {
       return {
@@ -144,5 +148,8 @@
   .logo div:nth-child(3){
     font-size: 10px;
     font-weight: 300;
+  }
+  .overHide{
+    overflow: hidden;
   }
 </style>
