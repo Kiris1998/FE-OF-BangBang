@@ -4,7 +4,7 @@
         <span class="name" :style="{color: userInfo.gender == 'MALE' ? '#248cd6' : '#eb2f74'}">
           {{userInfo.userName}}
         </span>
-        <span class="school">{{userInfo.school}}</span>
+        <span class="school">{{userInfo.schoolName}}</span>
         <span :style="{color: userInfo.gender == 'MALE' ? '#248cd6' : '#eb2f74',position: 'relative',bottom: '10px'}">
           {{userInfo.gender == 'MALE' ? '♂' : '♀'}}
         </span>
@@ -43,14 +43,14 @@
   .name {
     font-weight: bold;
     color: #248cd6;
-    font-size: 40px;
+    font-size: 25px;
     margin-right: 5px;
     display: inline-block;
     margin-left: 10px;
   }
   .school {
     font-weight: bolder;
-    font-size: 15px;
+    font-size: 12px;
     position: relative;
     bottom: 10px;
   }

@@ -8,13 +8,13 @@
     </div>
     <div class="page" :style="{height: bDetailInfo.length <= 2||myFlage ? '100vh' : ''}">
       <div v-if="myFlage">
-        <div class="wrapper" v-if="detailInfo == null">
+        <div class="wrapper" v-if="aDetailInfo == null">
           <div class="addPerson">
           <p>为您添加一位推荐人</p>
           <p>每单获得更高收益</p>
-          <input type="text" placeholder=" 请输入邀请码">
+          <input v-model="inviteNum" type="text" placeholder=" 请输入邀请码">
           </div>
-          <button class="sureInvite">确定添加</button>
+          <button class="sureInvite" @click="addPerson">确定添加</button>
         </div>
         <recommend-info v-for="item in aDetailInfo" :userInfo="item" :key="item.id"></recommend-info>
       </div>
@@ -26,7 +26,7 @@
             <span>收益提成自动转入账户余额</span>
           </div>
         </div>
-        <recommend-info v-for="item in testInfo" :userInfo="item" :key="item.id"></recommend-info>
+        <recommend-info v-for="item in bDetailInfo" :userInfo="item" :key="item.id"></recommend-info>
       </div>
       <button class="invibtn" @click="gotoInvite" :class="{addToInvitBtn: bDetailInfo.length <= 2||myFlage}">邀请有奖</button>
     </div>
@@ -42,8 +42,9 @@
     data() {
       return {
         cookie: '',
-        aDetailInfo: '',
+        aDetailInfo: [],
         bDetailInfo: '',
+        inviteNum:'',
         testInfo:[
           {
             "id": "dasaSw",
@@ -90,8 +91,8 @@
             cookie: this.cookie
           },
           success(res){
-            console.log(res);
-            that.detailInfo = res.data.data
+            that.aDetailInfo.push(res.data.data)
+            console.log(res.data.data)
           }
         })
       })
@@ -115,7 +116,22 @@
             cookie: this.cookie
           },
           success(res) {
+            console.log(res);
             that.bDetailInfo = res.data.data
+            console.log(that.bDetailInfo);
+          }
+        })
+      },
+      addPerson(){
+        let that = this
+        wx.request({
+          url:`https://bang.zhengsj.top/user/master/${this.userInfo.id}/${this.inviteNum}`,
+          method: 'POST',
+          header: {
+            cookie: this.cookie
+          },
+          success(res){
+            console.log(res);
           }
         })
       }

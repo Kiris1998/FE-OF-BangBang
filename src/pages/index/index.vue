@@ -43,6 +43,9 @@ import { fail } from 'assert';
         cookie: ''
       }
     },
+    methods:{
+      
+    },
     onReady(){
       let that = this
       var code;
@@ -63,8 +66,8 @@ import { fail } from 'assert';
             sort: this.sort
           },
           success(res){
-            console.log(res);
             that.orderInfos = res.data.data
+            console.log(res.data.data);
           }
         })
       })

@@ -45,7 +45,7 @@
         school: '',
         avatarUrl: '',
         userId: '',
-        gender: '',
+        gender: null,
         cookie: '',
         selectedSex: '请选择您的性别',
         sexClass:'small'
