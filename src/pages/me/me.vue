@@ -48,6 +48,7 @@
       }
     },
     onLoad() {
+
       getStorage('userInfo').then(res => {
         let info = res.data
         this.avatrUrl = info.avatar,

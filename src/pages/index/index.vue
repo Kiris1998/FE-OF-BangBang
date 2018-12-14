@@ -99,6 +99,7 @@ import { fail } from 'assert';
           console.log(res)
           header = res.header
           setStorage('userInfo',res.data.data)
+          store.commit('getUserDetail', res.data.data)
           setStorage('cookie',header["Set-Cookie"])
           wx.request({
           url: "https://bang.zhengsj.top/indent/list",

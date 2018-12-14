@@ -20,7 +20,7 @@
                         </span>
                     </div>
                     <div class="coupon-right-2">
-                        所有订单可用，按原价购买可用
+                        所有订单可用,按原价购买可用
                     </div>
                 </div>
             </li>

@@ -20,6 +20,9 @@ const modifyAddr = (data)=>{
 const couponList = (id)=>{
     return ajax(`https://bang.zhengsj.top/coupon/list/${id}`,'GET')
 }
+const getOrderDetails = (data)=>{
+    return ajax('https://bang.zhengsj.top/indent/detail','GET',data)
+}
 export {
     getUserInfor,
     getAddrList,
@@ -27,5 +30,6 @@ export {
     addAddress,
     daleteAddr,
     modifyAddr,
-    couponList
+    couponList,
+    getOrderDetails
 }

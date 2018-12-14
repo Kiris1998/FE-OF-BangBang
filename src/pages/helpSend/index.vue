@@ -99,7 +99,7 @@ export default {
       couponInfo.state.info = ''
       this.couponId = info
     },
-    shippingAddressId(){
+    shippingAddressId1(){
       this.shippingAddressId = store.state.id
       store.state.id = ''
     }

@@ -116,7 +116,7 @@
             cookie: this.cookie
           },
           success(res) {
-            console.log(res);
+            console.log(res.data.data)
             that.bDetailInfo = res.data.data
             console.log(that.bDetailInfo);
           }

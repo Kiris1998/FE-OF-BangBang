@@ -68,17 +68,29 @@
 
 <script>
 import card from '@/components/card'
+import {getOrderDetails} from '../../utils/API.js'
+import store from '../../store/vuex'
 
 export default {
   data () {
     return {
+        
     }
   },
 
   components: {
     card
   },
-
+    onShow(){
+        var data =  {
+            indentId:8,
+            userId:store.state.userInfo.id
+        }
+        console.log(data)
+        getOrderDetails(data).then((res)=>{
+            console.log(res)
+        })
+    },
   methods: {
 
   }
