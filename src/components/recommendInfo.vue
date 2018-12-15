@@ -5,7 +5,7 @@
           {{userInfo.userName}}
         </span>
         <span class="school">{{userInfo.schoolName}}</span>
-        <span :style="{color: userInfo.gender == 'MALE' ? '#248cd6' : '#eb2f74',position: 'relative',bottom: '10px'}">
+        <span :style="{color: userInfo.gender == 'MALE' ? '#248cd6' : '#eb2f74',position: 'relative'}">
           {{userInfo.gender == 'MALE' ? '♂' : '♀'}}
         </span>
         <p v-if="userInfo.phone" class="_id">{{userInfo.phone}}</p>
@@ -52,7 +52,6 @@
     font-weight: bolder;
     font-size: 12px;
     position: relative;
-    bottom: 10px;
   }
   ._id {
     color:#4d4d4d;

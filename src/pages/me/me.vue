@@ -10,7 +10,7 @@
       </div>
       <div class="btns">
         <button @click="getMoney">余额提现</button>
-        <button>余额充值</button>
+        <button @click="pushMoney">余额充值</button>
       </div>
     </div>
     <ul class="items">
@@ -65,6 +65,9 @@
             })
           }
         })
+      },
+      pushMoney(){
+        jumpTo('../pay/main')
       }
     },
     onLoad() {
