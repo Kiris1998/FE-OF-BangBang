@@ -1,5 +1,5 @@
 <template>
-  <div class="oldOrders">
+  <div class="oldOrders" @click="checkThis">
      <div class="info">
       <div class="row">
         <div class="orderInfo">
@@ -60,6 +60,10 @@
         wx.makePhoneCall({
           phoneNumber: that.detailInfo.publisherPhone
         })
+      },
+      checkThis(){
+        if(this.meOrOthers) jumpTo(`../detailsForClient/main?id=${this.detailInfo.indentId}`)
+        else jumpTo(`../orderDetails/main?id=${this.detailInfo.indentId}`)
       }
     }
   }
