@@ -40,8 +40,8 @@
         })
       },
       checkThis(){
-        if(this.meOrOthers) jumpTo('../detailsForClient/main')
-        else jumpTo('../orderDetails/main')
+        if(this.meOrOthers) jumpTo(`../detailsForClient/main?id=${this.detailInfo.indentId}`)
+        else jumpTo(`../orderDetails/main?id=${this.detailInfo.indentId}`)
       },
       addMoney(){
         let that = this
