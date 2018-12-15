@@ -57,7 +57,8 @@
 import couponInfo from '../../store/couponInfo'
 import {couponList,getCoupon} from '../../utils/API.js'
 import store from '../../store/vuex'
-import { jumpTo } from '../../utils/utils';
+import { jumpTo } from '../../utils/utils'
+import {showModal,showToast,showLoading,hideLoading} from '../../utils/wxAPI.js'
 
 export default {
     data(){
@@ -68,15 +69,19 @@ export default {
         }
     },
     onLoad:function(options){
+        showLoading()
         if(options.src != undefined)
             this.isChoose = true
         couponList(store.state.userInfo.id).then((res)=>{
             console.log(res)
             this.getCoupons = res.data.data.getCoupons;
             this.liveCoupons = res.data.data.liveCoupons;
+            hideLoading()
         })
         .catch((err)=>{
-            console.log(err)
+            let info = err || '请求失败'
+            showModal(info)
+            hideLoading()
         })
     },
     methods:{
@@ -98,7 +103,8 @@ export default {
                 console.log(res)
             })
             .catch((err)=>{
-                console.log(err)
+                let info = err || '请求失败'
+                showModal(info)
             })
         },
         checkInfo(couponId){

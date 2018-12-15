@@ -30,27 +30,33 @@ export default {
     },
     onLoad:function(options){
         console.log(options.id)
+        showLoading()
         this.couponId = options.id
         getCouponInfo(this.couponId).then((res)=>{
             this.couponInfo = res.data.data
+            hideLoading()
         })
         .catch((err)=>{
-            console.log(err)
+            hideLoading()
+            showModal(err).finally(()=>{
+                wx.navigateBack()
+            })
         })
     },
     mathods:{
         getIt(){
+            showLoading()
             var data = {
                 couponId:id,
                 userId:store.state.userInfo.id
             }
-            console.log(data)
             getCoupon(data).then((res)=>{
-                console.log(res)
+                hideLoading()
                 wx.navigateBack()
             })
             .catch((err)=>{
-                console.log(err)
+                hideLoading()
+                showModal(err)
             })
         }
     }

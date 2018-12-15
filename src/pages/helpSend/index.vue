@@ -59,24 +59,24 @@
 </template>
 
 <script>
-import card from '@/components/card';
+import card from '@/components/card'
 import bottom from '@/components/bottom'
-import {jumpTo} from '../../utils/utils'
+import {jumpTo,throttle} from '../../utils/utils'
 import store from '../../store/vuex'
 import {submitHelpSend} from '../../utils/API.js'
 import couponInfo from '../../store/couponInfo' 
-import {showModal} from '../../utils/wxAPI.js'
+import {showModal,showToast,showLoading,hideLoading} from '../../utils/wxAPI.js'
 
 export default {
   data () {
     return {
       isClear:true,
-      requireGender:'NO_LIMITED',
+      requireGender:'',
       shippingAddressId:'',
       indentContent:'',
-      indentPrice:20,
-      takeGoodAddress:'ddd',
-      secretText:'快递号101010',
+      indentPrice:'',
+      takeGoodAddress:'',
+      secretText:'',
       userAddr:'',
       couponId:'',
     }
@@ -125,6 +125,7 @@ export default {
       this.isClear = false
     },
     submitForm(){
+      showLoading()
       let data = {
         indentType:'HELP_SEND',
         requireGender:this.requireGender,
@@ -137,13 +138,23 @@ export default {
         couponId:this.couponId,
         goodPrice:''
       }
-      console.log(data)
-      submitHelpSend(data).then((res)=>{
-        console.log(res)
-      })
-      .catch((err)=>{
-        showModal(err)
-      })
+      function test(){
+        submitHelpSend(data).then((res)=>{
+            jumpTo('../order/main')
+            hideLoading()
+        })
+        .catch((err)=>{
+          showModal(err)
+          hideLoading()
+        })
+      }
+      throttle(test,300)
+      // submitHelpSend(data).then((res)=>{
+      //   console.log(res)
+      // })
+      // .catch((err)=>{
+      //   showModal(err)
+      // })
     }
   }
 }
