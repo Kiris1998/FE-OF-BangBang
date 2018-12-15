@@ -15,7 +15,7 @@
                         <span>
                             有效期至{{item.invalidTime}}
                         </span>
-                        <span class="coupon-right-bnt" @click="chooseThis(item.price)">
+                        <span class="coupon-right-bnt" @click="getThis(item.couponId)">
                             点击领取
                         </span>
                     </div>
@@ -38,7 +38,7 @@
                         <span>
                             有效期至{{item.invalidTime}}
                         </span>
-                        <span v-show="isChoose" class="coupon-right-bnt" @click="chooseThis(item.price)">
+                        <span v-show="isChoose" class="coupon-right-bnt" @click="chooseThis(item.reducePrice)">
                             立即使用
                         </span>
                     </div>
@@ -55,7 +55,7 @@
 </template>
 <script>
 import couponInfo from '../../store/couponInfo'
-import {couponList} from '../../utils/API.js'
+import {couponList,getCoupon} from '../../utils/API.js'
 import store from '../../store/vuex'
 
 export default {
@@ -102,6 +102,20 @@ export default {
                 console.log(info)
                 wx.navigateBack()
             }
+        },
+        getThis(id){
+            console.log(id)
+            var data = {
+                couponId:id,
+                userId:store.state.userInfo.id
+            }
+            console.log(data)
+            getCoupon(data).then((res)=>{
+                console.log(res)
+            })
+            .catch((err)=>{
+                console.log(err)
+            })
         }
     },
 }
