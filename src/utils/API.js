@@ -38,6 +38,9 @@ const configOrder = (data)=>{
 const getCoupon = (data)=>{
     return ajax('https://bang.zhengsj.top/coupon/get','POST',data)
 }
+const getCouponInfo = (id)=>{
+    return ajax(`https://bang.zhengsj.top/coupon/info/${id}`,'GET')
+}
 export {
     getUserInfor,
     getAddrList,
@@ -51,5 +54,6 @@ export {
     deleteOrder,
     takeOrder,
     configOrder,
-    getCoupon
+    getCoupon,
+    getCouponInfo
 }

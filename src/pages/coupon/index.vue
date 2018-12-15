@@ -1,7 +1,7 @@
 <template>
     <div>
         <ul class="coupon">
-            <li v-for="item in getCoupons" :key="item.couponId">
+            <li v-for="item in getCoupons" :key="item.couponId" @click="checkInfo(item.couponId)">
                 <div class="coupon-left">
                     <span class="coupon-left-1">
                         ￥{{item.reducePrice}}
@@ -15,7 +15,7 @@
                         <span>
                             有效期至{{item.invalidTime}}
                         </span>
-                        <span class="coupon-right-bnt" @click="getThis(item.couponId)">
+                        <span class="coupon-right-bnt" @click.stop="getThis(item.couponId)">
                             点击领取
                         </span>
                     </div>
@@ -24,7 +24,7 @@
                     </div>
                 </div>
             </li>
-            <li v-for="item in liveCoupons" :key="item.couponId">
+            <li v-for="item in liveCoupons" :key="item.couponId" >
                 <div class="coupon-left">
                     <span class="coupon-left-1">
                         ￥{{item.reducePrice}}
@@ -38,7 +38,7 @@
                         <span>
                             有效期至{{item.invalidTime}}
                         </span>
-                        <span v-show="isChoose" class="coupon-right-bnt" @click="chooseThis(item.reducePrice)">
+                        <span v-show="isChoose" class="coupon-right-bnt" @click.stop="chooseThis(item.reducePrice)">
                             立即使用
                         </span>
                     </div>
@@ -57,6 +57,7 @@
 import couponInfo from '../../store/couponInfo'
 import {couponList,getCoupon} from '../../utils/API.js'
 import store from '../../store/vuex'
+import { jumpTo } from '../../utils/utils';
 
 export default {
     data(){
@@ -99,6 +100,9 @@ export default {
             .catch((err)=>{
                 console.log(err)
             })
+        },
+        checkInfo(couponId){
+            jumpTo(`../couponInfo/main?id=${couponId}`)
         }
     },
 }

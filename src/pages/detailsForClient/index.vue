@@ -172,17 +172,7 @@ export default {
             "indentId":this.orderId
         }
         deleteOrder(data).then((res)=>{
-            getOrderDetails(data).then((res)=>{
-                this.info = res.data.data
-                this.status = this.site[this.info.indentState]
-                hideLoading()
-            })
-            .catch((err)=>{
-                hideLoading()
-                showModal(err).finally(()=>{
-                    wx.navigateBack()
-                })
-            })
+            wx.navigateBack()
         })
         .catch((err)=>{
             hideLoading()
