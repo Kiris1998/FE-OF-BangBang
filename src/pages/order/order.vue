@@ -7,11 +7,11 @@
       </div>
     </div>
     <div style="margin-top:50px"></div>
-    <order-pushing v-for="item in pushingCompleted" :meOrOthers="myFlage" :detailInfo="item" :key="item.id">
+    <order-pushing v-for="item in pushingDoing" :meOrOthers="myFlage" :detailInfo="item" :key="item.id">
     </order-pushing>
     <p v-if="myFlage" class="title">已完成订单</p>
     <p v-else class="title">已完成抱单</p>
-    <finished-pushing v-for="item in pushingDoing" :meOrOthers="myFlage" :detailInfo="item" :key="item.id">
+    <finished-pushing v-for="item in pushingCompleted" :meOrOthers="myFlage" :detailInfo="item" :key="item.id">
     </finished-pushing>
   </div>
 </template>
