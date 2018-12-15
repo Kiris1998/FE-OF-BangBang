@@ -64,6 +64,22 @@ import { fail } from 'assert';
           })
         })
       },
+      getCoupons(){
+        let that = this
+        getStorage('cookie').then((res) => {
+          this.cookie = res.data
+          wx.request({
+            url: "https://bang.zhengsj.top/coupon/list",
+            method: 'GET',
+            header: {
+              cookie: this.cookie
+            },
+            success(res){
+              console.log(res);
+            }
+          })
+        })
+      },
       selectTime(){
         this.selectedNum = 1
         this.getList(10)
@@ -109,6 +125,7 @@ import { fail } from 'assert';
           store.commit('getUserDetail', res.data.data)
           setStorage('cookie',header["Set-Cookie"])
           this.getList(0)
+          this.getCoupons()
           this.sex = res.data.gender
           hideLoading()
         })

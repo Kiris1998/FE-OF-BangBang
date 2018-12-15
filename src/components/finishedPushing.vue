@@ -43,6 +43,7 @@
 </template>
 
 <script>
+  import {getSettings,getUserInfo,jumpTo,switchTab,login,setStorage,getStorage} from '../utils/utils.js'
   export default {
     props: {
       meOrOthers: Boolean,
