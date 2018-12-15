@@ -150,10 +150,11 @@ export default {
     mounted(){
         var data =  {
             "userId":store.state.userInfo.id,
-            "indentId":25,
+            "indentId":this.orderId,
         }
         getOrderDetails(data).then((res)=>{
             this.info = res.data.data
+            console.log(this.info)
             this.status = this.site[this.info.indentState]
             hideLoading()
         })
@@ -168,7 +169,7 @@ export default {
       deleteOrde(){
         var data =  {
             "userId":store.state.userInfo.id,
-            "indentId":25
+            "indentId":this.orderId
         }
         deleteOrder(data).then((res)=>{
             getOrderDetails(data).then((res)=>{
@@ -184,6 +185,7 @@ export default {
             })
         })
         .catch((err)=>{
+            hideLoading()
             showModal(err).finally(()=>{
                 wx.navigateBack()
             })
@@ -192,7 +194,7 @@ export default {
       configSend(){
         var data =  {
             "userId":store.state.userInfo.id,
-            "indentId":25
+            "indentId":this.orderId
         }
         finishOrder(data).then((res)=>{
             getOrderDetails(data).then((res)=>{
@@ -208,6 +210,7 @@ export default {
             })
         })
         .catch((err)=>{
+            hideLoading()
             showModal(err).finally(()=>{
                 wx.navigateBack()
             })

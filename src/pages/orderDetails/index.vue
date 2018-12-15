@@ -156,7 +156,7 @@ data () {
     mounted(){
         var data =  {
             "userId":store.state.userInfo.id,
-            "indentId":32,
+            "indentId":this.orderId,
         }
         getOrderDetails(data).then((res)=>{
             this.info = res.data.data
@@ -176,12 +176,12 @@ data () {
         showLoading()
         var data =  {
             "userId":store.state.userInfo.id,
-            "indentId":32,
+            "indentId":this.orderId,
         }
         deleteOrder(data).then((res)=>{
             var data =  {
                 "userId":store.state.userInfo.id,
-                "indentId":32,
+                "indentId":this.orderId,
             }
             getOrderDetails(data).then((res)=>{
                 this.info = res.data.data
@@ -207,14 +207,14 @@ data () {
         showLoading()
         var data =  {
             "userId":store.state.userInfo.id,
-            "indentId":32
+            "indentId":this.orderId
         }
         if(this.info.indentState == 'WAIT_FOR_PERFORMER'){
             //立即抢单
             takeOrder(data).then((res)=>{
                 var data =  {
                     "userId":store.state.userInfo.id,
-                    "indentId":32,
+                    "indentId":this.orderId,
                 }
                 getOrderDetails(data).then((res)=>{
                     this.info = res.data.data
@@ -240,7 +240,7 @@ data () {
             configOrder(data).then((res)=>{
                 var data =  {
                     "userId":store.state.userInfo.id,
-                    "indentId":32,
+                    "indentId":this.orderId,
                 }
                 getOrderDetails(data).then((res)=>{
                     this.info = res.data.data
