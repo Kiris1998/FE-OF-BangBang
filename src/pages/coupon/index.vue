@@ -62,23 +62,6 @@ export default {
     data(){
         return{
             isChoose:false,
-            myCoupon:[
-                {
-                    price:5,
-                    info:20,
-                    date:'2018.12.12'
-                },
-                {
-                    price:20,
-                    info:50,
-                    date:'2018.12.23'
-                },
-                {
-                    price:10,
-                    info:20,
-                    date:'2019.01.01'
-                }
-            ],
             liveCoupons:[],
             getCoupons:[]
         }

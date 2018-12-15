@@ -74,14 +74,14 @@
 
 <script>
 import card from '@/components/card'
-import {getOrderDetails,finishOrder,deleteOrder,takeOrder,configOrder} from '../../utils/API.js'
-  import {getSettings,getUserInfo,jumpTo,switchTab,login,setStorage,getStorage} from '../../utils/utils.js'
+import {getOrderDetails,deleteOrder,takeOrder,configOrder} from '../../utils/API.js'
+import {getSettings,getUserInfo,jumpTo,switchTab,login,setStorage,getStorage} from '../../utils/utils.js'
 import store from '../../store/vuex'
-
+import {showModal,showToast,showLoading,hideLoading} from '../../utils/wxAPI.js'
 export default {
 data () {
     return {
-        cookie:'',
+        orderId:'',
         bntEnable:true,
         info:{
             indentType:'',
@@ -99,6 +99,32 @@ data () {
             performerAvatar:''
         },
         status:{
+        },
+        site:{
+            'WAIT_FOR_PERFORMER':{
+                first:'red',
+                second:'white',
+                third:'white',
+                fourth:'white'
+            },
+            'PERFORMING':{
+                first:'red',
+                second:'red',
+                third:'white',
+                fourth:'white'
+            },
+            'ARRIVED':{
+                first:'red',
+                second:'red',
+                third:'red',
+                fourth:'white'
+            },
+            'COMPLETED':{
+                first:'red',
+                second:'red',
+                third:'red',
+                fourth:'red'
+            }
         }
     }
     },
@@ -122,6 +148,11 @@ data () {
             }
         },
     },
+    onLoad(options){
+        showLoading()
+        console.log(options.id)
+        this.orderId = options.id
+    },
     mounted(){
         var data =  {
             "userId":store.state.userInfo.id,
@@ -129,100 +160,110 @@ data () {
         }
         getOrderDetails(data).then((res)=>{
             this.info = res.data.data
-            var site = {
-                'WAIT_FOR_PERFORMER':{
-                    first:'red',
-                    second:'white',
-                    third:'white',
-                    fourth:'white'
-                },
-                'PERFORMING':{
-                    first:'red',
-                    second:'red',
-                    third:'white',
-                    fourth:'white'
-                },
-                'ARRIVED':{
-                    first:'red',
-                    second:'red',
-                    third:'red',
-                    fourth:'white'
-                },
-                'COMPLETED':{
-                    first:'red',
-                    second:'red',
-                    third:'red',
-                    fourth:'red'
-                }
-            }
-            console.log(site[this.info.indentState])
-            this.status = site[this.info.indentState]
+            this.status = this.site[this.info.indentState]
+            hideLoading()
         })
         .catch((err)=>{
-            console.log(err)
+            hideLoading()
+            showModal(err).finally(()=>{
+                wx.navigateBack()
+            })
         })
     },
   methods: {
+      //接单人取消订单
       deleteOrde(){
+        showLoading()
         var data =  {
             "userId":store.state.userInfo.id,
-            "indentId":32
+            "indentId":32,
         }
         deleteOrder(data).then((res)=>{
-            console.log(res)
-        })
-        .catch((err)=>{
-            console.log(err)
-        })
-      },
-      configSend(){
-        var data =  {
-            "userId":store.state.userInfo.id,
-            "indentId":32
-        }
-        finishOrder(data).then((res)=>{
-            console.log(res)
-        })
-        .catch((err)=>{
-            console.log(err)
-        })
-      },
-      deleteOrde(){
-        var data =  {
-            "userId":store.state.userInfo.id,
-            "indentId":32
-        }
-        deleteOrder(data).then((res)=>{
-            console.log(res)
-        })
-        .catch((err)=>{
-            console.log(err)
-        })
-      },
-      configSend(){
-        var data =  {
-            "userId":store.state.userInfo.id,
-            "indentId":32
-        }
-          if(this.info.indentState == 'WAIT_FOR_PERFORMER'){
-              //立即抢单
-            takeOrder(data).then((res)=>{
-                console.log(res)
+            var data =  {
+                "userId":store.state.userInfo.id,
+                "indentId":32,
+            }
+            getOrderDetails(data).then((res)=>{
+                this.info = res.data.data
+                this.status = this.site[this.info.indentState]
+                hideLoading()
             })
             .catch((err)=>{
-                console.log(err)
+                hideLoading()
+                showModal(err).finally(()=>{
+                    wx.navigateBack()
+                })
             })
-          } else{
-              //确认送达
-                configOrder(data).then((res)=>{
-                    console.log(res)
+            hideLoading()
+        })
+        .catch((err)=>{
+            showModal(err).finally(()=>{
+                wx.navigateBack()
+            })
+            hideLoading()
+        })
+      },
+      configSend(){
+        showLoading()
+        var data =  {
+            "userId":store.state.userInfo.id,
+            "indentId":32
+        }
+        if(this.info.indentState == 'WAIT_FOR_PERFORMER'){
+            //立即抢单
+            takeOrder(data).then((res)=>{
+                var data =  {
+                    "userId":store.state.userInfo.id,
+                    "indentId":32,
+                }
+                getOrderDetails(data).then((res)=>{
+                    this.info = res.data.data
+                    this.status = this.site[this.info.indentState]
+                    hideLoading()
                 })
                 .catch((err)=>{
-                    console.log(err)
+                    hideLoading()
+                    showModal(err).finally(()=>{
+                        wx.navigateBack()
+                    })
                 })
-          }
+                hideLoading()
+            })
+            .catch((err)=>{
+                showModal(err).finally(()=>{
+                    wx.navigateBack()
+                })
+                hideLoading()
+            })
+        } else{
+            //确认送达
+            configOrder(data).then((res)=>{
+                var data =  {
+                    "userId":store.state.userInfo.id,
+                    "indentId":32,
+                }
+                getOrderDetails(data).then((res)=>{
+                    this.info = res.data.data
+                    this.status = this.site[this.info.indentState]
+                    hideLoading()
+                })
+                .catch((err)=>{
+                    hideLoading()
+                    showModal(err).finally(()=>{
+                        wx.navigateBack()
+                    })
+                })
+                hideLoading()
+            })
+            .catch((err)=>{
+            showModal(err).finally(()=>{
+                wx.navigateBack()
+            })
+                hideLoading()
+            })
+        }
       }
-  }
+    }
 }
 </script>
 

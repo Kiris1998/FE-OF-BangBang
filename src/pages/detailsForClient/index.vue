@@ -73,11 +73,12 @@ import card from '@/components/card'
 import {getOrderDetails,finishOrder,deleteOrder} from '../../utils/API.js'
 import {getSettings,getUserInfo,jumpTo,switchTab,login,setStorage,getStorage} from '../../utils/utils.js'
 import store from '../../store/vuex'
+import {showModal,showToast,showLoading,hideLoading} from '../../utils/wxAPI.js'
 
 export default {
   data () {
     return {
-        cookie:'',
+        orderId:'',
         bntEnable:true,
         info:{
             indentType:'',
@@ -95,6 +96,32 @@ export default {
             performerAvatar:''
         },
         status:{
+        },
+        site:{
+            'WAIT_FOR_PERFORMER':{
+                first:'red',
+                second:'white',
+                third:'white',
+                fourth:'white'
+            },
+            'PERFORMING':{
+                first:'red',
+                second:'red',
+                third:'white',
+                fourth:'white'
+            },
+            'ARRIVED':{
+                first:'red',
+                second:'red',
+                third:'red',
+                fourth:'white'
+            },
+            'COMPLETED':{
+                first:'red',
+                second:'red',
+                third:'red',
+                fourth:'red'
+            }
         }
     }
     },
@@ -115,6 +142,11 @@ export default {
             }
         },
     },
+    onLoad(options){
+        showLoading()
+        console.log(options.id)
+        this.orderId = options.id
+    },
     mounted(){
         var data =  {
             "userId":store.state.userInfo.id,
@@ -122,37 +154,14 @@ export default {
         }
         getOrderDetails(data).then((res)=>{
             this.info = res.data.data
-            var site = {
-                'WAIT_FOR_PERFORMER':{
-                    first:'red',
-                    second:'white',
-                    third:'white',
-                    fourth:'white'
-                },
-                'PERFORMING':{
-                    first:'red',
-                    second:'red',
-                    third:'white',
-                    fourth:'white'
-                },
-                'ARRIVED':{
-                    first:'red',
-                    second:'red',
-                    third:'red',
-                    fourth:'white'
-                },
-                'COMPLETED':{
-                    first:'red',
-                    second:'red',
-                    third:'red',
-                    fourth:'red'
-                }
-            }
-            console.log(site[this.info.indentState])
-            this.status = site[this.info.indentState]
+            this.status = this.site[this.info.indentState]
+            hideLoading()
         })
         .catch((err)=>{
-            console.log(err)
+            hideLoading()
+            showModal(err).finally(()=>{
+                wx.navigateBack()
+            })
         })
     },
   methods: {
@@ -162,10 +171,22 @@ export default {
             "indentId":25
         }
         deleteOrder(data).then((res)=>{
-            console.log(res)
+            getOrderDetails(data).then((res)=>{
+                this.info = res.data.data
+                this.status = this.site[this.info.indentState]
+                hideLoading()
+            })
+            .catch((err)=>{
+                hideLoading()
+                showModal(err).finally(()=>{
+                    wx.navigateBack()
+                })
+            })
         })
         .catch((err)=>{
-            console.log(err)
+            showModal(err).finally(()=>{
+                wx.navigateBack()
+            })
         })
       },
       configSend(){
@@ -174,10 +195,22 @@ export default {
             "indentId":25
         }
         finishOrder(data).then((res)=>{
-            console.log(res)
+            getOrderDetails(data).then((res)=>{
+                this.info = res.data.data
+                this.status = this.site[this.info.indentState]
+                hideLoading()
+            })
+            .catch((err)=>{
+                hideLoading()
+                showModal(err).finally(()=>{
+                    wx.navigateBack()
+                })
+            })
         })
         .catch((err)=>{
-            console.log(err)
+            showModal(err).finally(()=>{
+                wx.navigateBack()
+            })
         })
       }
   }

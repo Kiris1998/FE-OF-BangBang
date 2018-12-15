@@ -93,7 +93,6 @@ export default {
      }
   },
   onLoad(options){
-      console.log(options.info)
     if(options.info != undefined){
         var obj = JSON.parse(options.info)
         this.telePhone = obj.phone
