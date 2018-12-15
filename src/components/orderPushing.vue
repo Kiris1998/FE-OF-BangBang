@@ -4,8 +4,9 @@
         <div class="pushingLogo"></div>
         <div class="pushingContent">
           <div class="pushingInfo">
-            <p class="task">老铁带包辣条</p>
-            <span>二楼超市</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>一区414</span>
+            <p class="task hide">{{detailInfo.indentContent}}</p>
+            <span class="hide">{{detailInfo.shippingAddress}}</span>
+            <span class="hide">{{detailInfo.takeGoodAddress}}</span>
             <div class="pushingTips">
               <p class="pushingMoney">¥5</p>
               <p v-if="meOrOthers" class="tip">提高悬赏金可使任务更快被发现</p>
@@ -13,8 +14,7 @@
           </div>
           <div v-if="meOrOthers" class="pushingBtn">
             <p>提高悬赏金</p>
-            <button>+1</button>
-            <p>已接单</p>
+            <button @click.stop="addMoney">+1</button>
           </div>
           <div v-else class="othersBtn" @click.stop="ToPhone">
             <img src="../static/image/phone.png">
@@ -25,21 +25,44 @@
 </template>
 
 <script>
-  import {jumpTo} from '../utils/utils.js'
+  import store from '../store/vuex'
+  import {getSettings,getUserInfo,jumpTo,switchTab,login,setStorage,getStorage} from '../utils/utils.js'
   export default {
     props: {
-      meOrOthers: Boolean
+      meOrOthers: Boolean,
+      detailInfo: String
     },
     methods:{
       ToPhone(){
-        console.log('wwww')
+        let that = this
         wx.makePhoneCall({
-          phoneNumber: '1340000' //仅为示例，并非真实的电话号码
+          phoneNumber: that.detailInfo.publisherPhone
         })
       },
       checkThis(){
-        console.log('aaa')
-        jumpTo('../detailsForClient/main')
+        if(this.meOrOthers) jumpTo('../detailsForClient/main')
+        else jumpTo('../orderDetails/main')
+      },
+      addMoney(){
+        let that = this
+        let cookie = ''
+        getStorage('cookie').then((res) => {
+          cookie = res.data
+          wx.request({
+            url: 'https://bang.zhengsj.top/indent/price',
+            method: 'POST',
+            header: {
+              cookie:cookie
+            },
+            data: {
+              indentId: that.detailInfo.indentId,
+              userId: store.state.userInfo.id
+            },
+            success(res){
+              console.log(res);
+            }
+        })
+      })
       }
     }
   }
@@ -70,6 +93,13 @@
     border-bottom-right-radius: 7px;
     align-items: center;
   }
+  .hide{
+    overflow:hidden;
+    width:50%;
+    display:inline-block;
+    white-space:nowrap;
+    text-overflow: ellipsis
+  }
   .pushingInfo {
     color: #4d4d4d;
     padding: 10px 20px 5px 20px;
@@ -80,6 +110,7 @@
     display: block;
     padding-bottom: 3px;
     border-bottom: solid #c09d2c 1px;
+    overflow: hidden;
   }
   .pushingTips {
     background: url("http://cx-can-read.oss-cn-beijing.aliyuncs.com/bar.png");

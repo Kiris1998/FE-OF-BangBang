@@ -1,34 +1,41 @@
 <template>
   <div class="oldOrders">
-    <p v-if="meOrOthers" class="title">已完成订单</p>
-    <p v-else class="title">已完成抱单</p>
      <div class="info">
       <div class="row">
         <div class="orderInfo">
-          <img class="avatr" src="http://thyrsi.com/t6/400/1540826774x1822611437.jpg">
-          <span class="orderHelper">Kiris|</span>
-          <span>西安电子科技大学</span>
-          <span style="color:#ea267a;margin: 5px 0 0 7px;">♀</span>
+          <img class="avatr" :src="detailInfo.performerAvatar">
+          <span v-if="meOrOthers" class="orderHelper" :style="{color: detailInfo.performerGender == 'MALE' ? '#248cd6' : '#eb2f74'}">
+            {{detailInfo.performerNickName}}|
+          </span>
+          <span v-else class="orderHelper" :style="{color: detailInfo.publisherGender == 'MALE' ? '#248cd6' : '#eb2f74'}">
+            {{detailInfo.publisherNickName}}|
+          </span>
+          <span class="hide">{{meOrOthers?detailInfo.performerSchool:detailInfo.publisherSchool}}</span>
+          <span v-if="meOrOthers" :style="{color: detailInfo.performerGender == 'MALE' ? '#248cd6' : '#eb2f74'}" style="margin: 5px 0 0 7px;">
+            {{detailInfo.performerGender == 'MALE' ? '♂' : '♀'}}
+          </span>
+          <span v-else :style="{color: detailInfo.publisherGender == 'MALE' ? '#248cd6' : '#eb2f74'}" style="margin: 5px 0 0 7px;">
+            {{detailInfo.publisherGender == 'MALE' ? '♂' : '♀'}}
+          </span>
         </div>
         <div style="position:relative;right:35px;">
-          <span class="orderDate">10.13| </span>
+          <span class="orderDate">{{detailInfo.updateTime}}| </span>
           <span>已完成</span>
         </div>
       </div>
       <div class="details">
-        <p><i class="iconfont icon-bijiben-copy"></i> 123131231</p>
-        <p><i class="iconfont icon-quhaopaidui"></i> 123123123121231231</p>
-        <p><i class="iconfont icon-distribution"></i> 12312312312</p>
+        <p><i class="iconfont icon-bijiben-copy"></i> {{detailInfo.indentContent}}</p>
+        <p><i class="iconfont icon-quhaopaidui"></i> {{detailInfo.shippingAddress}}</p>
+        <p><i class="iconfont icon-distribution"></i> {{detailInfo.takeGoodAddress}}</p>
       </div>
       <div class="lastRow">
         <div class="orderMoney">
           <span>成交金额:</span>
-          <span style="font-size:20px;color:black;font-weight:bold;">¥6.00</span>
+          <span style="font-size:20px;color:black;font-weight:bold;">¥{{detailInfo.totalPrice}}.00</span>
         </div>
         <div class="btns">
-          <button>评价</button>
-          <button v-if="meOrOthers">联系接单人</button>
-          <button v-else>联系发单人</button>
+          <button v-if="meOrOthers" @click.stop="callPerformer">联系接单人</button>
+          <button v-else @click.stop="callPublishmer">联系发单人</button>
         </div>
       </div>
     </div>
@@ -38,19 +45,27 @@
 <script>
   export default {
     props: {
-      meOrOthers: Boolean
+      meOrOthers: Boolean,
+      detailInfo: Object
+    },
+    methods: {
+      callPerformer(){
+        let that = this
+        wx.makePhoneCall({
+          phoneNumber: that.detailInfo.performerPhone
+        })
+      },
+      callPublishmer(){
+        let that = this
+        wx.makePhoneCall({
+          phoneNumber: that.detailInfo.publisherPhone
+        })
+      }
     }
   }
 </script>
 
 <style scoped>
-  .title {
-    font-weight: bold;
-    color: #808080;
-    display: block;
-    margin: 20px 0 5px 20px;
-    font-size: 15px;
-  }
   .info {
     background: white;
     width: 100vw;
@@ -62,6 +77,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+  }
+  .hide{
+    overflow:hidden;
+    width:80px;
+    display:inline-block;
+    white-space:nowrap;
+    text-overflow: ellipsis
   }
   .orderInfo {
     display: flex;
@@ -87,7 +109,7 @@
   }
   .orderDate {
     color: #b2b2b2;
-    font-size: 15px;
+    font-size: 9px;
   }
   .orderDate+span {
     color: #7d7d7d;

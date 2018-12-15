@@ -8,7 +8,10 @@
         <span>账户余额</span>
         <span>{{balance}}</span>
       </div>
-      <button>余额提现</button>
+      <div class="btns">
+        <button @click="getMoney">余额提现</button>
+        <button>余额充值</button>
+      </div>
     </div>
     <ul class="items">
       <li @click="toInformation"><i class="iconfont icon-wo"></i> 个人信息</li>
@@ -45,6 +48,23 @@
       },
       toAdvice(){
         jumpTo('../advices/main')
+      },
+      getMoney(){
+        wx.showModal({
+          title: '提现提醒',
+          content: '点击下方确定复制按钮可获取客服微信，请添加客服微信进行提现操作',
+          confirmText: '确定复制',
+          success(){
+            wx.setClipboardData({
+              data: '123123',
+              success(){
+                wx.showToast({
+                  title:'复制成功'
+                })
+              }
+            })
+          }
+        })
       }
     },
     onLoad() {
@@ -110,11 +130,10 @@
   }
   .money button{
     padding: 0 30px;
-    margin: 0;
+    margin: 3px;
     background: #fed901;
     height: 30px;
     line-height: 30px;
-    width: 120px;
     font-size: 12px;
   }
   .items {
@@ -128,7 +147,10 @@
   .items i {
     display: inline;
   }
-
+  .btns{
+    display: flex;
+    flex-direction: column;
+  }
 @font-face {
   font-family: 'iconfont';  /* project id 916546 */
   src: url('//at.alicdn.com/t/font_916546_fpkc56enspm.eot');

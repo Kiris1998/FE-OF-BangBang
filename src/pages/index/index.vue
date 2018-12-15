@@ -12,9 +12,9 @@
       </block>
     </swiper>
     <div class="bar">
-      <div :class="{selected:selectedNum === 0}" @click="selectedNum = 0">默认</div>
-      <div :class="{selected:selectedNum === 1}" @click="selectedNum = 1">时间</div>
-      <div :class="{selected:selectedNum === 2}" @click="selectedNum = 2">价格</div>
+      <div :class="{selected:selectedNum === 0}" @click="selectDefault">默认</div>
+      <div :class="{selected:selectedNum === 1}" @click="selectTime">时间</div>
+      <div :class="{selected:selectedNum === 2}" @click="selectPrice">价格</div>
     </div>
     <index-infos v-for="item in orderInfos" :key="item.indentId" :detailInfo="item"></index-infos>
   </div>
@@ -38,13 +38,44 @@ import { fail } from 'assert';
         ],
         selectedNum: 0,
         sex: '',
-        sort: 0,
         orderInfos:[],
         cookie: ''
       }
     },
     methods:{
-      
+      getList(sort){
+        let that = this
+        getStorage('cookie').then((res) => {
+          this.cookie = res.data
+          wx.request({
+            url: "https://bang.zhengsj.top/indent/list",
+            method: 'GET',
+            header: {
+              cookie: this.cookie
+            },
+            data: {
+              sexType: 'MALE',
+              sort: sort
+            },
+            success(res){
+              that.orderInfos = res.data.data
+              console.log(res.data.data);
+            }
+          })
+        })
+      },
+      selectTime(){
+        this.selectedNum = 1
+        this.getList(10)
+      },
+      selectPrice(){
+        this.selectedNum = 2
+        this.getList(20)
+      },
+      selectDefault(){
+        this.selectedNum = 0
+        this.getList(0)
+      }
     },
     onReady(){
       let that = this
@@ -53,31 +84,7 @@ import { fail } from 'assert';
       var iv;
       var header
       showLoading()
-      getStorage('cookie').then((res) => {
-        this.cookie = res.data
-        wx.request({
-          url: "https://bang.zhengsj.top/indent/list",
-          method: 'GET',
-          header: {
-            cookie: this.cookie
-          },
-          data: {
-            sexType: 'MALE',
-            sort: this.sort
-          },
-          success(res){
-            that.orderInfos = res.data.data
-            console.log(res.data.data);
-          }
-        })
-      })
-      getStorage('userInfo').then((res)=>{
-          store.commit('getUserDetail', res.data)
-          that.sex = res.data.gender
-          hideLoading()
-      })
-      .catch(()=>{
-        getUserInfo()
+      getUserInfo()
         .then((res)=>{
             console.log('userInfo',res)
             encryptedData = res.encryptedData
@@ -101,26 +108,13 @@ import { fail } from 'assert';
           setStorage('userInfo',res.data.data)
           store.commit('getUserDetail', res.data.data)
           setStorage('cookie',header["Set-Cookie"])
-          wx.request({
-          url: "https://bang.zhengsj.top/indent/list",
-          method: 'GET',
-          header: {
-            cookie: header["Set-Cookie"]
-          },
-          data: {
-            sexType: 'MALE',
-            sort: this.sort
-          },
-          success(res){
-            console.log(res);
-            that.orderInfos = res.data.data
-          }
-        })
+          this.getList(0)
+          this.sex = res.data.gender
+          hideLoading()
         })
         .catch(()=>{
           console.log('登录失败')
         })
-      })
     }
   }
 </script>

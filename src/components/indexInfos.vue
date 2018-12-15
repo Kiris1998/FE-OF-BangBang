@@ -4,14 +4,14 @@
       <img class="avatr" :src="detailInfo.publisherAvatar">
       <div class="details">
         <div class="baseInfo">
-          <span class="name">
+          <span :style="{color: detailInfo.publisherGender == 'MALE' ? '#248cd6' : '#eb2f74'}" class="name">
             {{detailInfo.publisherNickName}}
           </span>
           <span class="school">
             {{detailInfo.publisherSchool}}
           </span>
-          <span :style="{color: detailInfo.gender == 'MALE' ? '#248cd6' : '#eb2f74'}" class="sex">
-            {{detailInfo.gender == 'MALE' ? '♂' : '♀'}}
+          <span :style="{color: detailInfo.publisherGender == 'MALE' ? '#248cd6' : '#eb2f74'}" class="sex">
+            {{detailInfo.publisherGender == 'MALE' ? '♂' : '♀'}}
           </span>
           <p class="time">
             {{detailInfo.createTime}}

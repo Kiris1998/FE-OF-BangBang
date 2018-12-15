@@ -6,6 +6,7 @@
         <span :class="{selected:!myFlage}" @click="getMyrecommened">我推荐的人</span>
       </div>
     </div>
+    <div style="margin-top:50px"></div>
     <div class="page" :style="{height: bDetailInfo.length <= 2||myFlage ? '100vh' : ''}">
       <div v-if="myFlage">
         <div class="wrapper" v-if="aDetailInfo == null">
@@ -22,7 +23,7 @@
         <div class="money">
           <p>被推荐人今日累计收益提成</p>
           <div>
-            <span>0.00</span>
+            <span>{{masterIncome}}</span>
             <span>收益提成自动转入账户余额</span>
           </div>
         </div>
@@ -45,34 +46,9 @@
         aDetailInfo: [],
         bDetailInfo: '',
         inviteNum:'',
-        testInfo:[
-          {
-            "id": "dasaSw",
-            "userName": "eff",
-            "phone": null,
-            "avatar": "https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKcss56uKzrc9Mzib0XmfTgB66Q720iah5l8MOpzxUbhsN8RwkMkbgFiczGhtv5OPic34MlfgtYoQrIDw/132",
-            "school": "西安电子科技大学",
-            "gender": "FEMALE",
-          },
-          {
-            "id": "dasaSw",
-            "userName": "eff",
-            "phone": null,
-            "avatar": "https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKcss56uKzrc9Mzib0XmfTgB66Q720iah5l8MOpzxUbhsN8RwkMkbgFiczGhtv5OPic34MlfgtYoQrIDw/132",
-            "school": "西安电子科技大学",
-            "gender": "MALE",
-          },
-          {
-            "id": "dasaSw",
-            "userName": "eff",
-            "phone": null,
-            "avatar": "https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKcss56uKzrc9Mzib0XmfTgB66Q720iah5l8MOpzxUbhsN8RwkMkbgFiczGhtv5OPic34MlfgtYoQrIDw/132",
-            "school": "西安电子科技大学",
-            "gender": "MALE",
-          }
-        ],
         myFlage: true,
-        userInfo: ''
+        userInfo: '',
+        masterIncome: ''
       }
     },
     components: {
@@ -119,6 +95,16 @@
             console.log(res.data.data)
             that.bDetailInfo = res.data.data
             console.log(that.bDetailInfo);
+          }
+        })
+        wx.request({
+          url: `https://bang.zhengsj.top/user/income/master/${this.userInfo.id}`,
+          method:'GET',
+          header: {
+            cookie: this.cookie
+          },
+          success(res) {
+            that.masterIncome = res.data.data.masterIncome
           }
         })
       },
@@ -203,7 +189,10 @@
     background: #fdd731;
     height: 50px;
     text-align: center;
-    position: relative;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 100;
   }
   .select{
     position: absolute;
