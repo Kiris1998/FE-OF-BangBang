@@ -2,14 +2,105 @@
   <div class="page">
     <div style="position:relative">
       <label>充值金额</label>
-      <input type="text" placeholder="请输入充值金额">
+      <input v-model="num" placeholder="请输入充值金额">
     </div>
-    <button>微信付款</button>
+    <button @click="throttlePay">微信付款</button>
   </div>
 </template>
 
 <script>
-  
+  import {getSettings,getUserInfo,jumpTo,switchTab,login,setStorage,getStorage} from '../../utils/utils.js'
+  import { setTimeout } from 'timers';
+import { showLoading, hideLoading } from '../../utils/wxAPI.js';
+  function throttle(fn){
+        let timer
+        return function () {
+          showLoading()
+          if(!timer){
+            timer = setTimeout(() => {
+              fn.call(this)
+              hideLoading()
+              timer = null
+            }, 3000);
+          }
+        }
+      }
+      function pay(){
+        if(!this.num) {
+          wx.showToast({
+            icon:'none',
+            title: '请输入充值金额！'
+          })
+        } else {
+        getStorage('cookie').then((res) => {
+            this.cookie = res.data
+        })
+        getStorage('userInfo').then(res => {
+          this.id = res.data.id
+          let that = this
+          wx.request({
+            url: `https://bang.zhengsj.top/pay/prepay`,
+            method: 'POST',
+            header: {
+              Cookie: this.cookie
+            },
+            data:{
+              totalFee: this.num,
+              userId: this.id
+            },
+            success(res){
+              let {timeStamp,nonceStr,signType} = res.data.data
+              let paka = res.data.data.package
+              let paySign = res.data.data.sign
+              wx.requestPayment({
+                timeStamp,
+                nonceStr,
+                signType,
+                paySign,
+                package: paka,
+                success:function(res){
+                  console.log(111);
+                  wx.showToast({
+                    title:'充值成功',
+                    complete(){
+                      that.num = ''
+                      setTimeout(() => {
+                        wx.navigateBack()
+                      },1500)
+                    }
+                  })
+                },
+                fail:function(){
+                  wx.showToast({
+                    title:'充值失败',
+                    complete(){
+                      that.num = ''
+                      setTimeout(() => {
+                        wx.navigateBack()
+                      },1500)
+                    }
+                  })
+                }
+              })
+              that.payData = res.data.data
+            }
+          })
+        })
+        }
+      }
+  export default{
+    data(){
+      return {
+        num: '',
+        cookie: '',
+        id: '',
+        payData:''
+      }
+    },
+    methods: {
+      throttlePay: throttle(pay)
+    }
+  }
 </script>
 
 <style scoped>

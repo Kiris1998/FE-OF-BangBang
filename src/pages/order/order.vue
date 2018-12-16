@@ -21,6 +21,7 @@
   import finishedPushing from '@/components/finishedPushing'
   import store from '../../store/vuex'
   import {getSettings,getUserInfo,jumpTo,switchTab,login,setStorage,getStorage} from '../../utils/utils.js'
+  import { showLoading, hideLoading } from '../../utils/wxAPI';
   export default{
     components: {
       orderPushing,
@@ -68,9 +69,6 @@
           })
         })
       },
-      checkThis(){
-        console.log('aaa')
-      },
       getPushing(){
         let id = store.state.userInfo.id
         let cookie = ''
@@ -98,8 +96,10 @@
         })
       }
     },
-    mounted(){
-      this.getPushing()
+    onShow(){
+      showLoading()
+      this.goMine()
+      hideLoading()
     }
   }
 </script>

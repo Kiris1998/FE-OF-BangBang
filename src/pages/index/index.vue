@@ -5,9 +5,9 @@
             indicator-color="#a9a8a9"
             indicator-active-color="#444444"
             class="swiper">
-      <block v-for="(item,index) in pictures" :index="index" :key="index">
-        <swiper-item>
-          <image :src="item" mode="widthFix"/>
+      <block v-for="(item,index) in coupons" :index="index" :key="index">
+        <swiper-item @click="fetchCoupon(index)">
+          <image :src="item.pictureLink" mode="widthFix"/>
         </swiper-item>
       </block>
     </swiper>
@@ -34,7 +34,7 @@ import { fail } from 'assert';
     },
     data () {
       return {
-        pictures: [
+        coupons: [
         ],
         selectedNum: 0,
         sex: '',
@@ -75,10 +75,18 @@ import { fail } from 'assert';
               cookie: this.cookie
             },
             success(res){
-              console.log(res);
+              res.data.data.forEach(item => {
+                item.pictureLink = "http://cx-can-read.oss-cn-beijing.aliyuncs.com/bike.png"
+              })
+              that.coupons = res.data.data
+              console.log(res.data.data);
             }
           })
         })
+      },
+      fetchCoupon(index){
+        let id = this.coupons[index].couponId
+        jumpTo(`../couponInfo/main?id=${id}`)
       },
       selectTime(){
         this.selectedNum = 1
