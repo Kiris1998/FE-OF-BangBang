@@ -38,6 +38,15 @@ const configOrder = (data)=>{
 const getCoupon = (data)=>{
     return ajax('https://bang.zhengsj.top/coupon/get','POST',data)
 }
+const getCouponInfo = (id)=>{
+    return ajax(`https://bang.zhengsj.top/coupon/info/${id}`,'GET')
+}
+const checkAddr = (userId,data)=>{
+    return ajax(`https://bang.zhengsj.top/user/addresses/${userId}`,'GET',data)
+}
+const getOneSch = (schoolId)=>{
+    return ajax(`https://bang.zhengsj.top/user/school/${schoolId}`,'GET')
+}
 export {
     getUserInfor,
     getAddrList,
@@ -51,5 +60,8 @@ export {
     deleteOrder,
     takeOrder,
     configOrder,
-    getCoupon
+    getCoupon,
+    getCouponInfo,
+    checkAddr,
+    getOneSch
 }

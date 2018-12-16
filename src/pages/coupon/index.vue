@@ -1,7 +1,7 @@
 <template>
     <div>
         <ul class="coupon">
-            <li v-for="item in getCoupons" :key="item.couponId">
+            <li v-for="item in getCoupons" :key="item.couponId" @click="checkInfo(item.couponId)">
                 <div class="coupon-left">
                     <span class="coupon-left-1">
                         ￥{{item.reducePrice}}
@@ -15,7 +15,7 @@
                         <span>
                             有效期至{{item.invalidTime}}
                         </span>
-                        <span class="coupon-right-bnt" @click="getThis(item.couponId)">
+                        <span class="coupon-right-bnt" @click.stop="getThis(item.couponId)">
                             点击领取
                         </span>
                     </div>
@@ -24,7 +24,7 @@
                     </div>
                 </div>
             </li>
-            <li v-for="item in liveCoupons" :key="item.couponId">
+            <li v-for="item in liveCoupons" :key="item.couponId" >
                 <div class="coupon-left">
                     <span class="coupon-left-1">
                         ￥{{item.reducePrice}}
@@ -38,7 +38,7 @@
                         <span>
                             有效期至{{item.invalidTime}}
                         </span>
-                        <span v-show="isChoose" class="coupon-right-bnt" @click="chooseThis(item.reducePrice)">
+                        <span v-show="isChoose" class="coupon-right-bnt" @click.stop="chooseThis(item.reducePrice,item.couponId)">
                             立即使用
                         </span>
                     </div>
@@ -57,65 +57,92 @@
 import couponInfo from '../../store/couponInfo'
 import {couponList,getCoupon} from '../../utils/API.js'
 import store from '../../store/vuex'
+import { jumpTo } from '../../utils/utils'
+import {showModal,showToast,showLoading,hideLoading} from '../../utils/wxAPI.js'
 
 export default {
     data(){
         return{
             isChoose:false,
-            myCoupon:[
-                {
-                    price:5,
-                    info:20,
-                    date:'2018.12.12'
-                },
-                {
-                    price:20,
-                    info:50,
-                    date:'2018.12.23'
-                },
-                {
-                    price:10,
-                    info:20,
-                    date:'2019.01.01'
-                }
-            ],
             liveCoupons:[],
             getCoupons:[]
         }
     },
     onLoad:function(options){
+        showLoading()
         if(options.src != undefined)
             this.isChoose = true
+        else
+            this.isChoose = false
+    },
+    onShow(){
         couponList(store.state.userInfo.id).then((res)=>{
             console.log(res)
+            res.data.data.getCoupons.forEach((element) => {
+                let date = new Date(element.invalidTime);
+                var theDate = date.getFullYear() + '.' + date.getMonth() + '.' + date.getDate()
+                element.invalidTime = theDate
+            });
+            res.data.data.liveCoupons.forEach((element) => {
+                let date = new Date(element.invalidTime);
+                var theDate = date.getFullYear() + '.' + date.getMonth() + '.' + date.getDate()
+                element.invalidTime = theDate
+            });
             this.getCoupons = res.data.data.getCoupons;
             this.liveCoupons = res.data.data.liveCoupons;
+            hideLoading()
         })
-        .catch((err)=>{
+        .catch((err)=>{ 
             console.log(err)
+            let info = err || '请求失败'
+            showModal(info)
+            hideLoading()
         })
     },
     methods:{
-        chooseThis(info){
+        chooseThis(info,id){
             if(this.isChoose){
                 couponInfo.commit('commitInfo',info)
-                console.log(info)
+                couponInfo.commit('commitId',id)
                 wx.navigateBack()
             }
         },
         getThis(id){
-            console.log(id)
             var data = {
                 couponId:id,
                 userId:store.state.userInfo.id
             }
-            console.log(data)
+            showLoading()
             getCoupon(data).then((res)=>{
-                console.log(res)
+                couponList(store.state.userInfo.id).then((res)=>{
+                    res.data.data.getCoupons.forEach((element) => {
+                        let date = new Date(element.invalidTime);
+                        var theDate = date.getFullYear() + '.' + date.getMonth() + '.' + date.getDate()
+                        element.invalidTime = theDate
+                    });
+                    res.data.data.liveCoupons.forEach((element) => {
+                        let date = new Date(element.invalidTime);
+                        var theDate = date.getFullYear() + '.' + date.getMonth() + '.' + date.getDate()
+                        element.invalidTime = theDate
+                    });
+                    this.getCoupons = res.data.data.getCoupons;
+                    this.liveCoupons = res.data.data.liveCoupons;
+                    hideLoading()
+                })
+                .catch((err)=>{ 
+                    let info = err || '请求失败'
+                    showModal(info)
+                    hideLoading()
+                })
             })
             .catch((err)=>{
-                console.log(err)
+                let info = err || '请求失败'
+                showModal(info)
+                hideLoading()
             })
+        },
+        checkInfo(couponId){
+            jumpTo(`../couponInfo/main?id=${couponId}`)
         }
     },
 }

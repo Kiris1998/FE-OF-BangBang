@@ -27,6 +27,15 @@
             padding: 0 52rpx 0 52rpx;
             box-sizing: border-box;
         }
+        button{
+            position: absolute;
+            right: 10rpx;
+            @include config_width_height(80rpx,56rpx);
+            line-height: 56rpx;
+            @include config_font($inputFontSize);
+            padding: 0;
+            background:  #FCD800
+        }
     }
     &-content{
         @include config_width_height(701rpx,131rpx);

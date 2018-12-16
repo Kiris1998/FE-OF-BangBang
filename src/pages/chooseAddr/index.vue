@@ -5,7 +5,8 @@
                 西安市
             </span>
             <img src="/static/image/chooseAddr/search.png" />
-            <input placeholder="物品从哪儿取"/>
+            <input v-model="theKey" @input="changeInput" placeholder="物品从哪儿取"/>
+            <button @click="checkAddr">查询</button>
         </div>
         <div class="choose-content">
             <ul>
@@ -43,14 +44,16 @@ import card from '@/components/card'
 import {jumpTo} from '../../utils/utils'
 import Bus from '@/mixins/event-bus'
 import store from '../../store/vuex'
-import {getAddrList} from '../../utils/API.js'
+import {getAddrList,checkAddr} from '../../utils/API.js'
+import {showModal,showToast,showLoading,hideLoading} from '../../utils/wxAPI.js'
 
 export default {
   data () {
     return {
         msg:[
         ],
-        isChoose:false
+        isChoose:false,
+        theKey:''
     }
   },
 
@@ -62,6 +65,40 @@ export default {
             this.isChoose = true
     },
   methods: {
+    changeInput(){
+        if(this.theKey == ''){
+            showLoading()
+            checkAddr(store.state.userInfo.id,{key:this.theKey}).then((res)=>{
+                this.msg = res.data.data
+                //得到这个人的姓
+                for(let i = 0;i < this.msg.length;i++){
+                    this.msg[i].firstname = this.msg[i].userName.substr(0,1)
+                    this.msg[i].label = i + 1
+                }
+                wx.hideLoading()
+            })
+            .catch(err=>{
+                showModal(err)
+                wx.hideLoading()
+            })
+        }
+    },
+    checkAddr(){
+        showLoading()
+        checkAddr(store.state.userInfo.id,{key:this.theKey}).then((res)=>{
+            this.msg = res.data.data
+            //得到这个人的姓
+            for(let i = 0;i < this.msg.length;i++){
+                this.msg[i].firstname = this.msg[i].userName.substr(0,1)
+                this.msg[i].label = i + 1
+            }
+            wx.hideLoading()
+        })
+        .catch(err=>{
+            showModal(err)
+            wx.hideLoading()
+        })
+    },
     linkToSend(index){
         if(this.isChoose){
             let params = { 
@@ -79,22 +116,25 @@ export default {
         else{
             var info = this.msg[index]
             info = JSON.stringify(info)
-            console.log(info)
             jumpTo(`../addAddr/main?info=${info}`)
         }
     }
   },
   onShow(){
-      getAddrList(store.state.userInfo.id).then((res)=>{
-          console.log(res.data)
-          this.msg = res.data.data
+        getAddrList(store.state.userInfo.id).then((res)=>{
+            console.log(res.data)
+            this.msg = res.data.data
+            //得到这个人的姓
             for(let i = 0;i < this.msg.length;i++){
                 this.msg[i].firstname = this.msg[i].userName.substr(0,1)
                 this.msg[i].label = i + 1
             }
-      })
+        })
       .catch((err)=>{
-          console.log(err)
+            showModal(err).finally(()=>{
+                wx.navigateBack()
+            })
+            wx.hideLoading()
       })
   }
 }

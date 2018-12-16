@@ -49,7 +49,7 @@
             <li class="setSend-con-reward" @click="chooseCoupon">
                 <img src="/static/image/sendHelp/reward.png"/>
                 <span id="rewardTitle">优惠券</span>
-                <span id="rewardInput">{{couponId == ''?'请选择优惠券':couponId}}</span>
+                <span id="rewardInput">{{couponInfo == ''?'请选择优惠券':couponInfo}}</span>
             </li>
         </ul>
     </div>
@@ -59,13 +59,13 @@
 </template>
 
 <script>
-import card from '@/components/card';
+import card from '@/components/card'
 import bottom from '@/components/bottom'
-import {jumpTo} from '../../utils/utils'
+import {jumpTo,throttle} from '../../utils/utils'
 import store from '../../store/vuex'
 import {submitHelpSend} from '../../utils/API.js'
 import couponInfo from '../../store/couponInfo' 
-import {showModal} from '../../utils/wxAPI.js'
+import {showModal,showToast,showLoading,hideLoading} from '../../utils/wxAPI.js'
 
 export default {
   data () {
@@ -74,17 +74,17 @@ export default {
       requireGender:'NO_LIMITED',
       shippingAddressId:'',
       indentContent:'',
-      indentPrice:20,
-      takeGoodAddress:'ddd',
-      secretText:'快递号101010',
+      indentPrice:'',
+      takeGoodAddress:'',
+      secretText:'',
       userAddr:'',
       couponId:'',
+      couponInfo:''
     }
   },
   onShow(){
     if(this.isClear){
       Object.assign(this.$data, this.$options.data())
-      console.log(this.couponId)
     }
     this.isClear = true;
   },
@@ -96,8 +96,11 @@ export default {
     },
     coupon(){
       let info = couponInfo.state.info
+      let id = couponInfo.state.id
+      this.couponId = id
+      this.couponInfo = info
       couponInfo.state.info = ''
-      this.couponId = info
+      couponInfo.state.id = ''
     },
     shippingAddressId1(){
       this.shippingAddressId = store.state.id
@@ -125,6 +128,7 @@ export default {
       this.isClear = false
     },
     submitForm(){
+      showLoading()
       let data = {
         indentType:'HELP_SEND',
         requireGender:this.requireGender,
@@ -137,13 +141,21 @@ export default {
         couponId:this.couponId,
         goodPrice:''
       }
-      console.log(data)
-      submitHelpSend(data).then((res)=>{
-        console.log(res)
-      })
-      .catch((err)=>{
-        showModal(err)
-      })
+      function test(){
+        console.log(data)
+        submitHelpSend(data).then((res)=>{
+            showToast('订单提交成功','success',true,1000)
+            setTimeout(()=>{
+              wx.navigateBack()
+            },1000)
+            hideLoading()
+        })
+        .catch((err)=>{
+          showModal(err)
+          hideLoading()
+        })
+      }
+      throttle(test,300)()
     }
   }
 }

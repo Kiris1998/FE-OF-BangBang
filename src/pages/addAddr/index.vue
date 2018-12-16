@@ -34,14 +34,15 @@
 import card from '@/components/card'
 import {jumpTo,redirectTo} from '../../utils/utils'
 import store from '../../store/vuex'
-import {addAddress,daleteAddr,modifyAddr} from '../../utils/API.js'
+import {addAddress,daleteAddr,modifyAddr,getOneSch} from '../../utils/API.js'
+import {showModal,showToast,showLoading,hideLoading} from '../../utils/wxAPI.js'
 
 export default {
   data () {
     return {
         isAdd:true,
         telePhone:'',
-        college:'西安美术学院',
+        college:'',
         address:'',
         name:'',
         id:''
@@ -50,8 +51,34 @@ export default {
   components: {
     card
   },
+    onLoad(options){
+        console.log('aa')
+        if(options.info != undefined){
+            var obj = JSON.parse(options.info)
+            this.telePhone = obj.phone
+            this.name = obj.userName
+            this.address = obj.address
+            this.id = obj.id
+            this.isAdd = false
+        }else{
+            this.telePhone = ''
+            this.name = ''
+            this.address = ''
+            this.isAdd = true
+        }
+        showLoading()
+        getOneSch(store.state.userInfo.schoolId).then((res)=>{
+            this.college = res.data.data.schoolName
+            hideLoading()
+        })
+        .catch((err)=>{
+            showModal(err)
+            hideLoading()
+        })
+    },
   methods: {
-     configAddr(){
+    configAddr(){
+        showLoading()
         if(this.isAdd){
             var params = {
                 "phone":this.telePhone,
@@ -60,10 +87,16 @@ export default {
                 "userId":store.state.userInfo.id
             }
             addAddress(params).then((res)=>{
-                console.log(res)
+                showToast('地址添加成功','success',true,1000)
+                setTimeout(()=>{
+                    wx.navigateBack()
+                },1000)
+                hideLoading()
             })
             .catch((err)=>{
-                console.log(err)
+                showModal(err)
+                hideLoading()
+                return;
             })
         }else{
             var params = {
@@ -75,39 +108,34 @@ export default {
             }
             console.log(params)
             modifyAddr(params).then((res)=>{
-                console.log(res)
+                showToast('地址修改成功','success',true,1000)
+                setTimeout(()=>{
+                    wx.navigateBack()
+                },1000)
+                hideLoading()
             })
             .catch((err)=>{
-                console.log(err)
+                showModal(err)
+                hideLoading()
             })
         }
-        wx.navigateBack()
-     },
-     delectInfo(){
-         var obj = {
-             addressId:this.id
-         }
-         daleteAddr(obj).then((res)=>{
-             console.log(res)
-         })
-     }
-  },
-  onLoad(options){
-      console.log(options.info)
-    if(options.info != undefined){
-        var obj = JSON.parse(options.info)
-        this.telePhone = obj.phone
-        this.name = obj.userName
-        this.address = obj.address
-        this.id = obj.id
-        this.isAdd = false
-    }else{
-        this.telePhone = ''
-        this.name = ''
-        this.address = ''
-        this.isAdd = true
+    },
+    delectInfo(){
+        var obj = {
+            addressId:this.id
+        }
+        daleteAddr(obj).then((res)=>{
+            showToast('地址删除成功','success',true,1000)
+            setTimeout(()=>{
+                wx.navigateBack()
+            },1000)
+        })
+        .catch((err)=>{
+            showModal(err)
+            hideLoading()
+        })
+    },
     }
-  }
 }
 </script>
 
