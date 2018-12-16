@@ -51,6 +51,7 @@
         jumpTo('../advices/main')
       },
       getMoney(){
+        let that = this
         wx.showModal({
           title: '提现提醒',
           content: '点击下方确定复制按钮可获取客服微信，请添加客服微信进行提现操作',
@@ -63,6 +64,16 @@
                   wx.showToast({
                     title:'复制成功'
                   })
+                }
+              })
+              wx.request({
+                url: `https://bang.zhengsj.top/pay/withdraw/${that.id}`,
+                method: 'POST',
+                header: {
+                  Cookie: that.cookie
+                },
+                success(res){
+                  console.log(res);
                 }
               })
             }

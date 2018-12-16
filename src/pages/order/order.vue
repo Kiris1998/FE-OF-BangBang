@@ -87,7 +87,7 @@
               res.data.data.forEach(item => {
                 item.updateTime = new Date(item.updateTime).toLocaleString()
                 if(item.indentState === "COMPLETED") that.pushingCompleted.push(item)
-                else that.pushingDoing.push(item)
+                else if(item.indentState !== "CANCELED") that.pushingDoing.push(item)
               })
               console.log(that.pushingCompleted);
               console.log(that.pushingDoing);

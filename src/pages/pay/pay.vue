@@ -73,6 +73,7 @@ import { showLoading, hideLoading } from '../../utils/wxAPI.js';
                 fail:function(){
                   wx.showToast({
                     title:'充值失败',
+                    icon: 'none',
                     complete(){
                       that.num = ''
                       setTimeout(() => {
