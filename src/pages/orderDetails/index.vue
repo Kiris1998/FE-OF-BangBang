@@ -172,94 +172,101 @@ data () {
     },
   methods: {
       //接单人取消订单
-      deleteOrde(){
-        showLoading()
+    deleteOrde(){
         var data =  {
             "userId":store.state.userInfo.id,
             "indentId":this.orderId,
         }
-        deleteOrder(data).then((res)=>{
-            var data =  {
-                "userId":store.state.userInfo.id,
-                "indentId":this.orderId,
-            }
-            getOrderDetails(data).then((res)=>{
-                this.info = res.data.data
-                this.status = this.site[this.info.indentState]
+        showModal('您是否确定要取消这个订单？').then(()=>{
+            showLoading()
+            deleteOrder(data).then((res)=>{
+                var data =  {
+                    "userId":store.state.userInfo.id,
+                    "indentId":this.orderId,
+                }
+                getOrderDetails(data).then((res)=>{
+                    this.info = res.data.data
+                    this.status = this.site[this.info.indentState]
+                    hideLoading()
+                })
+                .catch((err)=>{
+                    hideLoading()
+                    showModal(err).finally(()=>{
+                        wx.navigateBack()
+                    })
+                })
                 hideLoading()
             })
             .catch((err)=>{
-                hideLoading()
                 showModal(err).finally(()=>{
                     wx.navigateBack()
                 })
+                hideLoading()
             })
-            hideLoading()
-        })
-        .catch((err)=>{
-            showModal(err).finally(()=>{
-                wx.navigateBack()
-            })
-            hideLoading()
         })
       },
       configSend(){
-        showLoading()
         var data =  {
             "userId":store.state.userInfo.id,
             "indentId":this.orderId
         }
         if(this.info.indentState == 'WAIT_FOR_PERFORMER'){
             //立即抢单
-            takeOrder(data).then((res)=>{
-                var data =  {
-                    "userId":store.state.userInfo.id,
-                    "indentId":this.orderId,
-                }
-                getOrderDetails(data).then((res)=>{
-                    this.info = res.data.data
-                    this.status = this.site[this.info.indentState]
+            showModal('您是否确定要接这个订单？').then(()=>{
+                showLoading()
+                takeOrder(data).then((res)=>{
+                    var data =  {
+                        "userId":store.state.userInfo.id,
+                        "indentId":this.orderId,
+                    }
+                    getOrderDetails(data).then((res)=>{
+                        this.info = res.data.data
+                        this.status = this.site[this.info.indentState]
+                        hideLoading()
+                    })
+                    .catch((err)=>{
+                        hideLoading()
+                        showModal(err).finally(()=>{
+                            wx.navigateBack()
+                        })
+                    })
                     hideLoading()
                 })
                 .catch((err)=>{
-                    hideLoading()
                     showModal(err).finally(()=>{
                         wx.navigateBack()
                     })
+                    hideLoading()
                 })
-                hideLoading()
-            })
-            .catch((err)=>{
-                showModal(err).finally(()=>{
-                    wx.navigateBack()
-                })
-                hideLoading()
             })
         } else{
             //确认送达
-            configOrder(data).then((res)=>{
-                var data =  {
-                    "userId":store.state.userInfo.id,
-                    "indentId":this.orderId,
-                }
-                getOrderDetails(data).then((res)=>{
-                    this.info = res.data.data
-                    this.status = this.site[this.info.indentState]
+            showModal('您是否确定已送达？').then(()=>{
+                showLoading()
+                configOrder(data).then((res)=>{
+                    var data =  {
+                        "userId":store.state.userInfo.id,
+                        "indentId":this.orderId,
+                    }
+                    getOrderDetails(data).then((res)=>{
+                        this.info = res.data.data
+                        this.status = this.site[this.info.indentState]
+                        hideLoading()
+                    })
+                    .catch((err)=>{
+                        hideLoading()
+                        showModal(err).finally(()=>{
+                            wx.navigateBack()
+                        })
+                    })
                     hideLoading()
                 })
                 .catch((err)=>{
-                    hideLoading()
                     showModal(err).finally(()=>{
                         wx.navigateBack()
                     })
+                    hideLoading()
                 })
-                hideLoading()
-            })
-            .catch((err)=>{
-            showModal(err).finally(()=>{
-                wx.navigateBack()
-            })
-                hideLoading()
             })
         }
       }

@@ -41,6 +41,12 @@ const getCoupon = (data)=>{
 const getCouponInfo = (id)=>{
     return ajax(`https://bang.zhengsj.top/coupon/info/${id}`,'GET')
 }
+const checkAddr = (userId,data)=>{
+    return ajax(`https://bang.zhengsj.top/user/addresses/${userId}`,'GET',data)
+}
+const getOneSch = (schoolId)=>{
+    return ajax(`https://bang.zhengsj.top/user/school/${schoolId}`,'GET')
+}
 export {
     getUserInfor,
     getAddrList,
@@ -55,5 +61,7 @@ export {
     takeOrder,
     configOrder,
     getCoupon,
-    getCouponInfo
+    getCouponInfo,
+    checkAddr,
+    getOneSch
 }

@@ -124,6 +124,7 @@ import { fail } from 'assert';
           setStorage('userInfo',res.data.data)
           store.commit('getUserDetail', res.data.data)
           setStorage('cookie',header["Set-Cookie"])
+          console.log('eeeee',header["Set-Cookie"])
           this.getList(0)
           this.getCoupons()
           this.sex = res.data.gender

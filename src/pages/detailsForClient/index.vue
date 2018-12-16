@@ -154,7 +154,6 @@ export default {
         }
         getOrderDetails(data).then((res)=>{
             this.info = res.data.data
-            console.log(this.info)
             this.status = this.site[this.info.indentState]
             hideLoading()
         })
@@ -167,30 +166,16 @@ export default {
     },
   methods: {
       deleteOrde(){
-        var data =  {
+        let data =  {
             "userId":store.state.userInfo.id,
             "indentId":this.orderId
         }
-        deleteOrder(data).then((res)=>{
-            wx.navigateBack()
-        })
-        .catch((err)=>{
-            hideLoading()
-            showModal(err).finally(()=>{
-                wx.navigateBack()
-            })
-        })
-      },
-      configSend(){
-        var data =  {
-            "userId":store.state.userInfo.id,
-            "indentId":this.orderId
-        }
-        finishOrder(data).then((res)=>{
-            getOrderDetails(data).then((res)=>{
-                this.info = res.data.data
-                this.status = this.site[this.info.indentState]
+        showModal('您是否确定要取消这个订单？').then(()=>{
+            showLoading()
+            deleteOrder(data).then((res)=>{
                 hideLoading()
+                showToast('订单取消成功','success',true)
+                wx.navigateBack()
             })
             .catch((err)=>{
                 hideLoading()
@@ -199,10 +184,29 @@ export default {
                 })
             })
         })
-        .catch((err)=>{
-            hideLoading()
-            showModal(err).finally(()=>{
-                wx.navigateBack()
+      },
+      configSend(){
+        let data =  {
+            "userId":store.state.userInfo.id,
+            "indentId":this.orderId
+        }
+        showModal('您是否确认送达？').then(()=>{
+            showLoading()
+            finishOrder(data).then((res)=>{
+                showToast('订单确认送达成功','success',true)
+                getOrderDetails(data).then((res)=>{
+                    this.info = res.data.data
+                    this.status = this.site[this.info.indentState]
+                    hideLoading()
+                })
+                .catch((err)=>{
+                    hideLoading()
+                    showModal(err)
+                })
+            })
+            .catch((err)=>{
+                hideLoading()
+                showModal(err)
             })
         })
       }

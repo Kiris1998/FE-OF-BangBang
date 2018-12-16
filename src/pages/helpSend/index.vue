@@ -49,7 +49,7 @@
             <li class="setSend-con-reward" @click="chooseCoupon">
                 <img src="/static/image/sendHelp/reward.png"/>
                 <span id="rewardTitle">优惠券</span>
-                <span id="rewardInput">{{couponId == ''?'请选择优惠券':couponId}}</span>
+                <span id="rewardInput">{{couponInfo == ''?'请选择优惠券':couponInfo}}</span>
             </li>
         </ul>
     </div>
@@ -71,7 +71,7 @@ export default {
   data () {
     return {
       isClear:true,
-      requireGender:'',
+      requireGender:'NO_LIMITED',
       shippingAddressId:'',
       indentContent:'',
       indentPrice:'',
@@ -79,12 +79,12 @@ export default {
       secretText:'',
       userAddr:'',
       couponId:'',
+      couponInfo:''
     }
   },
   onShow(){
     if(this.isClear){
       Object.assign(this.$data, this.$options.data())
-      console.log(this.couponId)
     }
     this.isClear = true;
   },
@@ -96,8 +96,11 @@ export default {
     },
     coupon(){
       let info = couponInfo.state.info
+      let id = couponInfo.state.id
+      this.couponId = id
+      this.couponInfo = info
       couponInfo.state.info = ''
-      this.couponId = info
+      couponInfo.state.id = ''
     },
     shippingAddressId1(){
       this.shippingAddressId = store.state.id
@@ -139,8 +142,12 @@ export default {
         goodPrice:''
       }
       function test(){
+        console.log(data)
         submitHelpSend(data).then((res)=>{
-            jumpTo('../order/main')
+            showToast('订单提交成功','success',true,1000)
+            setTimeout(()=>{
+              wx.navigateBack()
+            },1000)
             hideLoading()
         })
         .catch((err)=>{
@@ -148,13 +155,7 @@ export default {
           hideLoading()
         })
       }
-      throttle(test,300)
-      // submitHelpSend(data).then((res)=>{
-      //   console.log(res)
-      // })
-      // .catch((err)=>{
-      //   showModal(err)
-      // })
+      throttle(test,300)()
     }
   }
 }

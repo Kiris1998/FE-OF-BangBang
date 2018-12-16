@@ -9,7 +9,7 @@
                 优惠{{couponInfo.reducePrice}}元
             </li>
             <li>
-                有效期至{{couponInfo.invalidTime}}
+                有效期至{{theDate}}
             </li>
         </ul>
         <button @click="getIt">
@@ -24,16 +24,18 @@ import {showModal,showToast,showLoading,hideLoading} from '../../utils/wxAPI.js'
 export default {
     data(){
         return{
+            theDate:'',
             couponId:'',
             couponInfo:''
         }
     },
     onLoad:function(options){
-        console.log(options.id)
         showLoading()
         this.couponId = options.id
         getCouponInfo(this.couponId).then((res)=>{
             this.couponInfo = res.data.data
+            var date = new Date(this.couponInfo.invalidTime);
+            this.theDate = date.getFullYear() + '.' + date.getMonth() + '.' + date.getDate()
             hideLoading()
         })
         .catch((err)=>{
@@ -43,16 +45,19 @@ export default {
             })
         })
     },
-    mathods:{
+    methods:{
         getIt(){
             showLoading()
             var data = {
-                couponId:id,
+                couponId:this.couponId,
                 userId:store.state.userInfo.id
             }
             getCoupon(data).then((res)=>{
                 hideLoading()
-                wx.navigateBack()
+                showToast('优惠劵领取成功','success',true,2000)
+                setTimeout(()=>{
+                    wx.navigateBack()
+                },1000)
             })
             .catch((err)=>{
                 hideLoading()

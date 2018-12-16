@@ -3,7 +3,7 @@
   <div class="setSend">
     <div class="textHolder">
         <span>
-            帮我购买
+            随意帮
         </span>
         <textarea v-model="indentContent"  placeholder-class="place-holder" class="setSend-baseInfo" placeholder="买什么，从哪里买？输入物品名称和数量等基本信息" auto-focus />
     </div>
@@ -24,7 +24,7 @@
             <li class="setSend-con-reward" @click="chooseCoupon">
                 <img src="/static/image/sendHelp/reward.png"/>
                 <span id="rewardTitle">优惠券</span>
-                <span id="rewardInput">{{couponId == ''?'请选择优惠券':couponId}}</span>
+                <span id="rewardInput">{{couponInfo == ''?'请选择优惠券':couponInfo}}</span>
             </li>
         </ul>
     </div>
@@ -35,29 +35,25 @@
 
 <script>
 import bottom from '@/components/bottom'
-import {jumpTo} from '../../utils/utils'
+import {jumpTo,throttle} from '../../utils/utils'
 import store from '../../store/vuex'
 import {submitHelpSend} from '../../utils/API.js'
 import couponInfo from '../../store/couponInfo' 
-import {showModal} from '../../utils/wxAPI.js'
+import {showModal,showToast,showLoading,hideLoading} from '../../utils/wxAPI.js'
 export default {
   data () {
     return {     
       isClear:true,
       requireGender:'NO_LIMITED',
       indentContent:'',
-      indentPrice:20,
-      takeGoodAddress:'ddd',
-      shippingAddressId:4,
-      secretText:'aaa',
-      userAddr:'',
-      couponId:''
+      indentPrice:'',
+      couponId:'',
+      couponInfo:''
     }
   },
   onShow(){
     if(this.isClear){
       Object.assign(this.$data, this.$options.data())
-      console.log(this.couponId)
     }
     this.isClear = true;
   },
@@ -72,33 +68,22 @@ export default {
     },
     coupon(){
       let info = couponInfo.state.info
+      let id = couponInfo.state.id
+      this.couponId = id
+      console.log(info)
+      this.couponInfo = info
       couponInfo.state.info = ''
-      this.couponId = info
+      couponInfo.state.id = ''
     },
   },
 
   methods: {
-    linkToSend(){
-      jumpTo('../helpSend/main')
-    },
-    linkToShop(){
-      jumpTo('../helpShop/main')
-    },
     chooseCoupon(){
+      this.isClear = false
       jumpTo('../coupon/main?src=helpSend')
     },
     chooseThisSex(res){
       this.requireGender = res
-    },
-    linkToSend(){
-      jumpTo('../helpSend/main')
-    },
-    linkToShop(){
-      jumpTo('../helpShop/main')
-    },
-    chooseAddr(){
-      this.isClear = false
-      jumpTo('../chooseAddr/main?src=helpShop')
     },
     submitForm(){
       let data = {
@@ -109,13 +94,21 @@ export default {
         indentPrice:this.indentPrice,
         couponId:this.couponId
       }
-      console.log(data)
-      submitHelpSend(data).then((res)=>{
-        console.log(res)
-      })
-      .catch((err)=>{
-        showModal(err)
-      })
+      function test(){
+        console.log(data)
+        submitHelpSend(data).then((res)=>{
+            showToast('订单提交成功','success',true,1000)
+            setTimeout(()=>{
+              wx.navigateBack()
+            },1000)
+            hideLoading()
+        })
+        .catch((err)=>{
+          showModal(err)
+          hideLoading()
+        })
+      }
+      throttle(test,300)()
     }
   }
 }

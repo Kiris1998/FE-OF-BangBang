@@ -83,6 +83,7 @@ const getStorage = (key)=>{
 const getStorageSync = (key)=>{
     return wx.getStorageSync(key)
 }
+//函数防抖
 const throttle = (method,delay)=>{
     var last = 0;
     return function (){
