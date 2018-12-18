@@ -2,7 +2,7 @@
   <div class="page">
     <img class="logo" src="../../static/image/welcome/logo.png">
     <p>让美好的遇见从帮帮开始</p>
-    <button open-type="getUserInfo" @getuserinfo="bindinfo">获取用户的信息</button>
+    <button open-type="getUserInfo" @getuserinfo="bindinfo">授权信息</button>
   </div>
 </template>
 
@@ -23,8 +23,10 @@ export default{
       console.log(authInfo)
       //如果没有做过授权或者用户拒绝了授权
       if(authInfo == undefined || authInfo == false){
-        showModal('请授权，否则无法正常使用')
+          showModal('请授权，否则无法正常使用')
       } else{
+        hideLoading()
+        showToast('已授权','success',true,2000)
         setTimeout(()=>{
           switchTab('../index/main')
         },2000)
@@ -39,8 +41,8 @@ export default{
       showLoading()
       getUserInfo().then((res)=>{
         console.log(res)
-        hideLoading()
-        showToast('授权成功','success')
+          hideLoading()
+        showToast('授权成功','success',true,3000)
         setTimeout(()=>{
           switchTab('../index/main')
         },3000)
@@ -73,5 +75,9 @@ export default{
     margin-top: -130px;
     font-weight: bolder;
     font-size: 25px;
+  }
+  button{
+    position: absolute;
+    bottom: 20rpx;
   }
 </style>
