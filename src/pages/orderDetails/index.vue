@@ -64,10 +64,14 @@
         </div>
         <div class="footer">信息涉及到隐私，接单后可查看更多关于订单信息。</div>
         <div class="order-bnt">
-            <button :disabled="bntEnable" @click="configSend">{{state}}</button>
+            <form @submit="configSend" report-submit="true">
+                <button :disabled="bntEnable" formType="submit">{{state}}</button>
+            </form>
         </div>
         <div v-show="info.indentState != 'WAIT_FOR_PERFORMER' && info.indentState != 'COMPLETED'" class="order-bnt2">
-            <button @click="deleteOrde">取消订单</button>
+            <form @submit="deleteOrde" report-submit="true">
+                <button formType="submit">取消订单</button>
+            </form>
         </div>
     </div>
 </template>
@@ -172,10 +176,11 @@ data () {
     },
   methods: {
       //接单人取消订单
-    deleteOrde(){
+    deleteOrde(e){
         var data =  {
             "userId":store.state.userInfo.id,
             "indentId":this.orderId,
+            "formId":e.mp.detail.formId
         }
         showModal('您是否确定要取消这个订单？').then(()=>{
             showLoading()
@@ -205,10 +210,12 @@ data () {
             })
         })
       },
-      configSend(){
+      configSend(e){
+        console.log(e.mp.detail.formId)
         var data =  {
             "userId":store.state.userInfo.id,
-            "indentId":this.orderId
+            "indentId":this.orderId,
+            "formId":e.mp.detail.formId
         }
         if(this.info.indentState == 'WAIT_FOR_PERFORMER'){
             //立即抢单

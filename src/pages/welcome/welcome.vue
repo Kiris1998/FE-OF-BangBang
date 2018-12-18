@@ -20,6 +20,7 @@ export default{
     getSettings().then((res)=>{
       hideLoading()
       var authInfo = res.authSetting['scope.userInfo'];
+      console.log(authInfo)
       //如果没有做过授权或者用户拒绝了授权
       if(authInfo == undefined || authInfo == false){
         showModal('请授权，否则无法正常使用')

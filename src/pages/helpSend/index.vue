@@ -54,7 +54,7 @@
         </ul>
     </div>
   </div>
-  <bottom @submit="submitForm"></bottom>
+  <bottom @submit="submitForm" :givenPrice="indentPrice" :benefit="couponInfo"></bottom>
 </div>
 </template>
 

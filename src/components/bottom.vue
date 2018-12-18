@@ -5,7 +5,7 @@
         下单支付：<span>￥{{totalPrice}}</span>
       </div>
       <div class="setSend-bottom-info-2">
-        基础速递费{{basePrice}}元+悬赏金{{givenPrice}}元+优惠券{{benefit}}元
+        悬赏金{{givenPrice == '' || givenPrice == undefined?0:givenPrice}}元-优惠券{{benefit == '' || benefit == undefined?0:benefit}}元
       </div>
     </div>
     <button @click="submit">
@@ -15,12 +15,23 @@
 </template>
 <script>
 export default {
+    props: ["givenPrice","benefit"],
     data(){
       return{
-        totalPrice:'3.50',
-        basePrice:2,
-        givenPrice:3,
-        benefit:0
+        givenPrice:''
+      }
+    },
+    onShow(){
+      console.log(this.givenPrice)
+    },
+    computed:{
+      totalPrice(){
+        if(this.givenPrice == '' || this.givenPrice == undefined)
+          return 0;
+        else if(this.benefit == '' || this.benefit == undefined)
+          return this.givenPrice;
+        else
+          return this.givenPrice-this.benefit;
       }
     },
     methods:{

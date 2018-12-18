@@ -60,10 +60,14 @@
             </div>
         </div>
         <div class="order-bnt">
-            <button :disabled="bntEnable" @click="configSend">{{state}}</button>
+            <form @submit="configSend" report-submit="true">
+                <button :disabled="bntEnable" formType="submit">{{state}}</button>
+            </form>
         </div>
-        <div v-show="info.indentState != 'COMPLETED'" class="order-bnt2">
-            <button @click="deleteOrde">取消订单</button>
+        <div v-show="info.indentState != 'COMPLETED'" class="order-bnt2">            
+            <form @submit="deleteOrde" report-submit="true">
+                <button formType="submit">取消订单</button>
+            </form>
         </div>
     </div>
 </template>
@@ -165,10 +169,11 @@ export default {
         })
     },
   methods: {
-      deleteOrde(){
+      deleteOrde(e){
         let data =  {
             "userId":store.state.userInfo.id,
-            "indentId":this.orderId
+            "indentId":this.orderId,
+            "formId":e.mp.detail.formId
         }
         showModal('您是否确定要取消这个订单？').then(()=>{
             showLoading()
@@ -185,10 +190,11 @@ export default {
             })
         })
       },
-      configSend(){
+      configSend(e){
         let data =  {
             "userId":store.state.userInfo.id,
-            "indentId":this.orderId
+            "indentId":this.orderId,
+            "formId":e.mp.detail.formId
         }
         showModal('您是否确认送达？').then(()=>{
             showLoading()
