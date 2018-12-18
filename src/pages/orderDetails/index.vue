@@ -1,17 +1,16 @@
 <template>
     <div class="order">
         <div class="order-title"> 
-            Billy.Z的帮购订单详情
+            {{info.publisherNickName}}的帮购订单详情
         </div>
         <div class="order-details">
-            <div class="avatar">
-            </div>
+            <img class="avatar" :src="info.publisherAvatar"/>
             <div class="rightSide">
                 <div class="firstRow">
-                    <span>Billy.Z</span>
-                    <img src="/static/image/orderDetails/man.png"/>
+                    <span>{{info.publisherNickName}}</span>
+                    <span style="color:blue;padding-left:12rpx;">{{therequireGender}}</span>
                 </div>
-                <span class="college">{{info.performerSchool}}</span>
+                <span class="college">{{info.publisherSchool}}</span>
                 <ul class="list">
                     <li class="remark">
                         <img class="first" src="/static/image/orderDetails/details.png"/>
@@ -151,6 +150,15 @@ data () {
                 return '订单完成'
             }
         },
+        therequireGender(){
+            if(this.info.requireGender == 'MALE'){
+                return '♂'
+            }else if(this.info.requireGender == 'FEMALE'){
+                return '♀'
+            }else{
+                return '×'
+            }
+        }
     },
     onLoad(options){
         showLoading()
@@ -184,11 +192,14 @@ data () {
         }
         showModal('您是否确定要取消这个订单？').then(()=>{
             showLoading()
+            //接单人取消订单
             deleteOrder(data).then((res)=>{
+                showToast('订单取消成功','success',true)
                 var data =  {
                     "userId":store.state.userInfo.id,
                     "indentId":this.orderId,
                 }
+                //重新刷新列表
                 getOrderDetails(data).then((res)=>{
                     this.info = res.data.data
                     this.status = this.site[this.info.indentState]
@@ -221,7 +232,9 @@ data () {
             //立即抢单
             showModal('您是否确定要接这个订单？').then(()=>{
                 showLoading()
-                takeOrder(data).then((res)=>{
+                //接单人选择接单
+                takeOrder(data).then((res)=>{ 
+                    showToast('接单成功','success',true)
                     var data =  {
                         "userId":store.state.userInfo.id,
                         "indentId":this.orderId,
@@ -232,6 +245,9 @@ data () {
                         hideLoading()
                     })
                     .catch((err)=>{
+                        if(typeof(err) == object){
+                            err = '发生了异常，请重试'
+                        }
                         hideLoading()
                         showModal(err).finally(()=>{
                             wx.navigateBack()
@@ -240,6 +256,9 @@ data () {
                     hideLoading()
                 })
                 .catch((err)=>{
+                    if(typeof(err) == object){
+                        err = '发生了异常，请重试'
+                    }
                     showModal(err).finally(()=>{
                         wx.navigateBack()
                     })
@@ -251,6 +270,7 @@ data () {
             showModal('您是否确定已送达？').then(()=>{
                 showLoading()
                 configOrder(data).then((res)=>{
+                    showToast('订单已送达成功','success',true)
                     var data =  {
                         "userId":store.state.userInfo.id,
                         "indentId":this.orderId,
@@ -261,6 +281,9 @@ data () {
                         hideLoading()
                     })
                     .catch((err)=>{
+                        if(typeof(err) == object){
+                            err = '发生了异常，请重试'
+                        }
                         hideLoading()
                         showModal(err).finally(()=>{
                             wx.navigateBack()
@@ -269,10 +292,13 @@ data () {
                     hideLoading()
                 })
                 .catch((err)=>{
+                    if(typeof(err) == object){
+                        err = '发生了异常，请重试'
+                    }
+                    hideLoading()
                     showModal(err).finally(()=>{
                         wx.navigateBack()
                     })
-                    hideLoading()
                 })
             })
         }

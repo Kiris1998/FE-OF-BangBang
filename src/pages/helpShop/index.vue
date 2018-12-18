@@ -55,7 +55,7 @@
         </ul>
     </div>
   </div>
-  <bottom @submit="submitForm"></bottom>
+  <bottom @submit="submitForm" :givenPrice="indentPrice" :benefit="couponInfo"></bottom>
 </div>
 </template>
 
@@ -147,7 +147,6 @@ export default {
         goodPrice:this.goodPrice
       }
       function test(){
-        console.log(data)
         submitHelpSend(data).then((res)=>{
             showToast('订单提交成功','success',true,1000)
             setTimeout(()=>{
@@ -156,6 +155,9 @@ export default {
             hideLoading()
         })
         .catch((err)=>{
+          if(typeof(err) == object){
+              err = '发生了异常，请重试'
+          }
           showModal(err)
           hideLoading()
         })
