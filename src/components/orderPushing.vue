@@ -8,7 +8,7 @@
             <span class="hide">{{detailInfo.shippingAddress}}</span>
             <span class="hide">{{detailInfo.takeGoodAddress}}</span>
             <div class="pushingTips">
-              <p class="pushingMoney">¥5</p>
+              <p class="pushingMoney">¥{{detailInfo.totalPrice}}</p>
               <p v-if="meOrOthers" class="tip">提高悬赏金可使任务更快被发现</p>
             </div>
           </div>
@@ -45,24 +45,38 @@
       },
       addMoney(){
         let that = this
-        let cookie = ''
-        getStorage('cookie').then((res) => {
-          cookie = res.data
-          wx.request({
-            url: 'https://bang.zhengsj.top/indent/price',
-            method: 'POST',
-            header: {
-              cookie:cookie
-            },
-            data: {
-              indentId: that.detailInfo.indentId,
-              userId: store.state.userInfo.id
-            },
-            success(res){
-              console.log(res);
+        wx.showModal({
+          title: '加价提醒',
+          content: '点击下方确定加价按钮，您的订单悬赏金额将上涨一元',
+          confirmText: '确定加价',
+          success(res){
+            if(res.confirm){
+                let cookie = ''
+                getStorage('cookie').then((res) => {
+                  cookie = res.data
+                  wx.request({
+                    url: 'https://bang.zhengsj.top/indent/price',
+                    method: 'POST',
+                    header: {
+                      cookie:cookie
+                    },
+                    data: {
+                      indentId: that.detailInfo.indentId,
+                      userId: store.state.userInfo.id
+                    },
+                    success(res){
+                      console.log(res);
+                      if(res.statusCode == 200){
+                        wx.showToast({
+                          title:'加价成功'
+                        })
+                      }
+                    }
+                })
+                })
             }
+          }
         })
-      })
       }
     }
   }

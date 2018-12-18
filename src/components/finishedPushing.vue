@@ -3,7 +3,7 @@
      <div class="info">
       <div class="row">
         <div class="orderInfo">
-          <img class="avatr" :src="detailInfo.performerAvatar">
+          <img class="avatr" :src="meOrOthers?detailInfo.performerAvatar:detailInfo.publisherAvatar">
           <span v-if="meOrOthers" class="orderHelper" :style="{color: detailInfo.performerGender == 'MALE' ? '#248cd6' : '#eb2f74'}">
             {{detailInfo.performerNickName}}|
           </span>

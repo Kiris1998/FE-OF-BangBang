@@ -18,17 +18,18 @@
         <span @click="gender='FEMALE';selectedSex = '女';sexClass = 'big'">女</span>
       </div>
     </div>
-    <!-- <div class="inputRow">
+    <div class="inputRow">
       <span>昵称： </span>
       <input v-model="name2" type="text" placeholder-class="small" placeholder="输入你的昵称">
-    </div> -->
+    </div>
     <div class="inputRow">
       <span>电话： </span>
       <input v-model="tel" type="text" placeholder-class="small" placeholder="填写你的电话">
     </div>
     <div class="inputRow">
-      <span>学校： </span>
-      <input v-model="school" type="text" placeholder-class="small" placeholder="填写学校全称">
+      <picker :range="array" :value="schoolId" @change="selectSchool($event)">
+        <span> 学校： </span><span :class="{small:schoolId == 0}" style="width:70vw;display:inline-block">{{array[schoolId]}}</span>
+      </picker>
     </div>
     <button @click="submit">提交</button>
   </div>
@@ -42,13 +43,15 @@
         name: '',
         name2: '',
         tel: '',
-        school: '',
         avatarUrl: '',
         userId: '',
+        nickName: '',
         gender: null,
         cookie: '',
         selectedSex: '请选择您的性别',
-        sexClass:'small'
+        sexClass:'small',
+        array: ['请选择您的学校', '西安邮电大学', '陕西国际商贸学院', '陕西科技大学镐京学院','欧亚学院','西京学院','西北大学','西安工业大学','咸阳财经学院','西安电子科技大学','西安体育学院','西安美术学院','西安科技大学'],
+        schoolId: 0
       }
     },
     methods: {
@@ -68,13 +71,38 @@
             userName: this.name2,
             trueName: this.name,
             phone: this.tel,
-            schoolId: 1,
-            gender: this.gender
+            schoolId: this.schoolId,
+            gender: this.gender,
+            userName: this.name2
           },
           success(res) {
-            console.log(res);
+            if(res.statusCode == 200) {
+              wx.showToast({
+                title:'修改成功',
+                complete(){
+                  that.num = ''
+                  setTimeout(() => {
+                    wx.navigateBack()
+                  },1500)
+                }
+              })
+            } else {
+              wx.showToast({
+                title:'修改失败，请检查信息',
+                icon: 'none',
+                complete(){
+                  that.num = ''
+                  setTimeout(() => {
+                    wx.navigateBack()
+                  },1500)
+                }
+              })
+            }
           }
         })
+      },
+      selectSchool(e){
+        this.schoolId = e.mp.detail.value
       }
     },
     onLoad () {

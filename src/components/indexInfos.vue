@@ -59,7 +59,7 @@
   .info {
     width: 100vw;
     height: 110px;
-    margin-top: 15px;
+    margin-top: 10px;
     display: flex;
   }
   .content {

@@ -1,12 +1,12 @@
 {
   "pages": [
     "pages/welcome/main",
+    "pages/info/main",
     "pages/couponInfo/main",
     "pages/advices/main",
     "pages/coupon/main",
     "pages/detailsForClient/main",
     "pages/index/main",
-    "pages/info/main",
     "pages/orderDetails/main",
     "pages/secretPage/main",
     "pages/helpShop/main",
@@ -26,7 +26,7 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#FCD800",
-    "navigationBarTitleText": "WeChat",
+    "navigationBarTitleText": "帮帮",
     "navigationBarTextStyle": "black"
   },
   "tabBar": {

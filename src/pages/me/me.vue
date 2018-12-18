@@ -31,7 +31,8 @@
       avatrUrl: '',
       id: '',
       balance: '',
-      userName: ''
+      userName: '',
+      cookie: ''
     },
     methods: {
       toInformation(){
@@ -50,19 +51,32 @@
         jumpTo('../advices/main')
       },
       getMoney(){
+        let that = this
         wx.showModal({
           title: '提现提醒',
           content: '点击下方确定复制按钮可获取客服微信，请添加客服微信进行提现操作',
           confirmText: '确定复制',
-          success(){
-            wx.setClipboardData({
-              data: '123123',
-              success(){
-                wx.showToast({
-                  title:'复制成功'
-                })
-              }
-            })
+          success(res){
+            if(res.confirm){
+              wx.setClipboardData({
+                data: '123123',
+                success(){
+                  wx.showToast({
+                    title:'复制成功'
+                  })
+                }
+              })
+              wx.request({
+                url: `https://bang.zhengsj.top/pay/withdraw/${that.id}`,
+                method: 'POST',
+                header: {
+                  Cookie: that.cookie
+                },
+                success(res){
+                  console.log(res);
+                }
+              })
+            }
           }
         })
       },
@@ -70,15 +84,29 @@
         jumpTo('../pay/main')
       }
     },
-    onLoad() {
-
-      getStorage('userInfo').then(res => {
-        let info = res.data
-        this.avatrUrl = info.avatar,
-        this.id = info.id,
-        this.balance = info.balance,
-        this.userName = info.userName
+    onShow(){
+      getStorage('cookie').then((res) => {
+          this.cookie = res.data
       })
+        getStorage('userInfo').then(res => {
+            this.id = res.data.id
+            let that = this
+            console.log(this.id);
+            wx.request({
+              url: `https://bang.zhengsj.top/user/${this.id}`,
+              method: 'GET',
+              header: {
+                Cookie: this.cookie
+              },
+              success(res){
+                console.log(res);
+                let info = res.data.data
+                that.avatrUrl = info.avatar,
+                that.balance = info.balance,
+                that.userName = info.userName
+              }
+            })
+        })
     }
   }
 </script>
