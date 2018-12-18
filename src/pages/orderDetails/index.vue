@@ -184,11 +184,14 @@ data () {
         }
         showModal('您是否确定要取消这个订单？').then(()=>{
             showLoading()
+            //接单人取消订单
             deleteOrder(data).then((res)=>{
+                showToast('订单取消成功','success',true)
                 var data =  {
                     "userId":store.state.userInfo.id,
                     "indentId":this.orderId,
                 }
+                //重新刷新列表
                 getOrderDetails(data).then((res)=>{
                     this.info = res.data.data
                     this.status = this.site[this.info.indentState]
@@ -221,7 +224,9 @@ data () {
             //立即抢单
             showModal('您是否确定要接这个订单？').then(()=>{
                 showLoading()
-                takeOrder(data).then((res)=>{
+                //接单人选择接单
+                takeOrder(data).then((res)=>{ 
+                    showToast('接单成功','success',true)
                     var data =  {
                         "userId":store.state.userInfo.id,
                         "indentId":this.orderId,
@@ -232,6 +237,9 @@ data () {
                         hideLoading()
                     })
                     .catch((err)=>{
+                        if(typeof(err) == object){
+                            err = '发生了异常，请重试'
+                        }
                         hideLoading()
                         showModal(err).finally(()=>{
                             wx.navigateBack()
@@ -240,6 +248,9 @@ data () {
                     hideLoading()
                 })
                 .catch((err)=>{
+                    if(typeof(err) == object){
+                        err = '发生了异常，请重试'
+                    }
                     showModal(err).finally(()=>{
                         wx.navigateBack()
                     })
@@ -251,6 +262,7 @@ data () {
             showModal('您是否确定已送达？').then(()=>{
                 showLoading()
                 configOrder(data).then((res)=>{
+                    showToast('订单已送达成功','success',true)
                     var data =  {
                         "userId":store.state.userInfo.id,
                         "indentId":this.orderId,
@@ -261,6 +273,9 @@ data () {
                         hideLoading()
                     })
                     .catch((err)=>{
+                        if(typeof(err) == object){
+                            err = '发生了异常，请重试'
+                        }
                         hideLoading()
                         showModal(err).finally(()=>{
                             wx.navigateBack()
@@ -269,10 +284,13 @@ data () {
                     hideLoading()
                 })
                 .catch((err)=>{
+                    if(typeof(err) == object){
+                        err = '发生了异常，请重试'
+                    }
+                    hideLoading()
                     showModal(err).finally(()=>{
                         wx.navigateBack()
                     })
-                    hideLoading()
                 })
             })
         }

@@ -144,11 +144,11 @@ export default {
       function test(){
         console.log(data)
         submitHelpSend(data).then((res)=>{
+            hideLoading()
             showToast('订单提交成功','success',true,1000)
             setTimeout(()=>{
               wx.navigateBack()
             },1000)
-            hideLoading()
         })
         .catch((err)=>{
           showModal(err)

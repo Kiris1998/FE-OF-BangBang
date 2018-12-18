@@ -114,6 +114,7 @@ export default {
             }
             showLoading()
             getCoupon(data).then((res)=>{
+                showToast('优惠劵领取成功','success',true,1000)
                 couponList(store.state.userInfo.id).then((res)=>{
                     res.data.data.getCoupons.forEach((element) => {
                         let date = new Date(element.invalidTime);
@@ -130,12 +131,14 @@ export default {
                     hideLoading()
                 })
                 .catch((err)=>{ 
+                    console.log(err)
                     let info = err || '请求失败'
                     showModal(info)
                     hideLoading()
                 })
             })
             .catch((err)=>{
+                console.log(err)
                 let info = err || '请求失败'
                 showModal(info)
                 hideLoading()

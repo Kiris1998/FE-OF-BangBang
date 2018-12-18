@@ -175,6 +175,7 @@ export default {
             "indentId":this.orderId,
             "formId":e.mp.detail.formId
         }
+        console.log(data)
         showModal('您是否确定要取消这个订单？').then(()=>{
             showLoading()
             deleteOrder(data).then((res)=>{
@@ -184,6 +185,10 @@ export default {
             })
             .catch((err)=>{
                 hideLoading()
+                console.log(err)
+                if(typeof(err) == object){
+                    err = '发生了异常，请重试'
+                }
                 showModal(err).finally(()=>{
                     wx.navigateBack()
                 })
@@ -206,11 +211,17 @@ export default {
                     hideLoading()
                 })
                 .catch((err)=>{
+                    if(typeof(err) == object){
+                        err = '发生了异常，请重试'
+                    }
                     hideLoading()
                     showModal(err)
                 })
             })
             .catch((err)=>{
+                if(typeof(err) == object){
+                    err = '发生了异常，请重试'
+                }
                 hideLoading()
                 showModal(err)
             })
