@@ -17,6 +17,17 @@
 </template>
 
 <script>
+function getDetailDate(date) {
+    let year,month,day,hours,minutes
+    year = date.getFullYear()
+    if (date.getMonth()+1 < 10) month = `0${date.getMonth()+1}`
+    else month = date.getMonth()+1
+    if (date.getDate() < 10) day = `0${date.getDate()+1}`
+    else day = date.getDate()
+    hours = date.getHours()
+    minutes = date.getMinutes()
+    return `${year}-${month}-${day}-${hours}:${minutes}`
+  }
   import orderPushing from '@/components/orderPushing'
   import finishedPushing from '@/components/finishedPushing'
   import store from '../../store/vuex'
@@ -85,7 +96,7 @@
               that.pushingCompleted = []
               that.pushingDoing = []
               res.data.data.forEach(item => {
-                item.updateTime = new Date(item.updateTime).toLocaleString()
+                item.updateTime = getDetailDate(new Date(item.updateTime))
                 if(item.indentState === "COMPLETED") that.pushingCompleted.push(item)
                 else if(item.indentState !== "CANCELED") that.pushingDoing.push(item)
               })

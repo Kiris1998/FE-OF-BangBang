@@ -34,6 +34,17 @@
 </template>
 
 <script>
+  function getDetailDate(date) {
+    let year,month,day,hours,minutes
+    year = date.getFullYear()
+    if (date.getMonth()+1 < 10) month = `0${date.getMonth()+1}`
+    else month = date.getMonth()+1
+    if (date.getDate() < 10) day = `0${date.getDate()+1}`
+    else day = date.getDate()
+    hours = date.getHours()
+    minutes = date.getMinutes()
+    return `${year}-${month}-${day}-${hours}:${minutes}`
+  }
   import {getSettings,getUserInfo,jumpTo,switchTab,login,setStorage,getStorage} from '../utils/utils.js'
   export default {
     props: {
@@ -50,7 +61,7 @@
       }
     },
     created(){
-      this.detailInfo.createTime = new Date(this.detailInfo.createTime).toLocaleString()
+      this.detailInfo.createTime = getDetailDate(new Date(this.detailInfo.createTime))
     }
   }
 </script>
