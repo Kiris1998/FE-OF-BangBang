@@ -1,17 +1,16 @@
 <template>
     <div class="order">
         <div class="order-title"> 
-            Billy.Z的帮购订单详情
+            {{info.publisherNickName}}的帮购订单详情
         </div>
         <div class="order-details">
-            <div class="avatar">
-            </div>
+            <img class="avatar" :src="info.publisherAvatar"/>
             <div class="rightSide">
                 <div class="firstRow">
-                    <span>Billy.Z</span>
-                    <img src="/static/image/orderDetails/man.png"/>
+                    <span>{{info.publisherNickName}}</span>
+                    <span style="color:blue;padding-left:12rpx;">{{therequireGender}}</span>
                 </div>
-                <span class="college">{{info.performerSchool}}</span>
+                <span class="college">{{info.publisherSchool}}</span>
                 <ul class="list">
                     <li class="remark">
                         <img class="first" src="/static/image/orderDetails/details.png"/>
@@ -151,6 +150,15 @@ data () {
                 return '订单完成'
             }
         },
+        therequireGender(){
+            if(this.info.requireGender == 'MALE'){
+                return '♂'
+            }else if(this.info.requireGender == 'FEMALE'){
+                return '♀'
+            }else{
+                return '×'
+            }
+        }
     },
     onLoad(options){
         showLoading()

@@ -4,14 +4,13 @@
             我的发布订单详情
         </div>
         <div class="order-details">
-            <div class="avatar">
-            </div>
+            <img class="avatar" :src="info.publisherAvatar"/>
             <div class="rightSide">
                 <div class="firstRow">
-                    <span>Billy.Z</span>
-                    <img src="/static/image/orderDetails/man.png"/>
+                    <span>{{info.performerNickName == null?'(暂无人接单)':info.performerNickName}}</span>
+                    <span style="color:blue;padding-left:12rpx;">{{therequireGender}}</span>
                 </div>
-                <span class="college">{{info.performerSchool}}</span>
+                <span class="college">{{info.performerSchool == null?'(暂无人接单)':info.performerSchool}}</span>
                 <ul class="list">
                     <li class="remark">
                         <img class="first" src="/static/image/orderDetails/details.png"/>
@@ -145,6 +144,15 @@ export default {
                 return '确认送达'
             }
         },
+        therequireGender(){
+            if(this.info.requireGender == 'MALE'){
+                return '♂'
+            }else if(this.info.requireGender == 'FEMALE'){
+                return '♀'
+            }else{
+                return '×'
+            }
+        }
     },
     onLoad(options){
         showLoading()
@@ -157,6 +165,7 @@ export default {
             "indentId":this.orderId,
         }
         getOrderDetails(data).then((res)=>{
+            console.log(res.data.data)
             this.info = res.data.data
             this.status = this.site[this.info.indentState]
             hideLoading()
@@ -175,7 +184,6 @@ export default {
             "indentId":this.orderId,
             "formId":e.mp.detail.formId
         }
-        console.log(data)
         showModal('您是否确定要取消这个订单？').then(()=>{
             showLoading()
             deleteOrder(data).then((res)=>{
