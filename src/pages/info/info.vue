@@ -37,6 +37,7 @@
 
 <script>
   import store from '../../store/vuex'
+  import {getSettings,getUserInfo,jumpTo,switchTab,login,setStorage,getStorage} from '../../utils/utils.js'
   export default {
     data () {
       return {
@@ -72,8 +73,7 @@
             trueName: this.name,
             phone: this.tel,
             schoolId: this.schoolId,
-            gender: this.gender,
-            userName: this.name2
+            gender: this.gender
           },
           success(res) {
             if(res.statusCode == 200) {
@@ -83,7 +83,7 @@
                   that.num = ''
                   setTimeout(() => {
                     wx.navigateBack()
-                  },1500)
+                  },500)
                 }
               })
             } else {
@@ -109,12 +109,24 @@
       this.avatarUrl = store.state.userInfo.avatar,
       this.userId = store.state.userInfo.id
       let that = this
-      wx.getStorage({
-        key:'cookie',
-        success(res){
-          that.cookie = res.data
-        },
-      })
+      getStorage('cookie').then((res) => {
+          this.cookie = res.data
+        })
+        getStorage('userInfo').then(res => {
+            let that = this
+            wx.request({
+              url: `https://bang.zhengsj.top/user/${this.userId}`,
+              method: 'GET',
+              header: {
+                Cookie: this.cookie
+              },
+              success(res){
+                that.tel = res.data.data.phone
+                that.name2 = res.data.data.userName
+                that.name = res.data.data.trueName
+              }
+            })
+        })
     }
   }
 </script>
