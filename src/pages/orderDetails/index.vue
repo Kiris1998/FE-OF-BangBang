@@ -185,6 +185,9 @@ data () {
             hideLoading()
         })
         .catch((err)=>{
+            if(typeof(err) == Object){
+                err = '发生了异常，请重试'
+            }
             hideLoading()
             showModal(err).finally(()=>{
                 wx.navigateBack()
@@ -216,6 +219,9 @@ data () {
                     hideLoading()
                 })
                 .catch((err)=>{
+                    if(typeof(err) == Object){
+                        err = '发生了异常，请重试'
+                    }
                     hideLoading()
                     showModal(err).finally(()=>{
                         wx.navigateBack()
@@ -224,10 +230,13 @@ data () {
                 hideLoading()
             })
             .catch((err)=>{
+                if(typeof(err) == Object){
+                    err = '发生了异常，请重试'
+                }
+                hideLoading()
                 showModal(err).finally(()=>{
                     wx.navigateBack()
                 })
-                hideLoading()
             })
         })
       },
@@ -255,24 +264,24 @@ data () {
                         hideLoading()
                     })
                     .catch((err)=>{
-                        if(typeof(err) == object){
+                        hideLoading()
+                        if(typeof(err) == Object){
                             err = '发生了异常，请重试'
                         }
-                        hideLoading()
                         showModal(err).finally(()=>{
                             wx.navigateBack()
                         })
                     })
-                    hideLoading()
                 })
                 .catch((err)=>{
-                    if(typeof(err) == object){
+                    console.log('接单失败')
+                    hideLoading()
+                    if(typeof(err) == Object){
                         err = '发生了异常，请重试'
                     }
                     showModal(err).finally(()=>{
                         wx.navigateBack()
                     })
-                    hideLoading()
                 })
             })
         } else{
@@ -292,7 +301,7 @@ data () {
                         hideLoading()
                     })
                     .catch((err)=>{
-                        if(typeof(err) == object){
+                        if(typeof(err) == Object){
                             err = '发生了异常，请重试'
                         }
                         hideLoading()
@@ -303,7 +312,7 @@ data () {
                     hideLoading()
                 })
                 .catch((err)=>{
-                    if(typeof(err) == object){
+                    if(typeof(err) == Object){
                         err = '发生了异常，请重试'
                     }
                     hideLoading()

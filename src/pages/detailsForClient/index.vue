@@ -4,7 +4,7 @@
             我的发布订单详情
         </div>
         <div class="order-details">
-            <img class="avatar" :src="info.publisherAvatar"/>
+            <img class="avatar" :src="info.performerAvatar"/>
             <div class="rightSide">
                 <div class="firstRow">
                     <span>{{info.performerNickName == null?'(暂无人接单)':info.performerNickName}}</span>
