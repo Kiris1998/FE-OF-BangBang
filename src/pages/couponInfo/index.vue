@@ -52,6 +52,9 @@ export default {
             hideLoading()
         })
         .catch((err)=>{
+            if(typeof(err) == Object){
+                err = '发生了异常，请重试'
+            }
             hideLoading()
             showModal(err).finally(()=>{
                 wx.navigateBack()
@@ -73,8 +76,13 @@ export default {
                 },1000)
             })
             .catch((err)=>{
+                if(typeof(err) == Object){
+                    err = '发生了异常，请重试'
+                }
                 hideLoading()
-                showModal(err)
+                showModal(err).finally(()=>{
+                    wx.navigateBack()
+                })
             })
         }
     }
