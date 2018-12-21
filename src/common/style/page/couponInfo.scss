@@ -9,16 +9,79 @@ img{
     padding: 50rpx 0;
 }
 .infoList{
+    margin-top: 96rpx;
     @include config_colbox_center();
+    align-content: space-between;
     li{
         text-align: center;
-        line-height: 105rpx;
-        @include config_width_height(600rpx,105rpx);
-        border-bottom: 1rpx solid black;
+        line-height: 87rpx;
+        @include config_width_height(auto,87rpx);
+        @include config_font(28rpx);
+        .content{
+            border-bottom: 1rpx solid black;
+            display: inline-block;
+            width: 415rpx;
+        }
     }
 }
+.second{
+    margin-top: 30rpx;
+}
 button{
-    @include config_width_height(300rpx);
-    margin-top: 100rpx;
-    background: #FCD800;
+    @include config_width_height(555rpx,93);
+    border-radius: 25rpx;
+    margin-top: 218rpx;
+    background: #EEB422;
+}
+.pic{
+    background: #EEB422;
+    @include config_width_height(478rpx,265rpx);
+    border:2rpx solid black;
+    border-radius: 39rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .sign{
+        @include config_font(170rpx);
+        font-weight: bold;
+    }
+    .right{
+        @include config_font(40rpx);
+        font-weight: bold;
+        .up{
+            @include config_font(66rpx);
+            font-weight: bold;
+        }
+        .down{
+            border-top: 1rpx solid blue
+        }
+    }
+}
+.title1{
+    display: inline-block;
+    @include config_width_height(144rpx,56rpx);
+    border:1rpx solid black;
+    border-radius: 39rpx;
+    background: #EEB422;
+    @include config_font(28rpx);
+    line-height: 56rpx;
+    font-weight: bold;
+}
+.title2{
+    display: inline-block;
+    @include config_width_height(144rpx,56rpx);
+    border-radius: 39rpx;
+    border:1rpx solid black;
+    background: #EEB422;
+    @include config_font(28rpx);
+    line-height: 56rpx;
+    font-weight: bold;
+}
+.title3{
+    display: inline-block;
+    @include config_width_height(144rpx,56rpx);
+    border-radius: 39rpx;
+    @include config_font(28rpx);
+    line-height: 56rpx;
+    font-weight: bold;
 }

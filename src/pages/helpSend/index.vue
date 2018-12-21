@@ -151,6 +151,9 @@ export default {
             },1000)
         })
         .catch((err)=>{
+          if(typeof(err) == object){
+              err = '发生了异常，请重试'
+          }
           showModal(err)
           hideLoading()
         })

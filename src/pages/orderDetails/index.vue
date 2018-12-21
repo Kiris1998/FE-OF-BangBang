@@ -1,7 +1,7 @@
 <template>
     <div class="order">
         <div class="order-title"> 
-            {{info.publisherNickName}}的帮购订单详情
+            {{info.publisherNickName}}的{{orderType}}订单详情
         </div>
         <div class="order-details">
             <img class="avatar" :src="info.publisherAvatar"/>
@@ -135,6 +135,15 @@ data () {
         card
     },
     computed:{
+        orderType(){
+            if(this.info.indentType == 'HELP_BUY'){
+                return '帮购'
+            }else if(this.info.indentType == 'HELP_SEND'){
+                return '帮递'
+            }else{
+                return '随意帮'
+            }
+        },
         state(){
             if(this.info.indentState == 'WAIT_FOR_PERFORMER'){
                 this.bntEnable = false
@@ -162,7 +171,6 @@ data () {
     },
     onLoad(options){
         showLoading()
-        console.log(options.id)
         this.orderId = options.id
     },
     mounted(){
@@ -171,6 +179,7 @@ data () {
             "indentId":this.orderId,
         }
         getOrderDetails(data).then((res)=>{
+            console.log(res)
             this.info = res.data.data
             this.status = this.site[this.info.indentState]
             hideLoading()
@@ -201,6 +210,7 @@ data () {
                 }
                 //重新刷新列表
                 getOrderDetails(data).then((res)=>{
+                    console.log(res)
                     this.info = res.data.data
                     this.status = this.site[this.info.indentState]
                     hideLoading()
@@ -222,7 +232,6 @@ data () {
         })
       },
       configSend(e){
-        console.log(e.mp.detail.formId)
         var data =  {
             "userId":store.state.userInfo.id,
             "indentId":this.orderId,
@@ -240,6 +249,7 @@ data () {
                         "indentId":this.orderId,
                     }
                     getOrderDetails(data).then((res)=>{
+                        console.log(res)
                         this.info = res.data.data
                         this.status = this.site[this.info.indentState]
                         hideLoading()
@@ -276,6 +286,7 @@ data () {
                         "indentId":this.orderId,
                     }
                     getOrderDetails(data).then((res)=>{
+
                         this.info = res.data.data
                         this.status = this.site[this.info.indentState]
                         hideLoading()

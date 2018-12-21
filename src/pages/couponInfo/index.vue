@@ -1,15 +1,28 @@
 <template>
     <div class="container">
-        <img/>
+        <div class="pic">
+            <div class="sign">￥</div>
+            <div class="right">
+                <div class="up">{{couponInfo.reducePrice}}元</div>
+                <div class="down">满{{couponInfo.leastPrice}}元可用</div>
+            </div>
+        </div>
         <ul class="infoList">
             <li>
-                满{{couponInfo.leastPrice}}元可用
+                <span class="title1">有效日期</span>
+                <span class="content">至{{theDate}}</span>
+            </li>
+            <li class="second">
+                <span class="title2">使用条件</span>
+                <span class="content">仅可领取并使用一次</span>
             </li>
             <li>
-                优惠{{couponInfo.reducePrice}}元
+                <span class="title3"></span>
+                <span class="content">不可与其他优惠劵叠加使用</span>
             </li>
             <li>
-                有效期至{{theDate}}
+                <span class="title3"></span>
+                <span class="content">所有订单可用</span>
             </li>
         </ul>
         <button @click="getIt">
@@ -73,7 +86,7 @@ export default {
 <style lang="scss">
   @import '../../common/style/page/couponInfo.scss';
   page{
-    background: rgb(8, 35, 189);
+    background: #FCD800;
     margin:0 auto;
   }
 </style>
