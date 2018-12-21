@@ -11,7 +11,7 @@
             {{detailInfo.publisherNickName}}|
           </span>
           <span class="hide">{{meOrOthers?detailInfo.performerSchool:detailInfo.publisherSchool}}</span>
-          <span v-if="meOrOthers" :style="{color: detailInfo.performerGender == 'MALE' ? '#248cd6' : '#eb2f74'}" style="margin: 5px 0 0 7px;">
+          <span v-if="meOrOthers" :style="{color: detailInfo.performerGender == 'MALE' ? '#248cd6' : '#eb2f74'}" style="margin: 5px 0 0 0;">
             {{detailInfo.performerGender == 'MALE' ? '♂' : '♀'}}
           </span>
           <span v-else :style="{color: detailInfo.publisherGender == 'MALE' ? '#248cd6' : '#eb2f74'}" style="margin: 5px 0 0 7px;">
@@ -54,13 +54,13 @@
       callPerformer(){
         let that = this
         wx.makePhoneCall({
-          phoneNumber: that.detailInfo.performerPhone
+          phoneNumber: `${that.detailInfo.performerPhone}`
         })
       },
       callPublishmer(){
         let that = this
         wx.makePhoneCall({
-          phoneNumber: that.detailInfo.publisherPhone
+          phoneNumber: `${that.detailInfo.publisherPhone}`
         })
       },
       checkThis(){

@@ -121,6 +121,24 @@
             if(res.statusCode == 200) {
               wx.showToast({
                 title:'添加成功',
+                success(){
+                  getStorage('cookie').then(res => {
+                    that.cookie = res.data
+                    getStorage('userInfo').then(res => {
+                    that.userInfo = res.data
+                    wx.request({
+                      url: `https://bang.zhengsj.top/user/master/${that.userInfo.id}`,
+                      method: 'GET',
+                      header: {
+                        cookie: that.cookie
+                      },
+                      success(res){
+                        that.aDetailInfo = res.data.data
+                      }
+                    })
+                  })
+                })
+                }
               })
             } else {
               wx.showToast({
@@ -128,24 +146,6 @@
                 icon: 'none'
               })
             }
-            getStorage('cookie').then(res => {
-              this.cookie = res.data
-              getStorage('userInfo').then(res => {
-              this.userInfo = res.data
-              let that = this
-              wx.request({
-                url: `https://bang.zhengsj.top/user/master/${that.userInfo.id}`,
-                method: 'GET',
-                header: {
-                  cookie: that.cookie
-                },
-                success(res){
-                  that.aDetailInfo = res.data.data
-                  console.log(that.aDetailInfo);
-                }
-              })
-            })
-            })
           }
         })
       }

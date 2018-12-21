@@ -9,11 +9,11 @@
             <span class="hide">{{detailInfo.takeGoodAddress}}</span>
             <div class="pushingTips">
               <p class="pushingMoney">¥{{detailInfo.totalPrice}}</p>
-              <p v-if="meOrOthers" class="tip">提高悬赏金可使任务更快被发现</p>
+              <p v-if="meOrOthers" class="tip">提高金额可使任务更快被发现</p>
             </div>
           </div>
           <div v-if="meOrOthers" class="pushingBtn">
-            <p>提高悬赏金</p>
+            <p>提高金额</p>
             <button @click.stop="addMoney">+1</button>
           </div>
           <div v-else class="othersBtn" @click.stop="ToPhone">
@@ -36,7 +36,7 @@
       ToPhone(){
         let that = this
         wx.makePhoneCall({
-          phoneNumber: that.detailInfo.publisherPhone
+          phoneNumber: `${that.detailInfo.publisherPhone}`
         })
       },
       checkThis(){
@@ -47,7 +47,7 @@
         let that = this
         wx.showModal({
           title: '加价提醒',
-          content: '点击下方确定加价按钮，您的订单悬赏金额将上涨一元',
+          content: '点击下方确定加价按钮，您的订单金额将上涨一元',
           confirmText: '确定加价',
           success(res){
             if(res.confirm){

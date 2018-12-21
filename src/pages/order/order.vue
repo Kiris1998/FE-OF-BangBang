@@ -70,7 +70,7 @@ function getDetailDate(date) {
               that.pushingCompleted = []
               that.pushingDoing = []
               res.data.data.forEach(item => {
-                item.updateTime = new Date(item.updateTime).toLocaleString()
+                item.updateTime = getDetailDate(new Date(item.updateTime))
                 if(item.indentState === "COMPLETED") that.pushingCompleted.push(item)
                 else if(item.indentState !== "CANCELED") that.pushingDoing.push(item)
               })

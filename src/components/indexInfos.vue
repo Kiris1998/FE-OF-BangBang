@@ -25,7 +25,7 @@
       </div>
     </div>
     <div class="logo">
-      <div class="title">悬赏金</div>
+      <div class="title">金额</div>
       <div>
         <span style="font-size:13px">￥</span><span>{{detailInfo.indentPrice}}</span>
       </div>
@@ -45,14 +45,18 @@
     minutes = date.getMinutes()
     return `${year}-${month}-${day}-${hours}:${minutes}`
   }
+  import store from '../store/vuex'
   import {getSettings,getUserInfo,jumpTo,switchTab,login,setStorage,getStorage} from '../utils/utils.js'
   export default {
     props: {
-      detailInfo: Object
+      detailInfo: Object,
+      userId:''
     },
     methods: {
       gotoDetail(id){
-        jumpTo(`../orderDetails/main?id=${id}`)
+        console.log(this.detailInfo.publisherId)
+        console.log(this.userId)
+        if(this.detailInfo.publisherId !== this.userId)  jumpTo(`../orderDetails/main?id=${id}`)
       }
     },
     data () {
@@ -62,6 +66,11 @@
     },
     created(){
       this.detailInfo.createTime = getDetailDate(new Date(this.detailInfo.createTime))
+    },
+    onLoad(){
+       getStorage('userInfo').then(res => {
+         this.userId = res.data.id
+       })
     }
   }
 </script>
