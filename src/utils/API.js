@@ -47,6 +47,9 @@ const checkAddr = (userId,data)=>{
 const getOneSch = (schoolId)=>{
     return ajax(`https://bang.zhengsj.top/user/school/${schoolId}`,'GET')
 }
+const submitAdvices = (data)=>{
+    return ajax(`https://bang.zhengsj.top/feedback`,'POST',data)
+}
 export {
     getUserInfor,
     getAddrList,
@@ -63,5 +66,6 @@ export {
     getCoupon,
     getCouponInfo,
     checkAddr,
-    getOneSch
+    getOneSch,
+    submitAdvices
 }

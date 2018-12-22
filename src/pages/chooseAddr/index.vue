@@ -78,8 +78,11 @@ export default {
                 wx.hideLoading()
             })
             .catch(err=>{
+                if(typeof(err) == Object){
+                    err = '发生了异常，请重试'
+                }
+                hideLoading()
                 showModal(err)
-                wx.hideLoading()
             })
         }
     },
@@ -95,8 +98,11 @@ export default {
             wx.hideLoading()
         })
         .catch(err=>{
+            if(typeof(err) == Object){
+                err = '发生了异常，请重试'
+            }
+            hideLoading()
             showModal(err)
-            wx.hideLoading()
         })
     },
     linkToSend(index){
@@ -131,10 +137,13 @@ export default {
             }
         })
       .catch((err)=>{
+            if(typeof(err) == Object){
+                err = '发生了异常，请重试'
+            }
+            hideLoading()
             showModal(err).finally(()=>{
                 wx.navigateBack()
             })
-            wx.hideLoading()
       })
   }
 }
