@@ -37,6 +37,7 @@
 
 <script>
   import store from '../../store/vuex'
+  import {getSettings,getUserInfo,jumpTo,switchTab,login,setStorage,getStorage} from '../../utils/utils.js'
   export default {
     data () {
       return {
@@ -56,45 +57,48 @@
     },
     methods: {
       submit: function () {
-        console.log(this.name);
-        console.log(this.name2);
-        console.log(this.tel);
-        console.log(this.name);
-        console.log(this.gender);
-        wx.request({
-          url: `https://bang.zhengsj.top/user/info/${this.userId}`,
-          method: 'POST',
-          header: {
-            cookie: this.cookie
-          },
-          data: {
-            userName: this.name2,
-            trueName: this.name,
-            phone: this.tel,
-            schoolId: this.schoolId,
-            gender: this.gender,
-            userName: this.name2
-          },
-          success(res) {
-            if(res.statusCode == 200) {
-              wx.showToast({
-                title:'修改成功',
-                complete(){
-                  that.num = ''
-                  setTimeout(() => {
-                    wx.navigateBack()
-                  },1500)
-                }
-              })
-            } else {
-              wx.showToast({
-                title:'修改失败，请检查信息',
-                icon: 'none',
-                complete(){
-                  that.num = ''
-                  setTimeout(() => {
-                    wx.navigateBack()
-                  },1500)
+        let that = this
+        wx.showModal({
+          title:'请确认手机号',
+          content: `请您二次验证您的手机号${this.tel}是否正确，如果正确请点击确定按钮，上传您的信息。`,
+          success(res){
+            if(res.confirm){
+              wx.request({
+                url: `https://bang.zhengsj.top/user/info/${that.userId}`,
+                method: 'POST',
+                header: {
+                  cookie: that.cookie
+                },
+                data: {
+                  userName: that.name2,
+                  trueName: that.name,
+                  phone: that.tel,
+                  schoolId: that.schoolId,
+                  gender: that.gender
+                },
+                success(res) {
+                  if(res.statusCode == 200) {
+                    wx.showToast({
+                      title:'修改成功',
+                      complete(){
+                        that.num = ''
+                        setTimeout(() => {
+                          wx.navigateBack()
+                        },500)
+                      }
+                    })
+                  } else {
+                    wx.showToast({
+                      title:'修改失败，请检查信息是否填写完整',
+                      icon: 'none',
+                      complete(){
+                        that.num = ''
+                        setTimeout(() => {
+                          wx.navigateBack()
+                        },1500)
+                      }
+                    })
+                  }
                 }
               })
             }
@@ -109,12 +113,24 @@
       this.avatarUrl = store.state.userInfo.avatar,
       this.userId = store.state.userInfo.id
       let that = this
-      wx.getStorage({
-        key:'cookie',
-        success(res){
-          that.cookie = res.data
-        },
-      })
+      getStorage('cookie').then((res) => {
+          this.cookie = res.data
+        })
+        getStorage('userInfo').then(res => {
+            let that = this
+            wx.request({
+              url: `https://bang.zhengsj.top/user/${this.userId}`,
+              method: 'GET',
+              header: {
+                Cookie: this.cookie
+              },
+              success(res){
+                that.tel = res.data.data.phone
+                that.name2 = res.data.data.userName
+                that.name = res.data.data.trueName
+              }
+            })
+        })
     }
   }
 </script>

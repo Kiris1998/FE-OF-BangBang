@@ -17,7 +17,7 @@
           </div>
           <button class="sureInvite" @click="addPerson">确定添加</button>
         </div>
-        <recommend-info v-for="item in aDetailInfo" :userInfo="item" :key="item.id"></recommend-info>
+        <recommend-info v-else :userInfo="aDetailInfo"></recommend-info>
       </div>
       <div v-else>
         <div class="money">
@@ -43,12 +43,13 @@
     data() {
       return {
         cookie: '',
-        aDetailInfo: [],
+        aDetailInfo: '',
         bDetailInfo: '',
         inviteNum:'',
         myFlage: true,
         userInfo: '',
-        masterIncome: ''
+        masterIncome: '',
+        flag: true
       }
     },
     components: {
@@ -61,14 +62,14 @@
         this.userInfo = res.data
         let that = this
         wx.request({
-          url: `https://bang.zhengsj.top/user/master/${this.userInfo.id}`,
+          url: `https://bang.zhengsj.top/user/master/${that.userInfo.id}`,
           method: 'GET',
           header: {
-            cookie: this.cookie
+            cookie: that.cookie
           },
           success(res){
-            that.aDetailInfo.push(res.data.data)
-            console.log(res.data.data)
+            that.aDetailInfo = res.data.data
+            console.log(that.aDetailInfo);
           }
         })
       })
@@ -86,10 +87,10 @@
         let that = this
         this.myFlage = false
         wx.request({
-          url: `https://bang.zhengsj.top/user/apprentices/${this.userInfo.id}`,
+          url: `https://bang.zhengsj.top/user/apprentices/${that.userInfo.id}`,
           method:'GET',
           header: {
-            cookie: this.cookie
+            cookie: that.cookie
           },
           success(res) {
             console.log(res.data.data)
@@ -98,10 +99,10 @@
           }
         })
         wx.request({
-          url: `https://bang.zhengsj.top/user/income/master/${this.userInfo.id}`,
+          url: `https://bang.zhengsj.top/user/income/master/${that.userInfo.id}`,
           method:'GET',
           header: {
-            cookie: this.cookie
+            cookie: that.cookie
           },
           success(res) {
             that.masterIncome = res.data.data.masterIncome
@@ -117,7 +118,34 @@
             cookie: this.cookie
           },
           success(res){
-            console.log(res);
+            if(res.statusCode == 200) {
+              wx.showToast({
+                title:'添加成功',
+                success(){
+                  getStorage('cookie').then(res => {
+                    that.cookie = res.data
+                    getStorage('userInfo').then(res => {
+                    that.userInfo = res.data
+                    wx.request({
+                      url: `https://bang.zhengsj.top/user/master/${that.userInfo.id}`,
+                      method: 'GET',
+                      header: {
+                        cookie: that.cookie
+                      },
+                      success(res){
+                        that.aDetailInfo = res.data.data
+                      }
+                    })
+                  })
+                })
+                }
+              })
+            } else {
+              wx.showToast({
+                title:'添加失败，请检查推荐码',
+                icon: 'none'
+              })
+            }
           }
         })
       }

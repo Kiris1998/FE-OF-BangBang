@@ -62,7 +62,7 @@
                 data: '123123',
                 success(){
                   wx.showToast({
-                    title:'复制成功'
+                    title:'客服微信号已复制成功，请及时添加好友。'
                   })
                 }
               })

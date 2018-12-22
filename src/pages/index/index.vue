@@ -21,6 +21,9 @@
 </template>
 
 <script>
+  function goInfo(){
+     
+  }
   import globalStore from '@/store/vuex.js'
   import indexInfos from '@/components/indexInfos'
   import store from '../../store/vuex'
@@ -39,7 +42,8 @@ import { fail } from 'assert';
         selectedNum: 0,
         sex: '',
         orderInfos:[],
-        cookie: ''
+        cookie: '',
+        id: ''
       }
     },
     methods:{
@@ -75,9 +79,9 @@ import { fail } from 'assert';
               cookie: this.cookie
             },
             success(res){
-              res.data.data.forEach(item => {
-                item.pictureLink = "http://cx-can-read.oss-cn-beijing.aliyuncs.com/bike.png"
-              })
+              // res.data.data.forEach(item => {
+              //   item.pictureLink = "http://cx-can-read.oss-cn-beijing.aliyuncs.com/bike.png"
+              // })
               that.coupons = res.data.data
               console.log(res.data.data);
             }
@@ -85,7 +89,7 @@ import { fail } from 'assert';
         })
       },
       fetchCoupon(index){
-        let id = this.coupons[index].couponId
+        id = this.coupons[index].couponId
         jumpTo(`../couponInfo/main?id=${id}`)
       },
       selectTime(){
@@ -137,9 +141,61 @@ import { fail } from 'assert';
           this.getCoupons()
           this.sex = res.data.gender
           hideLoading()
+          wx.request({
+              url: `https://bang.zhengsj.top/user/${res.data.data.id}`,
+              method: 'GET',
+              header: {
+                Cookie: this.cookie
+              },
+              success(res){
+                let info = res.data.data
+                if(info.gender=='NOLIMITED'||info.phone == null||schoolId == null||info.trueName == null||userName == null){
+                  wx.showModal({
+                    title:'提示',
+                    content:'您的基本信息不完整，请点击确定完善信息。',
+                    success(res){
+                      if(res.confirm){
+                        jumpTo('../info/main')
+                      }
+                    }
+
+                  })
+                }
+              }
+            })
         })
         .catch(()=>{
           console.log('登录失败')
+        })
+        getStorage('cookie').then((res) => {
+          this.cookie = res.data
+        })
+        getStorage('userInfo').then(res => {
+            this.id = res.data.id
+            let that = this
+            wx.request({
+              url: `https://bang.zhengsj.top/user/${this.id}`,
+              method: 'GET',
+              header: {
+                Cookie: this.cookie
+              },
+              success(res){
+                let info = res.data.data
+                if(info.gender=='NOLIMITED'||info.phone == null||schoolId == null||info.trueName == null||userName == null){
+                  wx.showModal({
+                    title:'提示',
+                    content:'您的基本信息不完整，请点击确定完善信息。',
+                    showCancel: false,
+                    success(res){
+                      if(res.confirm){
+                        jumpTo('../info/main')
+                      }
+                    }
+
+                  })
+                }
+              }
+            })
         })
     }
   }
