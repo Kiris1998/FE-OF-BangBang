@@ -30,7 +30,8 @@
   export default {
     props: {
       meOrOthers: Boolean,
-      detailInfo: String
+      detailInfo: String,
+      cookie: ''
     },
     methods:{
       ToPhone(){
@@ -45,7 +46,24 @@
       },
       addMoney(){
         let that = this
-        wx.showModal({
+        let balance = ''
+        getStorage('cookie').then((res) => {
+          this.cookie = res.data
+      })
+        getStorage('userInfo').then(res => {
+            this.id = res.data.id
+            let that = this
+            console.log(this.id);
+            wx.request({
+              url: `https://bang.zhengsj.top/user/${this.id}`,
+              method: 'GET',
+              header: {
+                Cookie: this.cookie
+              },
+              success(res){
+                balance = res.data.data.balance
+                 if(balance >= 1){
+             wx.showModal({
           title: '加价提醒',
           content: '点击下方确定加价按钮，您的订单金额将上涨一元',
           confirmText: '确定加价',
@@ -77,6 +95,16 @@
             }
           }
         })
+          } else {
+            wx.showToast({
+              title:'余额不足',
+              icon: 'none'
+            })
+          }
+              }
+            })
+        })
+       
       }
     }
   }
