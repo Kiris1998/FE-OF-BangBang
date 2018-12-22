@@ -128,6 +128,10 @@
                 that.tel = res.data.data.phone
                 that.name2 = res.data.data.userName
                 that.name = res.data.data.trueName
+                if (that.selectedSex !== 'NOLIMITED') {
+                  that.selectedSex = res.data.data.gender == 'MALE' ? "您原来的性别是'男'" : "您原来的性别是'女'"
+                }
+                that.schoolId = res.data.data.schoolId
               }
             })
         })
