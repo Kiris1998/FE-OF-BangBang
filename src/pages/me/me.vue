@@ -22,7 +22,6 @@
     </ul>
   </div>
 </template>
-
 <script>
   import {getSettings,getUserInfo,jumpTo,switchTab,login,setStorage,getStorage} from '../../utils/utils.js'
   import store from '../../store/vuex'
@@ -57,7 +56,7 @@
         let that = this
         wx.showModal({
           title: '提现提醒',
-          content: '点击下方确定复制按钮可获取客服微信，请添加客服微信进行提现操作',
+          content: '点击下方确定复制按钮可获取客服微信，请添加客服微信进行提现操作。注意：提现操作每天只能进行一次！',
           confirmText: '确定复制',
           success(res){
             if(res.confirm){
@@ -65,20 +64,42 @@
                 data: '123123',
                 success(){
                   wx.showToast({
-                    title:'客服微信号已复制成功，请及时添加好友。'
+                    title:'复制成功',
+                    content:'客服微信号已复制成功，请及时添加好友。正在为您发送提现请求。',
+                    success(){
+                      setTimeout(() => {
+                        wx.showLoading({
+                          title: '请等待'
+                        })
+                      }, 1000);
+                    }
                   })
                 }
               })
-              wx.request({
-                url: `https://bang.zhengsj.top/pay/withdraw/${that.id}`,
-                method: 'POST',
-                header: {
-                  Cookie: that.cookie
-                },
-                success(res){
-                  console.log(res);
-                }
-              })
+              setTimeout(() => {
+                 wx.request({
+                    url: `https://bang.zhengsj.top/pay/withdraw/${that.id}`,
+                    method: 'POST',
+                    header: {
+                      Cookie: that.cookie
+                    },
+                    success(res){
+                      console.log(res);
+                      if(res.statusCode !== 200) {
+                        wx.hideLoading()
+                        wx.showToast({
+                          title:'一天一次！'
+                        })
+                      } else {
+                        wx.hideLoading()
+                        wx.showToast({
+                          title:'请添加微信'
+                        })
+                      }
+                    }
+                  })
+              }, 1500);
+             
             }
           }
         })
