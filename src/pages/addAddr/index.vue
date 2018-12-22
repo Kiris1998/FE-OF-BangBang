@@ -68,6 +68,7 @@ export default {
         }
         showLoading()
         getOneSch(store.state.userInfo.schoolId).then((res)=>{
+            console.log(res)
             this.college = res.data.data.schoolName
             hideLoading()
         })
