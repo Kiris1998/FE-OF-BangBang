@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/welcome/main",
+    "pages/pay/main",
     "pages/info/main",
     "pages/couponInfo/main",
     "pages/advices/main",

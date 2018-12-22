@@ -80,12 +80,12 @@ export default {
             console.log(res)
             res.data.data.getCoupons.forEach((element) => {
                 let date = new Date(element.invalidTime);
-                var theDate = date.getFullYear() + '.' + date.getMonth() + '.' + date.getDate()
+                var theDate = date.getFullYear() + '.' + (date.getMonth()+1) + '.' + date.getDate()
                 element.invalidTime = theDate
             });
             res.data.data.liveCoupons.forEach((element) => {
                 let date = new Date(element.invalidTime);
-                var theDate = date.getFullYear() + '.' + date.getMonth() + '.' + date.getDate()
+                var theDate = date.getFullYear() + '.' + (date.getMonth()+1) + '.' + date.getDate()
                 element.invalidTime = theDate
             });
             this.getCoupons = res.data.data.getCoupons;
@@ -118,12 +118,12 @@ export default {
                 couponList(store.state.userInfo.id).then((res)=>{
                     res.data.data.getCoupons.forEach((element) => {
                         let date = new Date(element.invalidTime);
-                        var theDate = date.getFullYear() + '.' + date.getMonth() + '.' + date.getDate()
+                        var theDate = date.getFullYear() + '.' + (date.getMonth()+1) + '.' + date.getDate()
                         element.invalidTime = theDate
                     });
                     res.data.data.liveCoupons.forEach((element) => {
                         let date = new Date(element.invalidTime);
-                        var theDate = date.getFullYear() + '.' + date.getMonth() + '.' + date.getDate()
+                        var theDate = date.getFullYear() + '.' + (date.getMonth()+1) + '.' + date.getDate()
                         element.invalidTime = theDate
                     });
                     this.getCoupons = res.data.data.getCoupons;
