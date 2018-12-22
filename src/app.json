@@ -5,6 +5,7 @@
     "pages/couponInfo/main",
     "pages/advices/main",
     "pages/coupon/main",
+    "pages/pay/main",
     "pages/detailsForClient/main",
     "pages/index/main",
     "pages/orderDetails/main",

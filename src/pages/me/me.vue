@@ -50,6 +50,9 @@
       toAdvice(){
         jumpTo('../advices/main')
       },
+      pushMoney(){
+        jumpTo('../pay/main')
+      },
       getMoney(){
         let that = this
         wx.showModal({
@@ -79,9 +82,6 @@
             }
           }
         })
-      },
-      pushMoney(){
-        jumpTo('../pay/main')
       }
     },
     onShow(){

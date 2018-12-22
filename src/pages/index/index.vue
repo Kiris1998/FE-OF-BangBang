@@ -58,7 +58,7 @@ import { fail } from 'assert';
               cookie: this.cookie
             },
             data: {
-              sexType: 'MALE',
+              sexType: this.sex,
               sort: sort
             },
             success(res){
@@ -89,7 +89,7 @@ import { fail } from 'assert';
         })
       },
       fetchCoupon(index){
-        id = this.coupons[index].couponId
+        let id = this.coupons[index].couponId
         jumpTo(`../couponInfo/main?id=${id}`)
       },
       selectTime(){
@@ -139,7 +139,9 @@ import { fail } from 'assert';
           console.log('eeeee',header["Set-Cookie"])
           this.getList(0)
           this.getCoupons()
-          this.sex = res.data.gender
+          console.log(res.data.data.gender)
+          this.sex = res.data.data.gender
+          console.log(this.sex);
           hideLoading()
           wx.request({
               url: `https://bang.zhengsj.top/user/${res.data.data.id}`,
@@ -153,6 +155,7 @@ import { fail } from 'assert';
                   wx.showModal({
                     title:'提示',
                     content:'您的基本信息不完整，请点击确定完善信息。',
+                    showCancel: false,
                     success(res){
                       if(res.confirm){
                         jumpTo('../info/main')
