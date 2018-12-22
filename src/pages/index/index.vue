@@ -151,7 +151,7 @@ import { fail } from 'assert';
               },
               success(res){
                 let info = res.data.data
-                if(info.gender=='NOLIMITED'||info.phone == null||schoolId == null||info.trueName == null||userName == null){
+                if(info.gender=='NOLIMITED'||info.phone == null||info.schoolId == null||info.trueName == null||info.userName == null){
                   wx.showModal({
                     title:'提示',
                     content:'您的基本信息不完整，请点击确定完善信息。',
@@ -184,7 +184,7 @@ import { fail } from 'assert';
               },
               success(res){
                 let info = res.data.data
-                if(info.gender=='NOLIMITED'||info.phone == null||schoolId == null||info.trueName == null||userName == null){
+                if(info.gender=='NOLIMITED'||info.phone == null||info.schoolId == null||info.trueName == null||info.userName == null){
                   wx.showModal({
                     title:'提示',
                     content:'您的基本信息不完整，请点击确定完善信息。',
@@ -194,7 +194,6 @@ import { fail } from 'assert';
                         jumpTo('../info/main')
                       }
                     }
-
                   })
                 }
               }

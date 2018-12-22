@@ -48,7 +48,7 @@ export default {
         getCouponInfo(this.couponId).then((res)=>{
             this.couponInfo = res.data.data
             var date = new Date(this.couponInfo.invalidTime);
-            this.theDate = date.getFullYear() + '.' + date.getMonth() + '.' + date.getDate()
+            this.theDate = date.getFullYear() + '.' + (date.getMonth()+1) + '.' + date.getDate()
             hideLoading()
         })
         .catch((err)=>{
