@@ -155,11 +155,11 @@ export default {
             hideLoading()
         })
         .catch((err)=>{
-          if(typeof(err) == object){
-              err = '发生了异常，请重试'
-          }
-          showModal(err)
-          hideLoading()
+            if(typeof(err) == Object){
+                err = '发生了异常，请重试'
+            }
+            hideLoading()
+            showModal(err)
         })
       }
       throttle(test,300)()
