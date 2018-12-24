@@ -1,12 +1,11 @@
 <template>
   <div class="succAccept">
-      <div class="succAccept-avatar">
-      </div>
+      <img class="succAccept-avatar" :src="url"/>
       <span class="succAccept-name">
-          Nene.jiao
+          {{name}}
       </span>
       <span class="succAccept-school">
-          西安美术学院
+          {{school}}
       </span>
       <span class="succAccept-cong">
           恭喜您
@@ -18,13 +17,14 @@
           <div class="left-dot">
           </div>
           <span>
-            已成功接到小姐姐的任务
+            已成功接到{{info}}的任务
           </span>
           <div class="right-dot">
           </div>
           <div class="right">
           </div>
       </div>
+      <button class="bntConfig" @click="config">确定</button>
   </div>
 </template>
 
@@ -35,15 +35,39 @@ import {jumpTo} from '../../utils/utils'
 export default {
   data () {
     return {
+      url:'',
+      school:'',
+      sex:'',
+      name:''
     }
   },
-
+  onLoad(options){
+    console.log(options)
+    this.name = options.name
+    this.url = options.url
+    this.school = options.school
+    this.sex = options.sex
+  },
   components: {
     card
   },
-
+  computed:{
+    info(){
+      if(this.sex == 'MALE')
+      {
+        return '小哥哥'
+      } else if(this.sex == 'FEMALE')
+      {
+        return '小姐姐'
+      } else{
+        return '未知'
+      }
+    }
+  },
   methods: {
-
+    config(){
+      wx.navigateBack()
+    }
   }
 }
 </script>
@@ -56,6 +80,14 @@ export default {
   page{
   background: #E6E6E6;
     margin:0 auto;
+  }
+  .bntConfig{
+    height: 100rpx;
+    width: 600rpx;
+    background: #000;
+    position: absolute;
+    bottom: 50rpx;
+    color: #E6E6E6
   }
 </style>
 

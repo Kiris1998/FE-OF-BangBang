@@ -11,7 +11,7 @@
         <ul class="setSend-con">
             <li class="setSend-con-sex">
                 <img src="/static/image/sendHelp/sex.png"/>
-                <span>请选择您的性别</span>
+                <span>请选择接单人的性别</span>
                 <div :id="requireGender == 'MALE'?'activeClass':'errorClass'" @click="chooseThisSex('MALE')">男</div>
                 <div :id="requireGender == 'FEMALE'?'activeClass':'errorClass'" @click="chooseThisSex('FEMALE')">女</div>
                 <div :id="requireGender == 'NO_LIMITED'?'activeClass':'errorClass'" @click="chooseThisSex('NO_LIMITED')">不限</div>
@@ -159,10 +159,14 @@ export default {
                 err = '发生了异常，请重试'
             }
             hideLoading()
+            if(err == '用户余额不足'){
+              this.isClear = false
+              jumpTo('../pay/main')
+            }
             showModal(err)
         })
       }
-      throttle(test,300)()
+      throttle(test,300,this)()
     }
   }
 }

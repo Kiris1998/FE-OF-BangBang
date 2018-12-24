@@ -67,6 +67,7 @@ export default {
             this.isAdd = true
         }
         showLoading()
+        
         getOneSch(store.state.userInfo.schoolId).then((res)=>{
             console.log(res)
             this.college = res.data.data.schoolName

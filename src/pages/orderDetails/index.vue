@@ -262,6 +262,7 @@ data () {
                         this.info = res.data.data
                         this.status = this.site[this.info.indentState]
                         hideLoading()
+                        jumpTo(`../succAccept/main?url=${this.info.publisherAvatar}&sex=${this.info.publisherGender}&name=${this.info.publisherNickName}&school=${this.info.publisherSchool}`)
                     })
                     .catch((err)=>{
                         hideLoading()

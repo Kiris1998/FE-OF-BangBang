@@ -5,7 +5,6 @@
     @include config_colbox_center();
     &-avatar{
         @include config_width_height(200rpx,200rpx);
-        background: black;
         border-radius: 50%;
         margin-top: 62rpx;
     }
@@ -16,11 +15,11 @@
     }
     &-school{
         margin-top: 7rpx;
-        @include config_font(19rpx,$adviceFont);
+        @include config_font(26rpx,$adviceFont);
     }
     &-cong{
         margin-top: 26rpx;
-        @include config_font(26rpx,#808080);
+        @include config_font(30rpx,#808080);
     }
     &-bottom{
         @include config_rowbox_centercol(center);
