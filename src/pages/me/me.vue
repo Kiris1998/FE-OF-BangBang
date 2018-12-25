@@ -61,7 +61,7 @@
           success(res){
             if(res.confirm){
               wx.setClipboardData({
-                data: '123123',
+                data: 'ivybabyxixi',
                 success(){
                   wx.showToast({
                     title:'复制成功',
