@@ -105,7 +105,7 @@ import { fail } from 'assert';
         this.getList(0)
       }
     },
-    onReady(){
+    onLoad(){
       let that = this
       var code;
       var encryptedData;
@@ -151,9 +151,13 @@ import { fail } from 'assert';
               },
               success(res){
                 let info = res.data.data
+<<<<<<< HEAD
                 console.log('errrrrrrrrrrr',res.data.data)
                 console.log('errrrrrrrrrrr',res.data.data == undefined)
                 if(info.gender=='NOLIMITED'||info.phone == null||info.schoolId == null||info.trueName == null||info.userName == null){
+=======
+                if(info==undefined||info.gender=='NOLIMITED'||info.phone == null||info.schoolId == null||info.trueName == null||info.userName == null){
+>>>>>>> a01ef91d6f1b0b8d6300ace497c8f09061958bcc
                   wx.showModal({
                     title:'提示',
                     content:'您的基本信息不完整，请点击确定完善信息。',
@@ -170,9 +174,46 @@ import { fail } from 'assert';
             })
         })
         .catch(()=>{
-          console.log('登录失败')
+          wx.showToast({
+            title:'登录失败',
+            icon: 'none'
+          })
         })
         getStorage('cookie').then((res) => {
+          this.cookie = res.data
+        })
+        getStorage('userInfo').then(res => {
+            this.id = res.data.id
+            let that = this
+            wx.request({
+              url: `https://bang.zhengsj.top/user/${this.id}`,
+              method: 'GET',
+              header: {
+                Cookie: this.cookie
+              },
+              success(res){
+                let info = res.data.data
+                if(res.data.data==undefined||info.gender=='NOLIMITED'||info.phone == null||info.schoolId == null||info.trueName == null||info.userName == null){
+                  wx.showModal({
+                    title:'提示',
+                    content:'您的基本信息不完整，请点击确定完善信息。',
+                    showCancel: false,
+                    success(res){
+                      if(res.confirm){
+                        jumpTo('../info/main')
+                      }
+                    }
+                  })
+                }
+              },
+              fail(){
+                console.log(1213);
+              }
+            })
+        })
+    },
+    onShow(){
+      getStorage('cookie').then((res) => {
           this.cookie = res.data
         })
         getStorage('userInfo').then(res => {
