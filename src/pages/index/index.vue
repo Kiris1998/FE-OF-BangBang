@@ -151,6 +151,8 @@ import { fail } from 'assert';
               },
               success(res){
                 let info = res.data.data
+                console.log('errrrrrrrrrrr',res.data.data)
+                console.log('errrrrrrrrrrr',res.data.data == undefined)
                 if(info.gender=='NOLIMITED'||info.phone == null||info.schoolId == null||info.trueName == null||info.userName == null){
                   wx.showModal({
                     title:'提示',

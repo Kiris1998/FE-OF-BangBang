@@ -1,4 +1,7 @@
 import ajax from './ajax'
+const get = (id)=>{
+    return ajax(`https://bang.zhengsj.top/user/${id}`,'GET')
+}
 const getUserInfor = (data)=>{
     return ajax('https://bang.zhengsj.top/login/user','POST',data)
 }
@@ -67,5 +70,6 @@ export {
     getCouponInfo,
     checkAddr,
     getOneSch,
-    submitAdvices
+    submitAdvices,
+    get
 }

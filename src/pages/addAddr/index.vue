@@ -34,7 +34,7 @@
 import card from '@/components/card'
 import {jumpTo,redirectTo} from '../../utils/utils'
 import store from '../../store/vuex'
-import {addAddress,daleteAddr,modifyAddr,getOneSch} from '../../utils/API.js'
+import {addAddress,daleteAddr,modifyAddr,getOneSch,get} from '../../utils/API.js'
 import {showModal,showToast,showLoading,hideLoading} from '../../utils/wxAPI.js'
 
 export default {
@@ -67,11 +67,13 @@ export default {
             this.isAdd = true
         }
         showLoading()
-        
-        getOneSch(store.state.userInfo.schoolId).then((res)=>{
-            console.log(res)
-            this.college = res.data.data.schoolName
-            hideLoading()
+        get(store.state.userInfo.id).then((res)=>{
+            let sid = res.data.data.schoolId
+            getOneSch(sid).then((res)=>{
+                console.log(res)
+                this.college = res.data.data.schoolName
+                hideLoading()
+            })
         })
         .catch((err)=>{
             showModal(err)
