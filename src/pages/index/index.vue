@@ -112,17 +112,15 @@ import { fail } from 'assert';
       var iv;
       var header
       showLoading()
-      getUserInfo()
+      login()
         .then((res)=>{
-            console.log('userInfo',res)
-            encryptedData = res.encryptedData
-            iv = res.iv
-            return login()
+            code = res.code
+            return getUserInfo()
         })
         .then((res)=>{
-            console.log('res',res)
-            code = res.code
-            hideLoading()
+            console.log(res)
+            encryptedData = res.encryptedData
+            iv = res.iv
             var data = {
                 "code":code,
                 "encryptedData": encryptedData,
@@ -150,14 +148,9 @@ import { fail } from 'assert';
                 Cookie: this.cookie
               },
               success(res){
+                console.log('llssioh',res)
                 let info = res.data.data
-<<<<<<< HEAD
-                console.log('errrrrrrrrrrr',res.data.data)
-                console.log('errrrrrrrrrrr',res.data.data == undefined)
-                if(info.gender=='NOLIMITED'||info.phone == null||info.schoolId == null||info.trueName == null||info.userName == null){
-=======
                 if(info==undefined||info.gender=='NOLIMITED'||info.phone == null||info.schoolId == null||info.trueName == null||info.userName == null){
->>>>>>> a01ef91d6f1b0b8d6300ace497c8f09061958bcc
                   wx.showModal({
                     title:'提示',
                     content:'您的基本信息不完整，请点击确定完善信息。',
