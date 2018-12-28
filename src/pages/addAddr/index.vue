@@ -93,9 +93,9 @@ export default {
             addAddress(params).then((res)=>{
                 showToast('地址添加成功','success',true,1000)
                 setTimeout(()=>{
+                    hideLoading()
                     wx.navigateBack()
                 },1000)
-                hideLoading()
             })
             .catch((err)=>{
                 showModal(err)
@@ -114,9 +114,9 @@ export default {
             modifyAddr(params).then((res)=>{
                 showToast('地址修改成功','success',true,1000)
                 setTimeout(()=>{
+                    hideLoading()
                     wx.navigateBack()
                 },1000)
-                hideLoading()
             })
             .catch((err)=>{
                 if(typeof(err) == Object){
